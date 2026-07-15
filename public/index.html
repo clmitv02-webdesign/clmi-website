@@ -147,11 +147,11 @@
   <!-- hero slideshow -->
   <section class="hero" id="hero">
     <div class="slide on"><img src="/assets/media/682560_797021ac91aa47679ecce6aeb5cffbc8~mv2.jpg" alt=""></div>
-    <div class="slide"><img loading="lazy" src="/assets/media/682560_55edcbfbe3674997b43fbb144dc0bb8f~mv2.jpg" alt=""></div>
-    <div class="slide"><img loading="lazy" src="/assets/media/682560_dfdd3072140745939dbc25bf83f61ac1~mv2.jpg" alt=""></div>
-    <div class="slide"><img loading="lazy" src="/assets/media/682560_81530cc60bcf4f6daf136f5367ce429e~mv2.jpg" alt=""></div>
-    <div class="slide"><img loading="lazy" src="/assets/media/682560_cfa6a66c5c484ef2ac0d545c4abf435a~mv2.jpg" alt=""></div>
-    <div class="slide"><img loading="lazy" src="/assets/media/682560_31a5e9b80d524e44b04b22cad28ac04e~mv2.jpg" alt=""></div>
+    <div class="slide"><img data-src="/assets/media/682560_55edcbfbe3674997b43fbb144dc0bb8f~mv2.jpg" alt=""></div>
+    <div class="slide"><img data-src="/assets/media/682560_dfdd3072140745939dbc25bf83f61ac1~mv2.jpg" alt=""></div>
+    <div class="slide"><img data-src="/assets/media/682560_81530cc60bcf4f6daf136f5367ce429e~mv2.jpg" alt=""></div>
+    <div class="slide"><img data-src="/assets/media/682560_cfa6a66c5c484ef2ac0d545c4abf435a~mv2.jpg" alt=""></div>
+    <div class="slide"><img data-src="/assets/media/682560_31a5e9b80d524e44b04b22cad28ac04e~mv2.jpg" alt=""></div>
     <button class="arrow prev" aria-label="Previous slide">&#10094;</button>
     <button class="arrow next" aria-label="Next slide">&#10095;</button>
     <div class="counter"><span id="slideNum">1</span>/6</div>
@@ -160,9 +160,9 @@
   <!-- YouTube playlists -->
   <section class="playlists">
     <div class="band"></div>
-    <iframe style="left:87px"  src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <iframe style="left:588px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_Cwa2Ziil-bO37a76pjl3FK" title="Testimony Sundays playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <iframe style="left:1092px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_AWHNPynyTKY-3DnPx4amrE" title="Outreach playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe loading="lazy" style="left:87px"  src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe loading="lazy" style="left:588px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_Cwa2Ziil-bO37a76pjl3FK" title="Testimony Sundays playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe loading="lazy" style="left:1092px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_AWHNPynyTKY-3DnPx4amrE" title="Outreach playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <div class="label" style="left:179px">Conventions</div>
     <div class="label" style="left:637px">Testimony Sundays</div>
     <div class="label" style="left:1203px">Outreach</div>
@@ -170,9 +170,9 @@
 
   <!-- Convention 2026 slideshow over background video -->
   <section class="convention">
-    <video class="bg" autoplay muted loop playsinline preload="metadata"
+    <video class="bg lazy-video" muted loop playsinline preload="none"
            poster="/assets/media/682560_0534c039f75d4beb8159dbcc83cf03d0f000.jpg"
-           src="/assets/video/682560_0534c039f75d4beb8159dbcc83cf03d0.mp4"></video>
+           data-src="/assets/video/682560_0534c039f75d4beb8159dbcc83cf03d0.mp4"></video>
     <iframe src="/convention-2026/" title="CLMI Annual Convention 2026" loading="lazy"></iframe>
   </section>
 
@@ -180,9 +180,9 @@
   <section class="poster">
     <img loading="lazy" src="/assets/media/682560_5c0e805c3d46455ca6f290c0de18739c~mv2.jpg" alt="CLMI Convention 2026 — The Hand of God">
     <div class="promo">
-      <video autoplay muted loop playsinline preload="metadata"
+      <video class="lazy-video" muted loop playsinline preload="none"
              poster="/assets/media/682560_26bfc20b06c24d85b942eb72475ca964f000.jpg"
-             src="/assets/video/682560_26bfc20b06c24d85b942eb72475ca964.mp4"></video>
+             data-src="/assets/video/682560_26bfc20b06c24d85b942eb72475ca964.mp4"></video>
     </div>
   </section>
 
@@ -230,9 +230,26 @@
       num.textContent = i + 1;
     }
     function auto() { timer = setInterval(() => show(i + 1), 5000); }
+    // fetch the remaining slides once the page is interactive
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#hero .slide img[data-src]').forEach((im) => { im.src = im.dataset.src; });
+    });
     document.querySelector('#hero .prev').addEventListener('click', () => { clearInterval(timer); show(i - 1); auto(); });
     document.querySelector('#hero .next').addEventListener('click', () => { clearInterval(timer); show(i + 1); auto(); });
     auto();
+  })();
+
+  // background videos start loading only when they scroll into view
+  (function () {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(() => {}); }
+        io.unobserve(v);
+      }
+    }, { rootMargin: '200px' });
+    document.querySelectorAll('video.lazy-video').forEach((v) => io.observe(v));
   })();
 
   // newsletter — static site: no backend yet. Shows confirmation only.

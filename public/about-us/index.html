@@ -86,5 +86,20 @@
   </a>
   
 </div>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>

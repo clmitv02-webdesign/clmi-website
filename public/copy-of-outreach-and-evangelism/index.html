@@ -50,7 +50,7 @@
     <div class="el txt" style="z-index:6;left:390px;top:516px;width:737px;height:54px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">⁠Game Nights:</span>Host regular game nights with a variety of games, such as board games, video games, or outdoor games.</div>
     <div class="el txt" style="z-index:6;left:390px;top:575px;width:710px;height:54px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">Outdoor Activities:</span>Plan outdoor activities, such as hiking, camping, or sports tournaments.</div>
     <div class="el txt" style="z-index:6;left:390px;top:634px;width:744px;height:54px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">Movie Nights:</span>Host movie nights with a discussion component, exploring themes and biblical connections.</div>
-    <video class="el" autoplay muted loop playsinline preload="metadata" src="/assets/video/11062b_eb492c6cb7834f13aee3424d74aceffc.mp4" style="left:357px;top:790px;width:797px;height:255px;"></video>
+    <video class="el lazy-video" muted loop playsinline preload="none" data-src="/assets/video/11062b_eb492c6cb7834f13aee3424d74aceffc.mp4" style="left:357px;top:790px;width:797px;height:255px;"></video>
     <img class="el" loading="lazy" src="/assets/media/11062b_eb492c6cb7834f13aee3424d74aceffcf000.jpg" alt="" style="left:357px;top:790px;width:797px;height:255px;">
     <div class="el" style="left:357px;top:790px;width:797px;height:255px;background:rgba(0, 0, 0, 0.07);"></div>
     <div class="el txt" style="z-index:6;left:386px;top:1050px;width:727px;height:84px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">Joy in Fellowship</span>: We create spaces where youth can unwind, laugh, and build lasting friendships through wholesome, Christ-centered fun and recreational activities.</div>
@@ -65,5 +65,20 @@
   </a>
   
 </div>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>

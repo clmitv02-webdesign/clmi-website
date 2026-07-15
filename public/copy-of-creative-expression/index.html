@@ -50,7 +50,7 @@
     <div class="el txt" style="z-index:6;left:391px;top:531px;width:715px;height:25px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">⁠Evangelism Training:</span>Provide training for youth to share their faith with others.</div>
     <div class="el txt" style="z-index:6;left:391px;top:560px;width:756px;height:54px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">⁠Outreach Events:</span>Host outreach events, such as concerts, sports tournaments, or community fairs.</div>
     <div class="el txt" style="z-index:6;left:391px;top:619px;width:712px;height:54px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">Mission Trips:</span>Organize mission trips, either locally or internationally, to serve others and spread the gospel.</div>
-    <video class="el" autoplay muted loop playsinline preload="metadata" src="/assets/video/11062b_eb492c6cb7834f13aee3424d74aceffc.mp4" style="left:357px;top:776px;width:797px;height:255px;"></video>
+    <video class="el lazy-video" muted loop playsinline preload="none" data-src="/assets/video/11062b_eb492c6cb7834f13aee3424d74aceffc.mp4" style="left:357px;top:776px;width:797px;height:255px;"></video>
     <img class="el" loading="lazy" src="/assets/media/11062b_eb492c6cb7834f13aee3424d74aceffcf000.jpg" alt="" style="left:357px;top:776px;width:797px;height:255px;">
     <div class="el" style="left:357px;top:776px;width:797px;height:255px;background:rgba(0, 0, 0, 0.07);"></div>
     <div class="el txt" style="z-index:6;left:386px;top:1036px;width:755px;height:84px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:21px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;"><span style="font-weight:700;color:rgb(0, 0, 0);font-size:21px">Equipped to Evangelize</span>: We train youth to boldly share their faith, equipping them with the knowledge, confidence, and compassion needed to reach others with the Gospel.</div>
@@ -65,5 +65,20 @@
   </a>
   
 </div>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>

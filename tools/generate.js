@@ -152,11 +152,11 @@ function renderItem(it) {
       if (m[1] === '682560_12ee8f9bf9864568951b727b93c9789c') {
         return `<video class="el" controls playsinline preload="metadata" poster="/assets/media/${m[1]}f003.jpg" src="/assets/video/${m[1]}.mp4" style="${st()}"></video>`;
       }
-      return `<video class="el" autoplay muted loop playsinline preload="metadata" src="/assets/video/${m[1]}.mp4" style="${st()}"></video>`;
+      return `<video class="el lazy-video" muted loop playsinline preload="none" data-src="/assets/video/${m[1]}.mp4" style="${st()}"></video>`;
     }
     case 'iframe': {
       const src = rewriteIframe(it.src);
-      return `<iframe class="el" src="${esc(src)}" title="Embedded content" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="${st()}"></iframe>`;
+      return `<iframe class="el" loading="lazy" src="${esc(src)}" title="Embedded content" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="${st()}"></iframe>`;
     }
     case 'txt': {
       if (it.text === 'Skip to Main Content') return '';
@@ -238,6 +238,21 @@ ${spec.desc ? `<meta name="description" content="${esc(spec.desc)}">` : ''}
   ${footerHtml()}
   ${fillerH > 10 ? `<div style="width:1512px;height:${fillerH}px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>` : ''}
 </div>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>
 `;

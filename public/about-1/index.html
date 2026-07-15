@@ -60,7 +60,7 @@
     <div class="el" style="left:688px;top:1394px;width:144px;height:50px;background:rgb(139, 0, 0);border-radius:10px;"></div>
     <div class="el txt" style="z-index:6;left:741px;top:1408px;width:38px;height:22px;font-family:'Avenir Next', 'Segoe UI', Arial, sans-serif;font-size:16px;font-weight:400;color:rgb(255, 255, 255);text-align:left;line-height:1.2;white-space:nowrap;">Send</div>
     <div class="el txt" style="z-index:6;left:719px;top:1615px;width:69px;height:35px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:25px;font-weight:400;color:rgb(0, 0, 0);text-align:left;line-height:1.2;white-space:nowrap;">Maps</div>
-    <iframe class="el" src="https://maps.google.com/maps?q=34%2F36%20John%20Simms%20Street%2C%20Windhoek&amp;z=16&amp;output=embed" title="Embedded content" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="left:266px;top:1676px;width:980px;height:350px;"></iframe>
+    <iframe class="el" loading="lazy" src="https://maps.google.com/maps?q=34%2F36%20John%20Simms%20Street%2C%20Windhoek&amp;z=16&amp;output=embed" title="Embedded content" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="left:266px;top:1676px;width:980px;height:350px;"></iframe>
   </main>
   <footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
@@ -70,5 +70,20 @@
   </a>
   
 </div>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>

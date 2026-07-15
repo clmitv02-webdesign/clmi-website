@@ -34,7 +34,7 @@
     </div>
   </header>
   <main class="pg" style="height:667px">
-    <iframe class="el" src="https://www.youtube.com/embed/live_stream?channel=UCqkrpCvbRCLEjc9v-jU67MQ" title="Embedded content" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="left:266px;top:0px;width:980px;height:662px;"></iframe>
+    <iframe class="el" loading="lazy" src="https://www.youtube.com/embed/live_stream?channel=UCqkrpCvbRCLEjc9v-jU67MQ" title="Embedded content" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="left:266px;top:0px;width:980px;height:662px;"></iframe>
   </main>
   <footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
@@ -44,5 +44,20 @@
   </a>
   <div style="width:1512px;height:26px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>
 </div>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
 </body>
 </html>
