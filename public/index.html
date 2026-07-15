@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1512">
+<title>HOME | Clminternational</title>
+<meta name="description" content="Christ's Love Ministries International — Windhoek, Namibia. Join us for Sunday services, conventions, outreach and live streams.">
+<link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* ---------- hero slideshow ---------- */
+  .hero {
+    position: relative; width: 1512px; height: 643px; margin: 0 auto;
+    background: #2f2e2e; overflow: hidden;
+  }
+  .hero .slide {
+    position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease;
+  }
+  .hero .slide.on { opacity: 1; }
+  .hero .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .hero .arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border: 0; cursor: pointer;
+    background: rgba(0,0,0,0.35); color: #fff; font-size: 22px; border-radius: 50%;
+    z-index: 5; display: flex; align-items: center; justify-content: center;
+  }
+  .hero .arrow:hover { background: rgba(0,0,0,0.6); }
+  .hero .arrow.prev { left: 18px; }
+  .hero .arrow.next { right: 18px; }
+  .hero .counter {
+    position: absolute; right: 24px; top: 18px; z-index: 5;
+    color: #fff; font-size: 14px; background: rgba(0,0,0,0.35);
+    padding: 4px 10px; border-radius: 12px;
+  }
+
+  /* ---------- playlists strip ---------- */
+  .playlists {
+    position: relative; width: 1512px; height: 310px; margin: 0 auto;
+    background: linear-gradient(26deg, rgb(49,97,66) 21.56%, rgba(0,87,225,0.85) 54.14%, rgba(40,95,97,0.97) 72.28%, rgb(49,97,66) 100%);
+  }
+  .playlists .band {
+    position: absolute; left: 0; top: 42px; width: 1512px; height: 210px;
+    background: linear-gradient(90deg, #fff 0%, #c7c7c7 100%);
+  }
+  .playlists iframe {
+    position: absolute; top: 47px; width: 336px; height: 200px; border: 0;
+  }
+  .playlists .label {
+    position: absolute; top: 266px; font-size: 25px; font-weight: 700; color: #fffffe;
+    font-family: var(--helv);
+  }
+
+  /* ---------- convention slideshow section ---------- */
+  .convention {
+    position: relative; width: 1512px; height: 683px; margin: 0 auto; overflow: hidden;
+  }
+  .convention video.bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .convention iframe {
+    position: absolute; left: 266px; top: 0; width: 980px; height: 683px; border: 0;
+  }
+
+  /* ---------- convention poster + promo video ---------- */
+  .poster {
+    position: relative; width: 1512px; height: 877px; margin: 0 auto; overflow: hidden;
+  }
+  .poster > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .poster .promo {
+    position: absolute; left: 429px; top: 5px; width: 633px; height: 870px;
+    background: #000;
+  }
+  .poster .promo video { width: 100%; height: 100%; object-fit: cover; }
+  .poster .promo::after {
+    content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.25);
+    pointer-events: none;
+  }
+
+  /* ---------- ministries grid + newsletter ---------- */
+  .ministries {
+    position: relative; width: 1512px; height: 1280px; margin: 0 auto;
+    background: linear-gradient(9deg, rgb(89,89,89) 0%, #fff 100%);
+  }
+  .ministries a.card { position: absolute; display: block; width: 398px; height: 157px; }
+  .ministries a.card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    box-shadow: 0 24px 26px -12px rgba(0,0,0,0.55);
+  }
+  .newsletter {
+    position: absolute; left: 459px; top: 980px; width: 593px; height: 216px;
+    background: rgba(139, 0, 0, 0.38);
+    font-family: var(--helv);
+  }
+  .newsletter h3 {
+    margin: 30px 40px 6px; font-family: Georgia, serif;
+    font-size: 20px; font-weight: 700; color: #fff;
+  }
+  .newsletter label { display: block; margin: 8px 40px 6px; font-size: 14px; color: #fff; }
+  .newsletter .row { display: flex; gap: 12px; margin: 0 40px; }
+  .newsletter input[type="email"] {
+    flex: 1; height: 55px; border: 1px solid #fff; background: rgba(255,255,255,0.2);
+    color: #fff; padding: 0 14px; font-size: 15px;
+  }
+  .newsletter input[type="email"]::placeholder { color: rgba(255,255,255,0.75); }
+  .newsletter button {
+    width: 90px; height: 55px; border: 0; cursor: pointer;
+    background: var(--dark-red); color: #fff; font-size: 15px; font-weight: 700;
+  }
+  .newsletter .done { margin: 10px 40px 0; color: #fff; font-size: 14px; display: none; }
+</style>
+</head>
+<body>
+<div class="canvas-wrap">
+
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img src="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png" alt="CLMI logo">
+      <span>Christ's Love Ministries International</span>
+    </a>
+    <nav class="main-nav">
+      <div class="nav-item active"><a href="/">HOME</a></div>
+      <div class="nav-item"><a href="/church-outreach">CHURCH OUTREACH</a>
+        <div class="dropdown">
+          <a href="/prison-outreach">PRISON OUTREACH</a>
+          <a href="/hospital-outreach">HOSPITAL OUTREACH</a>
+          <a href="/community-outreach">COMMUNITY OUTREACH</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="/events">EVENTS</a></div>
+      <div class="nav-item"><a href="/livestream">LIVE STREAMS</a></div>
+      <div class="nav-item"><a href="/donations">DONATIONS</a></div>
+      <div class="nav-item"><a href="/about-us">ABOUT US</a></div>
+      <div class="nav-item"><a href="/publication">PUBLICATION</a></div>
+      <div class="nav-item"><a href="/about-1">CONTACT US</a>
+        <div class="dropdown"><a href="/branches">BRANCHES</a></div>
+      </div>
+    </nav>
+    <a class="go-live" href="/copy-of-live-streams">Go Live <img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt=""></a>
+    <div class="socials">
+      <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
+      <a href="https://www.facebook.com/CLMItv-122166180865270/" target="_blank" rel="noopener"><img src="/assets/media/682560_9ac04de1b55049e2871e7aaacd5d37e3~mv2.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/clmitv/" target="_blank" rel="noopener"><img src="/assets/media/682560_62555820ace941a68a7c70857fb574fd~mv2.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
+    </div>
+  </header>
+
+  <!-- hero slideshow -->
+  <section class="hero" id="hero">
+    <div class="slide on"><img src="/assets/media/682560_797021ac91aa47679ecce6aeb5cffbc8~mv2.jpg" alt=""></div>
+    <div class="slide"><img loading="lazy" src="/assets/media/682560_55edcbfbe3674997b43fbb144dc0bb8f~mv2.jpg" alt=""></div>
+    <div class="slide"><img loading="lazy" src="/assets/media/682560_dfdd3072140745939dbc25bf83f61ac1~mv2.jpg" alt=""></div>
+    <div class="slide"><img loading="lazy" src="/assets/media/682560_81530cc60bcf4f6daf136f5367ce429e~mv2.jpg" alt=""></div>
+    <div class="slide"><img loading="lazy" src="/assets/media/682560_cfa6a66c5c484ef2ac0d545c4abf435a~mv2.jpg" alt=""></div>
+    <div class="slide"><img loading="lazy" src="/assets/media/682560_31a5e9b80d524e44b04b22cad28ac04e~mv2.jpg" alt=""></div>
+    <button class="arrow prev" aria-label="Previous slide">&#10094;</button>
+    <button class="arrow next" aria-label="Next slide">&#10095;</button>
+    <div class="counter"><span id="slideNum">1</span>/6</div>
+  </section>
+
+  <!-- YouTube playlists -->
+  <section class="playlists">
+    <div class="band"></div>
+    <iframe style="left:87px"  src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe style="left:588px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_Cwa2Ziil-bO37a76pjl3FK" title="Testimony Sundays playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe style="left:1092px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_AWHNPynyTKY-3DnPx4amrE" title="Outreach playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="label" style="left:179px">Conventions</div>
+    <div class="label" style="left:637px">Testimony Sundays</div>
+    <div class="label" style="left:1203px">Outreach</div>
+  </section>
+
+  <!-- Convention 2026 slideshow over background video -->
+  <section class="convention">
+    <video class="bg" autoplay muted loop playsinline preload="metadata"
+           poster="/assets/media/682560_0534c039f75d4beb8159dbcc83cf03d0f000.jpg"
+           src="/assets/video/682560_0534c039f75d4beb8159dbcc83cf03d0.mp4"></video>
+    <iframe src="/convention-2026/" title="CLMI Annual Convention 2026" loading="lazy"></iframe>
+  </section>
+
+  <!-- Convention poster with promo video -->
+  <section class="poster">
+    <img loading="lazy" src="/assets/media/682560_5c0e805c3d46455ca6f290c0de18739c~mv2.jpg" alt="CLMI Convention 2026 — The Hand of God">
+    <div class="promo">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="/assets/media/682560_26bfc20b06c24d85b942eb72475ca964f000.jpg"
+             src="/assets/video/682560_26bfc20b06c24d85b942eb72475ca964.mp4"></video>
+    </div>
+  </section>
+
+  <!-- Ministries grid + newsletter -->
+  <section class="ministries">
+    <a class="card" style="left:341px;top:126px"  href="/children-s-ministries"><img loading="lazy" src="/assets/media/682560_31b17a7ea6404ca7b6f40d30a9c41a5c~mv2.png" alt="Children's Ministry"></a>
+    <a class="card" style="left:767px;top:126px"  href="/marriage-seminars"><img loading="lazy" src="/assets/media/682560_39b04f6975e54a12a4a83088bac9010a~mv2.jpg" alt="Marriage Seminar"></a>
+    <a class="card" style="left:341px;top:331px"  href="/community-outreach"><img loading="lazy" src="/assets/media/682560_6c4ee8ed7a0043b2b9a58500cbd328c7~mv2.png" alt="Church Outreach"></a>
+    <a class="card" style="left:767px;top:327px"  href="/leadership-seminars"><img loading="lazy" src="/assets/media/682560_a5f4d58f31d3475ea63060738d5647a9~mv2.png" alt="Leadership Seminar"></a>
+    <a class="card" style="left:341px;top:536px"  href="/livestream"><img loading="lazy" src="/assets/media/682560_e2f7da08f1d344b8be9ce25952b3480a~mv2.jpg" alt="Live Stream"></a>
+    <a class="card" style="left:767px;top:532px"  href="/youth-movement"><img loading="lazy" src="/assets/media/682560_219f0db5f9224687abe0605e74aadd52~mv2.png" alt="Youth Movement"></a>
+    <a class="card" style="left:341px;top:737px"  href="/livestream"><img loading="lazy" src="/assets/media/682560_31a5e9b80d524e44b04b22cad28ac04e~mv2.jpg" alt="CLMI Podcast"></a>
+    <a class="card" style="left:767px;top:737px"  href="/church-outreach"><img loading="lazy" src="/assets/media/682560_81530cc60bcf4f6daf136f5367ce429e~mv2.jpg" alt="Handout — Good Samaritan"></a>
+
+    <form class="newsletter" id="newsletterForm">
+      <h3>Subscribe to our newsletter &bull; Don&rsquo;t miss out!</h3>
+      <label for="nl-email">Email *</label>
+      <div class="row">
+        <input id="nl-email" type="email" required placeholder="e.g., email@example.com">
+        <button type="submit">Join</button>
+      </div>
+      <p class="done" id="nl-done">Thank you for subscribing!</p>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
+  </footer>
+
+  <a class="wa-bubble" href="https://wa.me/264816195335" target="_blank" rel="noopener" aria-label="WhatsApp chat">
+    <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.5c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.2 0-2.4-.3-3.5-.8l-.7-.4-4.9.9 1-4.7-.4-.7C6.5 17.9 6 16.5 6 15c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10zm5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+  </a>
+</div>
+
+<script>
+  // hero slideshow
+  (function () {
+    const slides = document.querySelectorAll('#hero .slide');
+    const num = document.getElementById('slideNum');
+    let i = 0, timer;
+    function show(n) {
+      slides[i].classList.remove('on');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('on');
+      num.textContent = i + 1;
+    }
+    function auto() { timer = setInterval(() => show(i + 1), 5000); }
+    document.querySelector('#hero .prev').addEventListener('click', () => { clearInterval(timer); show(i - 1); auto(); });
+    document.querySelector('#hero .next').addEventListener('click', () => { clearInterval(timer); show(i + 1); auto(); });
+    auto();
+  })();
+
+  // newsletter — static site: no backend yet. Shows confirmation only.
+  // TODO: connect to a real mailing-list service (see README).
+  document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('nl-done').style.display = 'block';
+  });
+</script>
+</body>
+</html>

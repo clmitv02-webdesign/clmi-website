@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DONATIONS | Clminternational</title>
+<link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
+<style>
+  /* Replica of the original page's password gate ("Guest Area").
+     TODO: the protected donations content still needs to be added —
+     see README (needs the page password / donation details from CLMI). */
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; background: #fff; }
+  .gate { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .gate h1 { font-size: 48px; margin: 0 0 14px; color: #000; }
+  .gate p { margin: 0 0 46px; font-size: 16px; color: #333; }
+  .gate input {
+    width: 240px; border: 0; border-bottom: 1px solid #116dff; outline: none;
+    font-size: 16px; padding: 6px 2px; color: #333;
+  }
+  .gate button {
+    margin-top: 56px; width: 240px; height: 48px; border: 0; cursor: pointer;
+    background: #116dff; color: #fff; font-size: 16px;
+  }
+  .gate .err { margin-top: 14px; color: #c00; font-size: 14px; visibility: hidden; }
+  .close { position: fixed; top: 56px; right: 72px; font-size: 28px; color: #333; text-decoration: none; }
+</style>
+</head>
+<body>
+  <a class="close" href="/" aria-label="Back to home">&#10005;</a>
+  <div class="gate">
+    <h1>Guest Area</h1>
+    <p>Please enter the password below.</p>
+    <input id="pw" type="password" placeholder="Password">
+    <button onclick="document.getElementById('err').style.visibility='visible'">Go</button>
+    <div class="err" id="err">Incorrect password. Please try again.</div>
+  </div>
+</body>
+</html>

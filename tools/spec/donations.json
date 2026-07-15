@@ -1,0 +1,68 @@
+{
+ "url": "/donations",
+ "title": "Clminternational",
+ "desc": "",
+ "h": 900,
+ "items": [
+  {
+   "t": "bg",
+   "br": "0px",
+   "x": 0,
+   "y": 0,
+   "w": 1512,
+   "h": 900,
+   "bg": "rgb(255, 255, 255)"
+  },
+  {
+   "t": "txt",
+   "tag": "DIV",
+   "x": 0,
+   "y": 310,
+   "w": 1512,
+   "h": 38,
+   "text": "Guest Area",
+   "font": "helvetica-w01-bold",
+   "size": "48px",
+   "weight": "400",
+   "color": "rgb(0, 0, 0)",
+   "align": "center"
+  },
+  {
+   "t": "txt",
+   "tag": "DIV",
+   "x": 636,
+   "y": 371,
+   "w": 241,
+   "h": 76,
+   "text": "Please enter the password below.",
+   "font": "Helvetica",
+   "size": "16px",
+   "weight": "300",
+   "color": "rgb(0, 0, 0)",
+   "align": "center"
+  },
+  {
+   "t": "txt",
+   "tag": "BUTTON",
+   "x": 636,
+   "y": 525,
+   "w": 241,
+   "h": 48,
+   "text": "Go",
+   "font": "helvetica-w01-roman",
+   "size": "16px",
+   "weight": "400",
+   "color": "rgb(255, 255, 255)",
+   "align": "center"
+  },
+  {
+   "t": "bg",
+   "br": "1px",
+   "x": 636,
+   "y": 525,
+   "w": 241,
+   "h": 48,
+   "bg": "rgb(0, 87, 225)"
+  }
+ ]
+}
