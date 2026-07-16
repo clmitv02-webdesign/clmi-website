@@ -19,6 +19,11 @@ const SITE = 'https://www.christloveministriesinternational.org';
 const HEADER_H = 135;
 const FOOTER_H = 72;
 
+/* button link targets recovered from the original site (position-matched) */
+const BTN_LINKS = fs.existsSync(path.join(__dirname, 'button-links.json'))
+  ? JSON.parse(fs.readFileSync(path.join(__dirname, 'button-links.json'), 'utf8'))
+  : {};
+
 /* Pages built by hand, not generated */
 const SKIP = new Set(['home', 'donations']);
 
@@ -374,6 +379,19 @@ function pageHtml(spec, slug) {
 
   /* drop full-page white background rectangles (body is already white) */
   items = items.filter((it) => !(it.t === 'bg' && it.h > spec.h * 0.9));
+
+  /* re-attach button links that Wix rendered outside the captured anchors */
+  const anchors = BTN_LINKS[slug] || [];
+  for (const it of items) {
+    if (it.t !== 'txt' || it.href) continue;
+    const label = (it.text || '').trim();
+    if (!/^(View Gallery|Learn More|View More|Gallery)$/i.test(label)) continue;
+    const a = anchors.find((an) =>
+      an.t.toLowerCase().startsWith(label.toLowerCase()) &&
+      Math.abs(an.y - it.y) < 45 &&
+      it.x >= an.x - 40 && it.x <= an.x + an.w + 40);
+    if (a && a.href && a.href.startsWith('/')) it.href = SITE + a.href;
+  }
 
   /* merge inline runs captured as separate spans at the same origin
      (bold lead-in + flowing remainder) into one wrapping text block */

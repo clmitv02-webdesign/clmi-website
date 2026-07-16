@@ -1,0 +1,335 @@
+{
+ "about-5": [],
+ "church-outreach": [
+  {
+   "href": "/community-outreach",
+   "t": "View More",
+   "x": 266,
+   "y": 658,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/hospital-outreach",
+   "t": "View More",
+   "x": 266,
+   "y": 808,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/prison-outreach",
+   "t": "View More",
+   "x": 264,
+   "y": 974,
+   "w": 142,
+   "h": 40
+  }
+ ],
+ "community-outreach": [
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 872,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 872,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/1",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 872,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 403,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 403,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-katutura-street-evangelism",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 403,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 1858,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-kilimanjaro-outreach",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 1858,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 1342,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 1342,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-church-outreach-wavis-bay",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 1342,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-donations-to-the-orphange",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 3239,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 2738,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 2738,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-christmas-day-at-orphanage",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 2738,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 2302,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-zimababwe-shona-bibles",
+   "t": "View Gallery",
+   "x": 837,
+   "y": 2302,
+   "w": 122,
+   "h": 42
+  }
+ ],
+ "convention": [
+  {
+   "href": "/highlights",
+   "t": "View Gallery",
+   "x": 602,
+   "y": 172,
+   "w": 308,
+   "h": 60
+  }
+ ],
+ "copy-of-community-building": [
+  {
+   "href": "/copy-of-community-building-gallery",
+   "t": "Gallery",
+   "x": 722,
+   "y": 437,
+   "w": 133,
+   "h": 37
+  }
+ ],
+ "copy-of-convention-2025": [
+  {
+   "href": "/copy-of-2024-convention-gallery",
+   "t": "View Gallery",
+   "x": 602,
+   "y": 172,
+   "w": 308,
+   "h": 60
+  }
+ ],
+ "copy-of-convention": [
+  {
+   "href": "/copy-of-2023-convention-gallery",
+   "t": "View Gallery",
+   "x": 602,
+   "y": 172,
+   "w": 308,
+   "h": 60
+  }
+ ],
+ "copy-of-creative-expression": [],
+ "copy-of-outreach-and-evangelism": [],
+ "copy-of-spiritual-growth": [],
+ "copy-of-youth-service": [],
+ "events": [
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 873,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 873,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-2023-convention-gallery",
+   "t": "View Gallery",
+   "x": 1001,
+   "y": 873,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 404,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-convention-2025",
+   "t": "Learn More",
+   "x": 837,
+   "y": 404,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/copy-of-2024-convention-gallery",
+   "t": "View Gallery",
+   "x": 1001,
+   "y": 404,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/highlights",
+   "t": "Learn More",
+   "x": 837,
+   "y": 1343,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/convention",
+   "t": "Learn More",
+   "x": 837,
+   "y": 1343,
+   "w": 122,
+   "h": 42
+  },
+  {
+   "href": "/highlights",
+   "t": "View Gallery",
+   "x": 1001,
+   "y": 1343,
+   "w": 122,
+   "h": 42
+  }
+ ],
+ "youth-movement": [
+  {
+   "href": "/about-5",
+   "t": "View More",
+   "x": 266,
+   "y": 672,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/copy-of-youth-service",
+   "t": "View More",
+   "x": 266,
+   "y": 822,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/copy-of-spiritual-growth",
+   "t": "View More",
+   "x": 266,
+   "y": 972,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/copy-of-community-building",
+   "t": "View More",
+   "x": 266,
+   "y": 1122,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/copy-of-creative-expression",
+   "t": "View More",
+   "x": 266,
+   "y": 1272,
+   "w": 142,
+   "h": 40
+  },
+  {
+   "href": "/copy-of-outreach-and-evangelism",
+   "t": "View More",
+   "x": 266,
+   "y": 1422,
+   "w": 142,
+   "h": 40
+  }
+ ]
+}
