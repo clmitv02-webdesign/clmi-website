@@ -112,13 +112,33 @@ function headerHtml(activePath) {
       <a href="https://www.instagram.com/clmitv/" target="_blank" rel="noopener"><img src="/assets/media/682560_62555820ace941a68a7c70857fb574fd~mv2.png" alt="Instagram"></a>
       <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
     </div>
-  </header>`;
+  </header>
+  <header class="m-header">
+    <a class="m-brand" href="/">
+      <img src="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png" alt="CLMI logo">
+      <span>Christ's Love Ministries International</span>
+    </a>
+    <div class="m-right">
+      <a class="m-golive" href="/copy-of-live-streams">Go Live</a>
+      <div class="m-burger" id="mBurger" role="button" aria-label="Menu" tabindex="0"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+  <nav class="m-nav" id="mNav">
+    ${NAV.map((n) => `<a href="${n.h}">${n.t}</a>${(n.sub || []).map((s) => `<a class="sub" href="${s.h}">${s.t}</a>`).join('')}`).join('\n    ')}
+    <div class="m-socials">
+      <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
+      <a href="https://www.facebook.com/CLMItv-122166180865270/" target="_blank" rel="noopener"><img src="/assets/media/682560_9ac04de1b55049e2871e7aaacd5d37e3~mv2.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/clmitv/" target="_blank" rel="noopener"><img src="/assets/media/682560_62555820ace941a68a7c70857fb574fd~mv2.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
+    </div>
+  </nav>`;
 }
 
 function footerHtml() {
   return `<footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
   </footer>
+  <footer class="m-footer">Copyright © 2023 by <b>Christ's Love Ministries International</b> All rights reserved.</footer>
   <a class="wa-bubble" href="https://wa.me/264816195335" target="_blank" rel="noopener" aria-label="WhatsApp chat">
     <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.5c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.2 0-2.4-.3-3.5-.8l-.7-.4-4.9.9 1-4.7-.4-.7C6.5 17.9 6 16.5 6 15c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10zm5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
   </a>
@@ -189,6 +209,133 @@ function renderItem(it) {
   }
 }
 
+/* ---------- mobile layout: linearize the canvas into stacked sections ---------- */
+function mobileFontSize(px) {
+  if (px >= 40) return Math.round(px * 0.55);
+  if (px >= 24) return Math.max(19, Math.round(px * 0.72));
+  return Math.max(14.5, Math.min(px, 17));
+}
+
+function mobileBody(items) {
+  /* big background blocks (including full-width images with text on them)
+     become section wrappers so light text stays readable */
+  const isBigImg = (i) => i.t === 'img' && i.w >= 1200 && i.h >= 250;
+  const bigBgs = items
+    .filter((i) => ((i.t === 'bg' || i.t === 'grad' || i.t === 'bgimg') && i.w >= 1200 && i.h >= 250) || isBigImg(i))
+    .map((i) => ({
+      y0: i.y, y1: i.y + i.h, src: i.t === 'img' ? i.src : null, alt: i.alt, w: i.w, h: i.h,
+      css: i.t === 'bg' ? `background:${i.bg};`
+        : i.t === 'grad' ? `background:${i.g};`
+        : `background:url('${localMedia(i.src)}') center/cover no-repeat;`,
+    }))
+    .sort((a, b) => a.y0 - b.y0);
+  const bgFor = (y) => bigBgs.find((b) => y >= b.y0 && y < b.y1);
+
+  /* content rows: group items sharing the same y band, left-to-right */
+  const content = items
+    .filter((i) => ['txt', 'img', 'iframe', 'video'].includes(i.t))
+    .filter((i) => !(i.t === 'img' && i.w < 60 && i.h < 60)) /* skip tiny decorative icons */
+    .filter((i) => !isBigImg(i)) /* big images handled as section backgrounds */
+    .sort((a, b) => (a.y - b.y) || (a.x - b.x));
+  const rows = [];
+  for (const it of content) {
+    const row = rows.length && Math.abs(rows[rows.length - 1].y - it.y) <= 12 ? rows[rows.length - 1] : null;
+    if (row) { row.items.push(it); } else { rows.push({ y: it.y, items: [it] }); }
+  }
+
+  /* an image-based "background" with nothing on top of it is really just a picture —
+     put it back in the flow as a normal full-width image */
+  for (const bg of bigBgs) {
+    if (!bg.src) continue;
+    const inside = rows.some((r) => r.y + 5 >= bg.y0 && r.y + 5 < bg.y1);
+    if (!inside) {
+      bg.skip = true;
+      rows.push({ y: bg.y0, items: [{ t: 'img', src: bg.src, alt: bg.alt, w: bg.w, h: bg.h }] });
+    }
+  }
+  rows.sort((a, b) => a.y - b.y);
+  const activeBgs = bigBgs.filter((b) => !b.skip);
+  const bgForRow = (y) => activeBgs.find((b) => y >= b.y0 && y < b.y1);
+
+  const out = [];
+  let openBg = null;
+  const closeBg = () => { if (openBg) { out.push('</div>'); openBg = null; } };
+
+  for (const row of rows) {
+    const bg = bgForRow(row.y + 5);
+    if (bg !== openBg) {
+      closeBg();
+      if (bg) { out.push(`<div class="m-sec pad" style="${bg.css}">`); openBg = bg; }
+    }
+    const imgs = row.items.filter((i) => i.t === 'img');
+    const txts = row.items.filter((i) => i.t === 'txt');
+    const others = row.items.filter((i) => i.t === 'iframe' || i.t === 'video');
+
+    if (imgs.length >= 2) {
+      out.push(`<div class="m-grid2">${imgs.map((i) => {
+        const src = localMedia(i.src); if (!src) return '';
+        const href = localHref(i.link);
+        const im = `<img loading="lazy" src="${esc(src)}" alt="${esc(i.alt || '')}" width="${i.w}" height="${i.h}">`;
+        return href ? `<a href="${esc(href)}">${im}</a>` : im;
+      }).join('')}</div>`);
+    } else if (imgs.length === 1) {
+      const i = imgs[0]; const src = localMedia(i.src);
+      if (src) {
+        const href = localHref(i.link);
+        const im = `<img class="mi" loading="lazy" src="${esc(src)}" alt="${esc(i.alt || '')}" width="${i.w}" height="${i.h}">`;
+        out.push(href ? `<a href="${esc(href)}">${im}</a>` : im);
+      }
+    }
+    for (const o of others) {
+      if (o.t === 'iframe') {
+        out.push(`<iframe class="mi" loading="lazy" src="${esc(rewriteIframe(o.src))}" title="Embedded content" style="aspect-ratio:${o.w}/${o.h}" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>`);
+      } else {
+        const m = (o.src || '').match(/video\/([^/]+)\//);
+        if (!m) continue;
+        if (m[1] === '682560_12ee8f9bf9864568951b727b93c9789c') {
+          out.push(`<video class="mi" controls playsinline preload="metadata" poster="/assets/media/${m[1]}f003.jpg" src="/assets/video/${m[1]}.mp4"></video>`);
+        } else {
+          out.push(`<video class="mi lazy-video" muted loop playsinline preload="none" data-src="/assets/video/${m[1]}.mp4" style="aspect-ratio:${o.w}/${o.h};object-fit:cover"></video>`);
+        }
+      }
+    }
+    if (txts.length > 1 && !imgs.length && !others.length) {
+      /* table-like row (e.g. branches contact list): stack the cells in one block */
+      out.push(`<div class="m-row" style="color:${txts[0].color}">${txts.map((t, ix) =>
+        `${ix === 0 ? '<b>' : ''}${t.html || esc(t.text)}${ix === 0 ? '</b>' : ''}`
+      ).join(' ')}</div>`);
+    } else {
+      for (const t of txts) {
+        const href = localHref(t.href);
+        const fsz = mobileFontSize(parseFloat(t.size) || 15);
+        if (href && (t.text || '').length < 34 && href.startsWith('/')) {
+          out.push(`<a class="m-btn" href="${esc(href)}">${t.html || esc(t.text)}</a>`);
+          continue;
+        }
+        const style = `font-family:${fontStack(t.font)};font-size:${fsz}px;font-weight:${t.weight};color:${t.color};${t.align === 'center' ? 'text-align:center;' : ''}`;
+        const inner = t.html || esc(t.text);
+        out.push(href
+          ? `<a class="m-txt" style="display:block;${style}" href="${esc(href)}">${inner}</a>`
+          : `<div class="m-txt" style="${style}">${inner}</div>`);
+      }
+    }
+  }
+  closeBg();
+  return out.join('\n    ');
+}
+
+const FIT_SCRIPT = `<script>
+  (function () {
+    function fit() {
+      var w = document.documentElement.clientWidth;
+      document.body.style.zoom = (w > 768 && w < 1512) ? (w / 1512) : '';
+    }
+    fit(); window.addEventListener('resize', fit);
+    var b = document.getElementById('mBurger'), n = document.getElementById('mNav');
+    if (b && n) b.addEventListener('click', function () { n.classList.toggle('open'); });
+  })();
+</script>`;
+
 function pageHtml(spec, slug) {
   const activePath = slug === 'home' ? '/' : '/' + slug.replace(/__/g, '/');
 
@@ -232,11 +379,12 @@ function pageHtml(spec, slug) {
   items = [...byKey.values()];
 
   const body = items.map(renderItem).filter(Boolean).join('\n    ');
+  const mBody = mobileBody(items);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=1512">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(spec.title || 'Christ\'s Love Ministries International')}</title>
 ${spec.desc ? `<meta name="description" content="${esc(spec.desc)}">` : ''}
 <link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
@@ -248,9 +396,13 @@ ${spec.desc ? `<meta name="description" content="${esc(spec.desc)}">` : ''}
   <main class="pg" style="height:${Math.max(bodyH, 200)}px">
     ${body}
   </main>
+  <main class="m-page">
+    ${mBody}
+  </main>
   ${footerHtml()}
   ${fillerH > 10 ? `<div style="width:1512px;height:${fillerH}px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>` : ''}
 </div>
+${FIT_SCRIPT}
 <script>
   (function () {
     var vids = document.querySelectorAll('video.lazy-video');
