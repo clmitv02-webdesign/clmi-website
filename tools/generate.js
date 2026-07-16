@@ -261,7 +261,8 @@ function mobileBody(items) {
   let openBg = null;
   const closeBg = () => { if (openBg) { out.push('</div>'); openBg = null; } };
 
-  for (const row of rows) {
+  for (let ri = 0; ri < rows.length; ri++) {
+    const row = rows[ri];
     const bg = bgForRow(row.y + 5);
     if (bg !== openBg) {
       closeBg();
@@ -272,12 +273,35 @@ function mobileBody(items) {
     const others = row.items.filter((i) => i.t === 'iframe' || i.t === 'video');
 
     if (imgs.length >= 2) {
-      out.push(`<div class="m-grid2">${imgs.map((i) => {
+      /* photo grid — attach the caption lines that sit under each column
+         (team cards: name + role under every photo) */
+      const cols = imgs.map(() => []);
+      let rj = ri + 1;
+      while (rj < rows.length) {
+        const cand = rows[rj];
+        if (!cand.items.every((c) => c.t === 'txt')) break;
+        if (cand.y > row.y + Math.max(...imgs.map((i) => i.h)) + 160) break;
+        const fits = cand.items.every((c) => imgs.some((im) => c.x >= im.x - 60 && c.x < im.x + im.w + 20));
+        if (!fits || cand.items.length > imgs.length) break;
+        for (const c of cand.items) {
+          let ci = imgs.findIndex((im) => c.x >= im.x - 60 && c.x < im.x + im.w + 20);
+          if (ci >= 0) cols[ci].push(c);
+        }
+        rj++;
+      }
+      const zipped = rj > ri + 1;
+      out.push(`<div class="m-grid2">${imgs.map((i, ix) => {
         const src = localMedia(i.src); if (!src) return '';
         const href = localHref(i.link);
         const im = `<img loading="lazy" src="${esc(src)}" alt="${esc(i.alt || '')}" width="${i.w}" height="${i.h}">`;
-        return href ? `<a href="${esc(href)}">${im}</a>` : im;
+        const caps = zipped && cols[ix].length
+          ? `<div style="padding:6px 2px 2px">${cols[ix].map((c, k) =>
+              `<div style="font-size:${k === 0 ? '15px' : '13px'};font-weight:${k === 0 ? 700 : 400};color:${c.color};line-height:1.35">${c.html || esc(c.text)}</div>`).join('')}</div>`
+          : '';
+        const body = (href ? `<a href="${esc(href)}">${im}</a>` : im) + caps;
+        return `<div>${body}</div>`;
       }).join('')}</div>`);
+      if (zipped) { ri = rj - 1; continue; }
     } else if (imgs.length === 1) {
       const i = imgs[0]; const src = localMedia(i.src);
       if (src) {
@@ -377,6 +401,22 @@ function pageHtml(spec, slug) {
     byKey.set(key, it);
   }
   items = [...byKey.values()];
+
+  /* two different texts painted on the same spot = a hover-swap pair caught
+     mid-animation during capture — keep only the one painted last (on top) */
+  const txtItems = items.filter((it) => it.t === 'txt');
+  for (let a = 0; a < txtItems.length; a++) {
+    for (let b = a + 1; b < txtItems.length; b++) {
+      const A = txtItems[a], B = txtItems[b];
+      if (A.drop || B.drop || A.text === B.text) continue;
+      const ix = Math.max(0, Math.min(A.x + A.w, B.x + B.w) - Math.max(A.x, B.x));
+      const iy = Math.max(0, Math.min(A.y + A.h, B.y + B.h) - Math.max(A.y, B.y));
+      const inter = ix * iy;
+      const minArea = Math.min(A.w * A.h, B.w * B.h) || 1;
+      if (inter / minArea > 0.6) A.drop = true; /* keep B (later = on top) */
+    }
+  }
+  items = items.filter((it) => !it.drop);
 
   const body = items.map(renderItem).filter(Boolean).join('\n    ');
   const mBody = mobileBody(items);
