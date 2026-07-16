@@ -365,6 +365,49 @@ const FIT_SCRIPT = `<script>
   })();
 </script>`;
 
+/* real, working contact form (replaces the captured static artwork on /about-1) */
+const CONTACT_EMAIL = 'info.clmitv@gmail.com';
+const CONTACT_FORM_DESKTOP = `
+    <form class="el" action="https://formsubmit.co/${CONTACT_EMAIL}" method="POST"
+          style="left:523px;top:967px;width:474px;height:539px;background:#fff;border:1px solid rgb(139,0,0);z-index:7;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+      <input type="hidden" name="_subject" value="New message from the church website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://christloveministriesinternational.org/about-1?sent=1">
+      <div style="margin:48px 40px 0;font-size:20px;font-weight:700;color:rgb(139,0,0);line-height:1.3">Send us a message and we&rsquo;ll get back to you shortly.</div>
+      <div style="margin:22px 32px 0;font-size:13px;color:rgb(139,0,0)">Email *</div>
+      <input required type="email" name="email" style="margin:6px 32px 0;width:410px;height:55px;border:0;background:rgb(232,230,230);padding:0 14px;font-size:15px;box-sizing:border-box">
+      <div style="margin:18px 32px 0;font-size:13px;color:rgb(139,0,0)">Subject</div>
+      <input type="text" name="subject" style="margin:6px 32px 0;width:410px;height:55px;border:0;background:rgb(232,230,230);padding:0 14px;font-size:15px;box-sizing:border-box">
+      <div style="margin:18px 32px 0;font-size:13px;color:rgb(139,0,0)">Your message</div>
+      <textarea name="message" style="margin:6px 32px 0;width:410px;height:108px;border:0;background:rgb(232,230,230);padding:10px 14px;font-size:15px;box-sizing:border-box;resize:none"></textarea>
+      <button type="submit" style="display:block;margin:14px auto 0;width:144px;height:50px;border:0;cursor:pointer;background:rgb(139,0,0);color:#fff;font-size:16px">Send</button>
+    </form>`;
+const CONTACT_FORM_MOBILE = `
+    <form class="m-sec pad" action="https://formsubmit.co/${CONTACT_EMAIL}" method="POST" style="background:#fff">
+      <input type="hidden" name="_subject" value="New message from the church website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://christloveministriesinternational.org/about-1?sent=1">
+      <div style="font-size:19px;font-weight:700;color:rgb(139,0,0);line-height:1.3;margin-bottom:14px">Send us a message and we&rsquo;ll get back to you shortly.</div>
+      <div style="font-size:13px;color:rgb(139,0,0)">Email *</div>
+      <input required type="email" name="email" style="width:100%;height:50px;border:0;background:rgb(232,230,230);padding:0 12px;font-size:16px;box-sizing:border-box;margin:6px 0 14px">
+      <div style="font-size:13px;color:rgb(139,0,0)">Subject</div>
+      <input type="text" name="subject" style="width:100%;height:50px;border:0;background:rgb(232,230,230);padding:0 12px;font-size:16px;box-sizing:border-box;margin:6px 0 14px">
+      <div style="font-size:13px;color:rgb(139,0,0)">Your message</div>
+      <textarea name="message" style="width:100%;height:110px;border:0;background:rgb(232,230,230);padding:10px 12px;font-size:16px;box-sizing:border-box;margin:6px 0 14px"></textarea>
+      <button type="submit" style="display:block;width:144px;height:48px;border:0;cursor:pointer;background:rgb(139,0,0);color:#fff;font-size:16px">Send</button>
+    </form>`;
+const SENT_SCRIPT = `<script>
+  if (/[?&]sent=1/.test(location.search)) {
+    document.querySelectorAll('form[action*="formsubmit"]').forEach(function (f) {
+      f.innerHTML = '<div style="padding:60px 30px;text-align:center;font-size:19px;font-weight:700;color:rgb(139,0,0)">Thank you! Your message has been sent.<br><span style="font-weight:400;font-size:15px">We\\u2019ll get back to you shortly.</span></div>';
+    });
+    var f = document.querySelector('form[action*="formsubmit"]');
+    if (f) f.scrollIntoView({block: 'center'});
+  }
+</script>`;
+
 function pageHtml(spec, slug) {
   const activePath = slug === 'home' ? '/' : '/' + slug.replace(/__/g, '/');
 
@@ -436,8 +479,17 @@ function pageHtml(spec, slug) {
   }
   items = items.filter((it) => !it.drop);
 
-  const body = items.map(renderItem).filter(Boolean).join('\n    ');
-  const mBody = mobileBody(items);
+  /* /about-1: swap the captured (non-functional) contact-form artwork for a real form */
+  let extraDesktop = '', extraMobile = '', extraScript = '';
+  if (slug === 'about-1') {
+    items = items.filter((it) => !(it.x >= 520 && it.x + (it.w || 0) <= 1000 && it.y >= 1100 && it.y <= 1645));
+    extraDesktop = CONTACT_FORM_DESKTOP;
+    extraMobile = CONTACT_FORM_MOBILE;
+    extraScript = SENT_SCRIPT;
+  }
+
+  const body = items.map(renderItem).filter(Boolean).join('\n    ') + extraDesktop;
+  const mBody = mobileBody(items) + extraMobile;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -460,7 +512,7 @@ ${spec.desc ? `<meta name="description" content="${esc(spec.desc)}">` : ''}
   ${footerHtml()}
   ${fillerH > 10 ? `<div style="width:1512px;height:${fillerH}px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>` : ''}
 </div>
-${FIT_SCRIPT}
+${FIT_SCRIPT}${extraScript}
 <script>
   (function () {
     var vids = document.querySelectorAll('video.lazy-video');

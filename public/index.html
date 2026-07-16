@@ -272,11 +272,15 @@
     <a class="card" style="left:341px;top:737px"  href="/livestream"><img loading="lazy" src="/assets/media/682560_31a5e9b80d524e44b04b22cad28ac04e~mv2.jpg" alt="CLMI Podcast"></a>
     <a class="card" style="left:767px;top:737px"  href="/church-outreach"><img loading="lazy" src="/assets/media/682560_81530cc60bcf4f6daf136f5367ce429e~mv2.jpg" alt="Handout — Good Samaritan"></a>
 
-    <form class="newsletter" id="newsletterForm">
+    <form class="newsletter" id="newsletterForm" action="https://formsubmit.co/info.clmitv@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Newsletter signup — church website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://christloveministriesinternational.org/?subscribed=1">
       <h3>Subscribe to our newsletter &bull; Don&rsquo;t miss out!</h3>
       <label for="nl-email">Email *</label>
       <div class="row">
-        <input id="nl-email" type="email" required placeholder="e.g., email@example.com">
+        <input id="nl-email" name="email" type="email" required placeholder="e.g., email@example.com">
         <button type="submit">Join</button>
       </div>
       <p class="done" id="nl-done">Thank you for subscribing!</p>
@@ -352,12 +356,12 @@
     });
   });
 
-  // newsletter — static site: no backend yet. Shows confirmation only.
-  // TODO: connect to a real mailing-list service (see README).
-  document.getElementById('newsletterForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.getElementById('nl-done').style.display = 'block';
-  });
+  // newsletter — delivered to the church inbox via FormSubmit; show thanks after redirect back
+  if (/[?&]subscribed=1/.test(location.search)) {
+    var nlDone = document.getElementById('nl-done');
+    nlDone.style.display = 'block';
+    document.getElementById('newsletterForm').scrollIntoView({ block: 'center' });
+  }
 </script>
 </body>
 </html>
