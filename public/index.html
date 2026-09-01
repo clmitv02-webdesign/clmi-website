@@ -42,47 +42,19 @@
     background: #0b0d11;
   }
 
-  /* ---------- resilient YouTube playlist previews ---------- */
+  /* ---------- restored YouTube playlists ---------- */
   .playlists {
-    position: relative; width: 1512px; height: 310px; margin: 0 auto; box-sizing: border-box;
-    display: grid; grid-template-columns: repeat(3, 336px); justify-content: space-between;
-    padding: 47px 87px 22px;
+    position: relative; width: 1512px; height: 310px; margin: 0 auto;
     background: linear-gradient(26deg, rgb(49,97,66) 21.56%, rgba(0,87,225,0.85) 54.14%, rgba(40,95,97,0.97) 72.28%, rgb(49,97,66) 100%);
   }
   .playlists .band {
     position: absolute; left: 0; top: 42px; width: 1512px; height: 210px;
     background: linear-gradient(90deg, #fff 0%, #c7c7c7 100%);
   }
-  .playlists .pl-item { position: relative; z-index: 1; min-width: 0; }
-  .playlist-card {
-    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
-    background: #111; border-radius: 8px; box-shadow: 0 12px 28px rgba(6,21,16,0.25);
-    isolation: isolate; transition: transform 180ms ease, box-shadow 180ms ease;
-  }
-  .playlist-preview {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 420ms cubic-bezier(.2,.7,.2,1), filter 220ms ease;
-  }
-  .playlist-card::after {
-    content: ""; position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(180deg, rgba(0,0,0,0.02) 45%, rgba(0,0,0,0.52) 100%);
-  }
-  .playlist-play {
-    position: absolute; left: 50%; top: 50%; z-index: 2; width: 62px; height: 44px;
-    transform: translate(-50%,-50%); display: grid; place-items: center; border-radius: 12px;
-    background: #ff0033; color: #fff; box-shadow: 0 8px 22px rgba(0,0,0,0.32);
-  }
-  .playlist-play::before {
-    content: ""; width: 0; height: 0; margin-left: 4px;
-    border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid currentColor;
-  }
-  .playlist-card:hover, .playlist-card:focus-visible {
-    transform: translateY(-4px); box-shadow: 0 18px 34px rgba(6,21,16,0.34); outline: none;
-  }
-  .playlist-card:hover .playlist-preview, .playlist-card:focus-visible .playlist-preview { transform: scale(1.035); filter: brightness(1.04); }
+  .playlists iframe { position: absolute; top: 47px; width: 336px; height: 200px; border: 0; }
   .playlists .label {
-    margin-top: 14px; text-align: center; font-size: 25px; line-height: 1.1; font-weight: 700;
-    color: #fffffe; font-family: var(--helv);
+    position: absolute; top: 266px; font-size: 25px; font-weight: 700; color: #fffffe;
+    font-family: var(--helv);
   }
 
   /* ---------- ministries grid + newsletter ---------- */
@@ -135,12 +107,11 @@
     .social-video-showcase { width: 100%; }
     .social-platform-video { aspect-ratio: 16 / 9; }
 
-    .playlists { width: 100%; height: auto; padding: 16px 14px 6px; display: grid; grid-template-columns: 1fr; gap: 0; }
+    .playlists { width: 100%; height: auto; padding: 14px 0 4px; }
     .playlists .band { display: none; }
-    .playlists .pl-item { padding: 0 0 16px; }
-    .playlist-card { border-radius: 7px; }
-    .playlist-play { width: 56px; height: 40px; border-radius: 10px; }
-    .playlists .label { font-size: 18px; margin-top: 9px; }
+    .playlists .pl-item { position: static; padding: 0 14px 14px; }
+    .playlists iframe { position: static; width: 100%; height: auto; aspect-ratio: 16/9; display: block; }
+    .playlists .label { position: static; display: block; text-align: center; font-size: 18px; padding: 8px 0 2px; }
 
     .ministries { width: 100%; height: auto; padding: 18px 0 26px; border-top-width: 1px; }
     .ministries a.card { position: static !important; display: block; width: 90%; height: auto; aspect-ratio: 398/157; margin: 0 auto 26px; }
@@ -236,29 +207,20 @@
     <div class="counter"><span id="slideNum">1</span>/6</div>
   </section>
 
-  <!-- Resilient YouTube playlist previews: local artwork avoids broken third-party frames -->
+  <!-- Restored YouTube playlists -->
   <section class="playlists" aria-label="CLMI YouTube playlists">
     <div class="band"></div>
     <div class="pl-item">
-      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" target="_blank" rel="noopener noreferrer" aria-label="Watch the Conventions playlist on YouTube">
-        <img class="playlist-preview" src="/assets/youtube-playlists/conventions.jpg" loading="lazy" decoding="async" width="1280" height="720" alt="CLMI Annual Convention service">
-        <span class="playlist-play" aria-hidden="true"></span>
-      </a>
-      <div class="label">Conventions</div>
+      <iframe loading="lazy" style="left:87px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="label" style="left:179px">Conventions</div>
     </div>
     <div class="pl-item">
-      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLe7ztWaNnz_Cwa2Ziil-bO37a76pjl3FK" target="_blank" rel="noopener noreferrer" aria-label="Watch the Testimony Sundays playlist on YouTube">
-        <img class="playlist-preview" src="/assets/youtube-playlists/testimony-sundays.jpg" loading="lazy" decoding="async" width="1280" height="720" alt="CLMI Testimony Sunday service">
-        <span class="playlist-play" aria-hidden="true"></span>
-      </a>
-      <div class="label">Testimony Sundays</div>
+      <iframe loading="lazy" style="left:588px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_Cwa2Ziil-bO37a76pjl3FK" title="Testimony Sundays playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="label" style="left:637px">Testimony Sundays</div>
     </div>
     <div class="pl-item">
-      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PLe7ztWaNnz_AWHNPynyTKY-3DnPx4amrE" target="_blank" rel="noopener noreferrer" aria-label="Watch the Outreach playlist on YouTube">
-        <img class="playlist-preview" src="/assets/youtube-playlists/outreach.jpg" loading="lazy" decoding="async" width="1280" height="720" alt="CLMI revival and healing outreach service">
-        <span class="playlist-play" aria-hidden="true"></span>
-      </a>
-      <div class="label">Outreach</div>
+      <iframe loading="lazy" style="left:1092px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_AWHNPynyTKY-3DnPx4amrE" title="Outreach playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="label" style="left:1203px">Outreach</div>
     </div>
   </section>
 
