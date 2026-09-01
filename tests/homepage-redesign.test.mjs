@@ -44,11 +44,28 @@ test('old convention and poster blocks stay removed while the approved social fi
   assert.match(videos[0], /class="social-platform-video"/);
 });
 
-test('the three YouTube playlist embeds are restored and lazy-loaded', () => {
+test('the three YouTube playlists use resilient local preview cards', () => {
   assert.match(html, /class="playlists"/);
-  const playlists = [...html.matchAll(/<iframe\b[^>]*src="https:\/\/www\.youtube\.com\/embed\/videoseries\?list=[^"]+"[^>]*>/g)].map((match) => match[0]);
+  const section = html.match(/<section class="playlists"[\s\S]*?<\/section>/)?.[0] ?? '';
+  const playlists = [...section.matchAll(/<a\b[^>]*class="playlist-card"[^>]*>/g)].map((match) => match[0]);
   assert.equal(playlists.length, 3);
-  for (const playlist of playlists) assert.match(playlist, /loading="lazy"/);
+  assert.doesNotMatch(section, /<iframe\b/);
+  for (const playlist of playlists) {
+    assert.match(playlist, /href="https:\/\/www\.youtube\.com\/playlist\?list=[^"]+"/);
+    assert.match(playlist, /target="_blank"/);
+    assert.match(playlist, /rel="noopener noreferrer"/);
+  }
+  const previews = [...section.matchAll(/<img\b[^>]*class="playlist-preview"[^>]*>/g)].map((match) => match[0]);
+  assert.equal(previews.length, 3);
+  for (const preview of previews) {
+    assert.match(preview, /src="\/assets\/youtube-playlists\/[^"]+\.jpg"/);
+    assert.match(preview, /loading="lazy"/);
+    assert.match(preview, /decoding="async"/);
+    assert.match(preview, /width="1280"/);
+    assert.match(preview, /height="720"/);
+    assert.match(preview, /alt="[^"]+"/);
+  }
+  assert.match(html, /\.playlist-card\s*\{[^}]*aspect-ratio:\s*16\s*\/\s*9/s);
   assert.match(html, />Conventions<\/div>/);
   assert.match(html, />Testimony Sundays<\/div>/);
   assert.match(html, />Outreach<\/div>/);
