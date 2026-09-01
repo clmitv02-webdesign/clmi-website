@@ -6,18 +6,18 @@
 <title>HOME | Clminternational</title>
 <meta name="description" content="Christ's Love Ministries International — Windhoek, Namibia. Join us for Sunday services, conventions, outreach and live streams.">
 <link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20260901-2">
 <style>
   /* ---------- hero slideshow ---------- */
   .hero {
-    position: relative; width: 1512px; height: 643px; margin: 0 auto;
-    background: #2f2e2e; overflow: hidden;
+    position: relative; width: 1512px; height: auto; aspect-ratio: 2000 / 789; margin: 0 auto;
+    background: #17152f; overflow: hidden;
   }
   .hero .slide {
     position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease;
   }
   .hero .slide.on { opacity: 1; }
-  .hero .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .hero .slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .hero .arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 44px; height: 44px; border: 0; cursor: pointer;
@@ -33,7 +33,16 @@
     padding: 4px 10px; border-radius: 12px;
   }
 
-  /* ---------- playlists strip ---------- */
+  /* ---------- approved CLMI social-platform film ---------- */
+  .social-video-showcase {
+    position: relative; width: 1512px; margin: 0 auto; overflow: hidden; background: #0b0d11;
+  }
+  .social-platform-video {
+    width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+    background: #0b0d11;
+  }
+
+  /* ---------- restored YouTube playlists ---------- */
   .playlists {
     position: relative; width: 1512px; height: 310px; margin: 0 auto;
     background: linear-gradient(26deg, rgb(49,97,66) 21.56%, rgba(0,87,225,0.85) 54.14%, rgba(40,95,97,0.97) 72.28%, rgb(49,97,66) 100%);
@@ -42,44 +51,16 @@
     position: absolute; left: 0; top: 42px; width: 1512px; height: 210px;
     background: linear-gradient(90deg, #fff 0%, #c7c7c7 100%);
   }
-  .playlists iframe {
-    position: absolute; top: 47px; width: 336px; height: 200px; border: 0;
-  }
+  .playlists iframe { position: absolute; top: 47px; width: 336px; height: 200px; border: 0; }
   .playlists .label {
     position: absolute; top: 266px; font-size: 25px; font-weight: 700; color: #fffffe;
     font-family: var(--helv);
   }
 
-  /* ---------- convention slideshow section ---------- */
-  .convention {
-    position: relative; width: 1512px; height: 683px; margin: 0 auto; overflow: hidden;
-  }
-  .convention video.bg {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  }
-  .convention iframe {
-    position: absolute; left: 266px; top: 0; width: 980px; height: 683px; border: 0;
-  }
-
-  /* ---------- convention poster + promo video ---------- */
-  .poster {
-    position: relative; width: 1512px; height: 877px; margin: 0 auto; overflow: hidden;
-  }
-  .poster > img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .poster .promo {
-    position: absolute; left: 429px; top: 5px; width: 633px; height: 870px;
-    background: #000;
-  }
-  .poster .promo video { width: 100%; height: 100%; object-fit: cover; }
-  .poster .promo::after {
-    content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.25);
-    pointer-events: none;
-  }
-
   /* ---------- ministries grid + newsletter ---------- */
   .ministries {
     position: relative; width: 1512px; height: 1280px; margin: 0 auto;
-    background: linear-gradient(9deg, rgb(89,89,89) 0%, #fff 100%);
+    background: linear-gradient(180deg, #f0f0f0 0%, #fff 100%); border-top: 2px solid rgba(46,90,62,0.28);
   }
   .ministries a.card { position: absolute; display: block; width: 398px; height: 157px; }
   .ministries a.card img {
@@ -119,9 +100,12 @@
 
   /* ---------- mobile home (≤768px) ---------- */
   @media (max-width: 768px) {
-    .hero { width: 100%; height: 42.5vw; min-height: 150px; }
+    .hero { width: 100%; height: auto; min-height: 0; aspect-ratio: 2000 / 789; }
     .hero .arrow { width: 32px; height: 32px; font-size: 15px; }
     .hero .counter { font-size: 11px; top: 8px; right: 10px; }
+
+    .social-video-showcase { width: 100%; }
+    .social-platform-video { aspect-ratio: 16 / 9; }
 
     .playlists { width: 100%; height: auto; padding: 14px 0 4px; }
     .playlists .band { display: none; }
@@ -129,14 +113,7 @@
     .playlists iframe { position: static; width: 100%; height: auto; aspect-ratio: 16/9; display: block; }
     .playlists .label { position: static; display: block; text-align: center; font-size: 18px; padding: 8px 0 2px; }
 
-    .convention { width: 100%; height: auto; aspect-ratio: 980/683; }
-    .convention iframe { left: 0; top: 0; width: 100%; height: 100%; }
-
-    .poster { width: 100%; height: auto; }
-    .poster > img { width: 100%; height: auto; }
-    .poster .promo { position: static; width: 72%; height: auto; aspect-ratio: 633/870; margin: 10px auto; }
-
-    .ministries { width: 100%; height: auto; padding: 18px 0 26px; }
+    .ministries { width: 100%; height: auto; padding: 18px 0 26px; border-top-width: 1px; }
     .ministries a.card { position: static !important; display: block; width: 90%; height: auto; aspect-ratio: 398/157; margin: 0 auto 26px; }
     .newsletter { position: static; width: 90%; height: auto; margin: 10px auto 0; padding-bottom: 22px; }
     .newsletter h3 { font-size: 17px; margin: 22px 20px 6px; }
@@ -144,7 +121,11 @@
     .newsletter .row { margin: 0 20px; }
     .newsletter input[type="email"] { min-width: 0; height: 48px; }
     .newsletter button { height: 48px; width: 76px; }
-    .newsletter .done { margin: 10px 20px 0; }
+      .newsletter .done { margin: 10px 20px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero .slide { transition: none !important; }
   }
 </style>
 </head>
@@ -169,12 +150,12 @@
       <div class="nav-item"><a href="/livestream">LIVE STREAMS</a></div>
       <div class="nav-item"><a href="/donations">DONATIONS</a></div>
       <div class="nav-item"><a href="/about-us">ABOUT US</a></div>
-      <div class="nav-item"><a href="/publication">PUBLICATION</a></div>
+      <div class="nav-item"><a href="/publication">GALLERY</a></div>
       <div class="nav-item"><a href="/about-1">CONTACT US</a>
         <div class="dropdown"><a href="/branches">BRANCHES</a></div>
       </div>
     </nav>
-    <a class="go-live" href="/copy-of-live-streams">Go Live <img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt=""></a>
+    <a class="go-live" href="/copy-of-live-streams"><span class="live-pulse" aria-hidden="true"></span><span class="live-label">Go Live</span><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt=""></a>
     <div class="socials">
       <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
       <a href="https://www.facebook.com/CLMItv-122166180865270/" target="_blank" rel="noopener"><img src="/assets/media/682560_9ac04de1b55049e2871e7aaacd5d37e3~mv2.png" alt="Facebook"></a>
@@ -188,7 +169,7 @@
       <span>Christ's Love Ministries International</span>
     </a>
     <div class="m-right">
-      <a class="m-golive" href="/copy-of-live-streams">Go Live</a>
+      <a class="m-golive" href="/copy-of-live-streams"><span class="m-live-pulse" aria-hidden="true"></span>Go Live</a>
       <div class="m-burger" id="mBurger" role="button" aria-label="Menu" tabindex="0"><span></span><span></span><span></span></div>
     </div>
   </header>
@@ -202,7 +183,7 @@
     <a href="/livestream">LIVE STREAMS</a>
     <a href="/donations">DONATIONS</a>
     <a href="/about-us">ABOUT US</a>
-    <a href="/publication">PUBLICATION</a>
+    <a href="/publication">GALLERY</a>
     <a href="/about-1">CONTACT US</a>
     <a class="sub" href="/branches">BRANCHES</a>
     <div class="m-socials">
@@ -226,11 +207,11 @@
     <div class="counter"><span id="slideNum">1</span>/6</div>
   </section>
 
-  <!-- YouTube playlists -->
-  <section class="playlists">
+  <!-- Restored YouTube playlists -->
+  <section class="playlists" aria-label="CLMI YouTube playlists">
     <div class="band"></div>
     <div class="pl-item">
-      <iframe loading="lazy" style="left:87px"  src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe loading="lazy" style="left:87px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       <div class="label" style="left:179px">Conventions</div>
     </div>
     <div class="pl-item">
@@ -243,22 +224,9 @@
     </div>
   </section>
 
-  <!-- Convention 2026 slideshow over background video -->
-  <section class="convention">
-    <video class="bg lazy-video" muted loop playsinline preload="none"
-           poster="/assets/media/682560_0534c039f75d4beb8159dbcc83cf03d0f000.jpg"
-           data-src="/assets/video/682560_0534c039f75d4beb8159dbcc83cf03d0.mp4"></video>
-    <iframe src="/convention-2026/" title="CLMI Annual Convention 2026" loading="lazy"></iframe>
-  </section>
-
-  <!-- Convention poster with promo video -->
-  <section class="poster">
-    <img loading="lazy" src="/assets/media/682560_5c0e805c3d46455ca6f290c0de18739c~mv2.jpg" alt="CLMI Convention 2026 — The Hand of God">
-    <div class="promo">
-      <video class="lazy-video" muted loop playsinline preload="none"
-             poster="/assets/media/682560_26bfc20b06c24d85b942eb72475ca964f000.jpg"
-             data-src="/assets/video/682560_26bfc20b06c24d85b942eb72475ca964.mp4"></video>
-    </div>
+  <!-- Approved looped CLMI social-platform film -->
+  <section class="social-video-showcase" aria-label="CLMI social media platforms">
+    <video class="social-platform-video" autoplay muted loop playsinline preload="metadata" controls poster="/assets/video/clmi-social-platforms-poster.jpg" src="/assets/video/clmi-social-platforms-loop.mp4"></video>
   </section>
 
   <!-- Ministries grid + newsletter -->
@@ -328,19 +296,6 @@
     document.querySelector('#hero .prev').addEventListener('click', () => { clearInterval(timer); show(i - 1); auto(); });
     document.querySelector('#hero .next').addEventListener('click', () => { clearInterval(timer); show(i + 1); auto(); });
     auto();
-  })();
-
-  // background videos start loading only when they scroll into view
-  (function () {
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (!e.isIntersecting) continue;
-        const v = e.target;
-        if (!v.src) { v.src = v.dataset.src; v.play().catch(() => {}); }
-        io.unobserve(v);
-      }
-    }, { rootMargin: '200px' });
-    document.querySelectorAll('video.lazy-video').forEach((v) => io.observe(v));
   })();
 
   // WhatsApp: open the app directly (no wa.me interstitial); fall back to the web link

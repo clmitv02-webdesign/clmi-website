@@ -3,10 +3,47 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PUBLICATION | Clminternational</title>
+<title>GALLERY | Clminternational</title>
+<meta name="description" content="Explore photo highlights from worship, fellowship and ministry at Christ's Love Ministries International.">
 
 <link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20260901-3">
+<style>
+  .gallery-showcase { position: relative; width: 1512px; margin: 0 auto; padding: 0; overflow: hidden; background: #151817; }
+  .gallery-viewport { position: relative; z-index: 1; width: 100%; max-width: none; margin: 0; overflow: hidden; border-radius: 0; background: #151817; touch-action: pan-y; }
+  .gallery-track { display: flex; gap: 0; transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+  .gallery-card { position: relative; flex: 0 0 100%; margin: 0; overflow: hidden; background: #151817; }
+  .gallery-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 68%, rgba(8,18,13,0.18) 100%); }
+  .gallery-card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; transform: scale(1.015); transform-origin: center; will-change: transform; }
+  .gallery-card.is-active img { animation: galleryDrift 4.8s ease-out both; }
+  @keyframes galleryDrift { from { transform: scale(1.015) translate3d(0,0,0); } to { transform: scale(1.075) translate3d(-0.45%,-0.25%,0); } }
+  .gallery-controls { position: absolute; z-index: 4; inset: 0; pointer-events: none; }
+  .gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); pointer-events: auto; width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.42); border-radius: 50%; background: rgba(11,21,16,0.38); backdrop-filter: blur(7px); color: #fff; font-size: 22px; cursor: pointer; box-shadow: 0 7px 24px rgba(0,0,0,0.18); transition: background 0.2s ease, transform 0.2s ease; }
+  .gallery-arrow.gallery-prev { left: 28px; }
+  .gallery-arrow.gallery-next { right: 28px; }
+  .gallery-arrow:hover, .gallery-arrow:focus-visible { background: rgba(46,90,62,0.9); transform: translateY(-50%) scale(1.06); }
+  .gallery-dots { position: absolute; left: 50%; bottom: 25px; transform: translateX(-50%); pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 9px; min-width: 70px; padding: 10px 13px; border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; background: rgba(8,18,13,0.34); backdrop-filter: blur(8px); }
+  .gallery-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,0.52); cursor: pointer; transition: width 0.25s ease, background 0.25s ease; }
+  .gallery-dot.on { width: 26px; background: #fff; }
+  .gallery-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; overflow: hidden; background: rgba(255,255,255,0.16); }
+  .gallery-progress span { display: block; width: 100%; height: 100%; background: rgba(255,255,255,0.88); transform: scaleX(0); transform-origin: left center; }
+  .gallery-progress.is-running span { animation: galleryProgress 4.8s linear both; }
+  @keyframes galleryProgress { to { transform: scaleX(1); } }
+  @media (max-width: 768px) {
+    .gallery-showcase { width: 100%; }
+    .gallery-card img { aspect-ratio: 4 / 3; }
+    .gallery-arrow { width: 42px; height: 42px; font-size: 18px; }
+    .gallery-arrow.gallery-prev { left: 12px; }
+    .gallery-arrow.gallery-next { right: 12px; }
+    .gallery-dots { bottom: 14px; padding: 8px 11px; }
+    .gallery-progress { height: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-track, .gallery-arrow, .gallery-dot { transition: none !important; }
+    .gallery-card.is-active img { animation: none !important; transform: none !important; }
+    .gallery-progress.is-running span { animation: none !important; }
+  }
+</style>
 </head>
 <body>
 <div class="canvas-wrap">
@@ -22,7 +59,7 @@
       <div class="nav-item"><a href="/livestream">LIVE STREAMS</a></div>
       <div class="nav-item"><a href="/donations">DONATIONS</a></div>
       <div class="nav-item"><a href="/about-us">ABOUT US</a></div>
-      <div class="nav-item active"><a href="/publication">PUBLICATION</a></div>
+      <div class="nav-item active"><a href="/publication">GALLERY</a></div>
       <div class="nav-item"><a href="/about-1">CONTACT US</a><div class="dropdown"><a href="/branches">BRANCHES</a></div></div>
     </nav>
     <a class="go-live" href="/copy-of-live-streams">Go Live <img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt=""></a>
@@ -50,7 +87,7 @@
     <a href="/livestream">LIVE STREAMS</a>
     <a href="/donations">DONATIONS</a>
     <a href="/about-us">ABOUT US</a>
-    <a href="/publication">PUBLICATION</a>
+    <a href="/publication">GALLERY</a>
     <a href="/about-1">CONTACT US</a><a class="sub" href="/branches">BRANCHES</a>
     <div class="m-socials">
       <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
@@ -59,12 +96,24 @@
       <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
     </div>
   </nav>
-  <main class="pg" style="height:500px">
-    
-  </main>
-  <main class="m-page">
-    
-  </main>
+  <section class="gallery-showcase" id="galleryShowcase" aria-label="CLMI photo highlights" data-autoplay="on">
+    <div class="gallery-viewport" aria-live="off">
+      <div class="gallery-track">
+        <figure class="gallery-card is-active"><img loading="eager" fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-01.jpg" alt="Bishop Elizabeth Arowolo ministering during a CLMI convention"></figure>
+        <figure class="gallery-card"><img loading="lazy" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-02.jpg" alt="Bishop Elizabeth Arowolo seated during a CLMI gathering"></figure>
+        <figure class="gallery-card"><img loading="lazy" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-03.jpg" alt="A CLMI minister praying during the convention"></figure>
+        <figure class="gallery-card"><img loading="lazy" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-04.jpg" alt="A CLMI speaker preaching from the church lectern"></figure>
+        <figure class="gallery-card"><img loading="lazy" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-05.jpg" alt="A CLMI speaker sharing a visual message during the service"></figure>
+        <figure class="gallery-card"><img loading="lazy" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-06.jpg" alt="A worshipper listening during a CLMI convention service"></figure>
+      </div>
+    </div>
+    <div class="gallery-controls">
+      <button class="gallery-arrow gallery-prev" aria-label="Previous photos" type="button">&#10094;</button>
+      <div class="gallery-dots" aria-label="Choose photo group"></div>
+      <button class="gallery-arrow gallery-next" aria-label="Next photos" type="button">&#10095;</button>
+      <span class="gallery-progress" aria-hidden="true"><span></span></span>
+    </div>
+  </section>
   <footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
   </footer>
@@ -96,6 +145,81 @@
     fit(); window.addEventListener('resize', fit);
     var b = document.getElementById('mBurger'), n = document.getElementById('mNav');
     if (b && n) b.addEventListener('click', function () { n.classList.toggle('open'); });
+  })();
+</script>
+<script>
+  (function () {
+    const galleryShowcase = document.getElementById('galleryShowcase');
+    if (!galleryShowcase) return;
+    const track = galleryShowcase.querySelector('.gallery-track');
+    const cards = Array.from(galleryShowcase.querySelectorAll('.gallery-card'));
+    const dotsWrap = galleryShowcase.querySelector('.gallery-dots');
+    const viewport = galleryShowcase.querySelector('.gallery-viewport');
+    const progress = galleryShowcase.querySelector('.gallery-progress');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const AUTOPLAY_MS = 4800;
+    let page = 0, timer, pointerStartX = null;
+
+    function perPage() { return 1; }
+    function pageCount() { return Math.ceil(cards.length / perPage()); }
+    function renderDots() {
+      dotsWrap.replaceChildren();
+      for (let n = 0; n < pageCount(); n += 1) {
+        const dot = document.createElement('button');
+        dot.type = 'button'; dot.className = 'gallery-dot';
+        dot.setAttribute('aria-label', 'Show photo ' + (n + 1));
+        dot.addEventListener('click', () => { show(n); restart(); });
+        dotsWrap.appendChild(dot);
+      }
+    }
+    function show(next) {
+      page = (next + pageCount()) % pageCount();
+      const card = cards[page * perPage()];
+      track.style.transform = 'translateX(-' + card.offsetLeft + 'px)';
+      cards.forEach((item, n) => {
+        item.classList.toggle('is-active', n === page);
+        item.setAttribute('aria-hidden', n === page ? 'false' : 'true');
+      });
+      dotsWrap.querySelectorAll('.gallery-dot').forEach((dot, n) => {
+        dot.classList.toggle('on', n === page);
+        dot.setAttribute('aria-current', n === page ? 'true' : 'false');
+      });
+      progress.classList.remove('is-running');
+      void progress.offsetWidth;
+      if (!reduceMotion) progress.classList.add('is-running');
+    }
+    function pause() { clearInterval(timer); progress.classList.remove('is-running'); }
+    function restart() {
+      clearInterval(timer);
+      if (!reduceMotion && galleryShowcase.dataset.autoplay !== 'off') {
+        progress.classList.add('is-running');
+        timer = setInterval(() => show(page + 1), AUTOPLAY_MS);
+      }
+    }
+    function setup() { page = 0; renderDots(); show(0); restart(); }
+
+    galleryShowcase.querySelector('.gallery-prev').addEventListener('click', () => { show(page - 1); restart(); });
+    galleryShowcase.querySelector('.gallery-next').addEventListener('click', () => { show(page + 1); restart(); });
+    galleryShowcase.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') { show(page - 1); restart(); }
+      if (event.key === 'ArrowRight') { show(page + 1); restart(); }
+    });
+    viewport.addEventListener('pointerdown', (event) => { pointerStartX = event.clientX; pause(); });
+    viewport.addEventListener('pointerup', (event) => {
+      if (pointerStartX === null) return;
+      const distance = event.clientX - pointerStartX;
+      pointerStartX = null;
+      if (Math.abs(distance) > 50) show(page + (distance < 0 ? 1 : -1));
+      restart();
+    });
+    viewport.addEventListener('pointercancel', () => { pointerStartX = null; restart(); });
+    galleryShowcase.addEventListener('mouseenter', pause);
+    galleryShowcase.addEventListener('mouseleave', restart);
+    galleryShowcase.addEventListener('focusin', pause);
+    galleryShowcase.addEventListener('focusout', restart);
+    document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) : restart());
+    window.addEventListener('resize', setup);
+    setup();
   })();
 </script>
 <script>

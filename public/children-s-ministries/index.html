@@ -4,9 +4,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CHILDREN'S MINISTRIES | Clminternational</title>
+<meta name="description" content="Discover CLMI Children's Ministry through Sunday School, Children Evangelism and the Children's Christmas Gift program.">
 
 <link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20260901-4">
+<style>
+  .children-experience {
+    --children-green: #174d37;
+    --children-green-deep: #0d3326;
+    --children-red: #981b20;
+    --children-gold: #e8b84c;
+    --children-ink: #17201c;
+    --children-paper: #f7f5ef;
+    color: var(--children-ink);
+    background: var(--children-paper);
+    font-family: var(--helv);
+    overflow: hidden;
+  }
+  .children-hero {
+    position: relative;
+    min-height: 650px;
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr);
+    align-items: center;
+    gap: 70px;
+    padding: 92px 108px 100px;
+    background:
+      radial-gradient(circle at 11% 18%, rgba(232,184,76,.24), transparent 25%),
+      linear-gradient(128deg, var(--children-green-deep) 0%, var(--children-green) 54%, #1d5c65 100%);
+    color: #fff;
+  }
+  .children-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .16;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.32) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.32) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: linear-gradient(90deg, #000, transparent 70%);
+  }
+  .children-hero-copy { position: relative; z-index: 2; max-width: 610px; }
+  .children-eyebrow {
+    margin: 0 0 22px;
+    color: var(--children-gold);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+  .children-hero h1 {
+    margin: 0;
+    max-width: 700px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(56px, 5.2vw, 88px);
+    line-height: .96;
+    letter-spacing: -.045em;
+  }
+  .children-hero-copy > p:last-child {
+    max-width: 565px;
+    margin: 30px 0 0;
+    color: rgba(255,255,255,.84);
+    font-size: 21px;
+    line-height: 1.65;
+  }
+  .children-hero-visual {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+  .children-hero-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: block;
+    object-fit: cover;
+    border-radius: 34px 34px 118px 34px;
+    box-shadow: 0 34px 90px rgba(0,0,0,.34);
+  }
+  .children-hero-badge {
+    position: absolute;
+    left: -34px;
+    bottom: 34px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 290px;
+    padding: 18px 22px;
+    border: 1px solid rgba(255,255,255,.38);
+    border-radius: 18px;
+    background: rgba(255,255,255,.9);
+    color: var(--children-green-deep);
+    box-shadow: 0 18px 46px rgba(0,0,0,.2);
+    backdrop-filter: blur(16px);
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+  .children-hero-badge img { width: 54px; height: 54px; object-fit: contain; flex: 0 0 auto; }
+  .children-programs {
+    position: relative;
+    padding: 108px 108px 124px;
+    background:
+      radial-gradient(circle at 100% 0, rgba(46,90,62,.12), transparent 31%),
+      var(--children-paper);
+  }
+  .children-programs-intro {
+    display: grid;
+    grid-template-columns: .86fr 1.14fr;
+    gap: 80px;
+    align-items: end;
+    max-width: 1220px;
+    margin: 0 auto 52px;
+  }
+  .children-section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--children-red);
+    font-size: 14px;
+    font-weight: 850;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .children-section-label::before { content: ""; width: 38px; height: 3px; border-radius: 3px; background: var(--children-red); }
+  .children-programs-intro h2 {
+    margin: 14px 0 0;
+    color: var(--children-green-deep);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(42px, 4vw, 66px);
+    line-height: 1.02;
+    letter-spacing: -.035em;
+  }
+  .children-programs-intro p {
+    max-width: 620px;
+    margin: 0;
+    color: #52615a;
+    font-size: 19px;
+    line-height: 1.75;
+  }
+  .children-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    max-width: 1220px;
+    margin: 0 auto 18px;
+    padding: 9px;
+    border: 1px solid rgba(23,77,55,.13);
+    border-radius: 22px;
+    background: rgba(255,255,255,.78);
+    box-shadow: 0 18px 55px rgba(23,48,37,.08);
+  }
+  .children-tab {
+    position: relative;
+    min-height: 76px;
+    padding: 15px 24px;
+    border: 0;
+    border-radius: 15px;
+    background: transparent;
+    color: #56635d;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .children-tab:hover { color: var(--children-green); transform: translateY(-2px); }
+  .children-tab[aria-selected="true"] {
+    color: #fff;
+    background: linear-gradient(135deg, var(--children-green-deep), var(--children-green));
+    box-shadow: 0 12px 28px rgba(23,77,55,.24);
+  }
+  .children-tab:focus-visible {
+    outline: 4px solid rgba(232,184,76,.72);
+    outline-offset: 3px;
+  }
+  .children-panels { max-width: 1220px; margin: 0 auto; }
+  .children-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(430px, .92fr);
+    min-height: 610px;
+    overflow: hidden;
+    border: 1px solid rgba(23,77,55,.12);
+    border-radius: 32px;
+    background: #fff;
+    box-shadow: 0 28px 80px rgba(26,55,42,.13);
+    animation: childrenPanelIn .48s cubic-bezier(.22,.8,.22,1) both;
+  }
+  .children-panel[hidden] { display: none; }
+  .program-visual { position: relative; min-height: 610px; overflow: hidden; background: #d7dfdb; }
+  .program-image { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 8s ease; }
+  .children-panel:not([hidden]) .program-image { transform: scale(1.035); }
+  .program-copy { display: flex; flex-direction: column; justify-content: center; padding: 66px 62px; }
+  .program-kicker { margin: 0 0 13px; color: var(--children-red); font-size: 13px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+  .program-copy h3 { margin: 0; color: var(--children-green-deep); font-family: Georgia, 'Times New Roman', serif; font-size: 49px; line-height: 1.02; letter-spacing: -.035em; }
+  .program-lede { margin: 22px 0 0; color: #4d5d55; font-size: 18px; line-height: 1.72; }
+  .program-points { display: grid; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
+  .program-points li { display: flex; align-items: center; gap: 12px; color: #263b31; font-size: 16px; font-weight: 700; }
+  .program-points li::before { content: "✓"; width: 26px; height: 26px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: rgba(23,77,55,.1); color: var(--children-green); font-size: 14px; }
+  .children-invitation {
+    position: relative;
+    padding: 74px 108px;
+    background: linear-gradient(108deg, #951d22 0%, #74171d 100%);
+    color: #fff;
+  }
+  .children-invitation::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 75% 20%, rgba(232,184,76,.24), transparent 29%); }
+  .children-invitation > * { position: relative; z-index: 1; }
+  .children-invitation h2 { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(42px, 4vw, 64px); line-height: 1; letter-spacing: -.035em; }
+  .children-invitation p { max-width: 760px; margin: 18px 0 0; color: rgba(255,255,255,.82); font-size: 18px; line-height: 1.65; }
+  @keyframes childrenPanelIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 900px) {
+    .children-hero { min-height: auto; grid-template-columns: 1fr; gap: 42px; padding: 64px 24px 70px; }
+    .children-hero h1 { font-size: clamp(49px, 14vw, 72px); }
+    .children-hero-copy > p:last-child { font-size: 18px; }
+    .children-hero-image { border-radius: 26px 26px 74px 26px; }
+    .children-hero-badge { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+    .children-programs { padding: 72px 0 80px; }
+    .children-programs-intro { grid-template-columns: 1fr; gap: 24px; padding: 0 24px; margin-bottom: 34px; }
+    .children-programs-intro p { font-size: 17px; }
+    .children-tabs { display: flex; gap: 7px; margin: 0 0 14px; padding: 7px 18px; overflow-x: auto; border-width: 1px 0; border-radius: 0; scrollbar-width: none; scroll-snap-type: x mandatory; }
+    .children-tabs::-webkit-scrollbar { display: none; }
+    .children-tab { min-width: 205px; min-height: 64px; padding-inline: 16px; scroll-snap-align: center; }
+    .children-panels { margin: 0; }
+    .children-panel { grid-template-columns: 1fr; min-height: 0; border-width: 1px 0; border-radius: 0; }
+    .program-visual { min-height: 330px; aspect-ratio: 4 / 3; }
+    .program-copy { padding: 42px 24px 48px; }
+    .program-copy h3 { font-size: 43px; }
+    .program-lede { font-size: 17px; }
+    .children-invitation { padding: 60px 24px 66px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .children-panel { animation: none; }
+    .program-image, .children-tab { transition: none; }
+    .children-panel:not([hidden]) .program-image { transform: none; }
+  }
+</style>
 </head>
 <body>
 <div class="canvas-wrap">
@@ -22,7 +255,7 @@
       <div class="nav-item"><a href="/livestream">LIVE STREAMS</a></div>
       <div class="nav-item"><a href="/donations">DONATIONS</a></div>
       <div class="nav-item"><a href="/about-us">ABOUT US</a></div>
-      <div class="nav-item"><a href="/publication">PUBLICATION</a></div>
+      <div class="nav-item"><a href="/publication">GALLERY</a></div>
       <div class="nav-item"><a href="/about-1">CONTACT US</a><div class="dropdown"><a href="/branches">BRANCHES</a></div></div>
     </nav>
     <a class="go-live" href="/copy-of-live-streams">Go Live <img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt=""></a>
@@ -50,7 +283,7 @@
     <a href="/livestream">LIVE STREAMS</a>
     <a href="/donations">DONATIONS</a>
     <a href="/about-us">ABOUT US</a>
-    <a href="/publication">PUBLICATION</a>
+    <a href="/publication">GALLERY</a>
     <a href="/about-1">CONTACT US</a><a class="sub" href="/branches">BRANCHES</a>
     <div class="m-socials">
       <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
@@ -59,11 +292,94 @@
       <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
     </div>
   </nav>
-  <main class="pg" style="height:500px">
-    
-  </main>
-  <main class="m-page">
-    
+  <main class="children-experience">
+    <section class="children-hero" aria-labelledby="childrenHeroTitle">
+      <div class="children-hero-copy">
+        <p class="children-eyebrow">Children’s Ministry · CLMI</p>
+        <h1 id="childrenHeroTitle">A place to know Jesus, grow in faith, and belong.</h1>
+        <p>Every gathering is an invitation for children to discover God’s love, build lasting faith and enjoy meaningful moments with a caring church family.</p>
+      </div>
+      <div class="children-hero-visual">
+        <img class="children-hero-image" src="/assets/media/682560_787142f138994feca8d5011f40bd57f2~mv2.jpg" width="1080" height="720" alt="Children gathered together in a bright CLMI classroom" fetchpriority="high" decoding="async">
+        <div class="children-hero-badge">
+          <img src="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png" width="173" height="173" alt="">
+          <span>Christ-centred experiences made for growing hearts.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="children-programs" aria-label="Children’s Ministry programs">
+      <div class="children-programs-intro">
+        <div>
+          <span class="children-section-label">Our programs</span>
+          <h2>Three ways children grow with us.</h2>
+        </div>
+        <p>Choose a program to see how CLMI helps children learn the Word, live out their faith and experience the joy of giving and receiving in community.</p>
+      </div>
+
+      <div class="children-tabs" role="tablist" aria-label="Choose a Children’s Ministry program">
+        <button class="children-tab" id="tab-sunday-school" aria-controls="panel-sunday-school" type="button" role="tab" aria-selected="true" tabindex="0">Sunday School</button>
+        <button class="children-tab" id="tab-children-evangelism" aria-controls="panel-children-evangelism" type="button" role="tab" aria-selected="false" tabindex="-1">Children Evangelism</button>
+        <button class="children-tab" id="tab-christmas-gift" aria-controls="panel-christmas-gift" type="button" role="tab" aria-selected="false" tabindex="-1">Children’s Christmas Gift</button>
+      </div>
+
+      <div class="children-panels">
+        <article class="children-panel" id="panel-sunday-school" aria-labelledby="tab-sunday-school" role="tabpanel" tabindex="0">
+          <div class="program-visual">
+            <img class="program-image" src="/assets/media/682560_2834a0ead0e3489f8302041bf71e3bc9~mv2.jpg" width="1080" height="720" alt="Children sharing a joyful community moment outdoors" loading="eager" fetchpriority="high" decoding="async">
+          </div>
+          <div class="program-copy">
+            <p class="program-kicker">Faith begins with understanding</p>
+            <h3>Sunday School</h3>
+            <p class="program-lede">A welcoming time where Bible truth becomes clear, memorable and relevant to a child’s everyday world. Children are encouraged to ask questions, pray and discover what it means to walk with Jesus.</p>
+            <ul class="program-points">
+              <li>Bible stories made clear and engaging</li>
+              <li>Prayer, worship and joyful participation</li>
+              <li>Lessons children can carry into the week</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="children-panel" id="panel-children-evangelism" aria-labelledby="tab-children-evangelism" role="tabpanel" tabindex="0" hidden>
+          <div class="program-visual">
+            <img class="program-image" src="/assets/media/682560_5404089964f4458187c4a939418d3d8e~mv2.jpg" width="2000" height="1333" alt="A ministry leader sharing a message with children gathered in a CLMI classroom" loading="lazy" decoding="async">
+          </div>
+          <div class="program-copy">
+            <p class="program-kicker">Faith that reaches beyond Sunday</p>
+            <h3>Children Evangelism</h3>
+            <p class="program-lede">Children learn that sharing Christ’s love can begin with a kind word, a helping hand and the courage to tell someone what Jesus means to them. Faith becomes something they can live and share.</p>
+            <ul class="program-points">
+              <li>Simple ways to speak about Jesus</li>
+              <li>Kindness, service and compassion in action</li>
+              <li>Confidence to be a light wherever they go</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="children-panel" id="panel-christmas-gift" aria-labelledby="tab-christmas-gift" role="tabpanel" tabindex="0" hidden>
+          <div class="program-visual">
+            <img class="program-image" src="/assets/media/682560_375892a7519146d88991dbe505a11f0e~mv2.jpg" width="2000" height="1333" alt="Children gathered beside gifts and essential supplies" loading="lazy" decoding="async">
+          </div>
+          <div class="program-copy">
+            <p class="program-kicker">Celebrating Jesus through generous love</p>
+            <h3>Children’s Christmas Gift</h3>
+            <p class="program-lede">A joyful seasonal experience that places the love of Jesus at the centre of Christmas. Through fellowship and thoughtful gifts, children are reminded that they are seen, valued and part of a caring community.</p>
+            <ul class="program-points">
+              <li>A Christ-centred Christmas celebration</li>
+              <li>Joyful fellowship and shared memories</li>
+              <li>Gifts offered with dignity, care and love</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="children-invitation" aria-labelledby="childrenInvitationTitle">
+      <div>
+        <h2 id="childrenInvitationTitle">Every child has a place here.</h2>
+        <p>Whether your family is visiting for the first time or looking for a church community where children can flourish in faith, we would love to welcome you and answer your questions.</p>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
@@ -85,8 +401,45 @@
       });
     });
   </script>
-  <div style="width:1512px;height:193px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>
 </div>
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.children-tab'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.children-panel'));
+    if (!tabs.length || !panels.length) return;
+
+    function activate(tab, shouldFocus, updateHash) {
+      tabs.forEach(function (item) {
+        var selected = item === tab;
+        item.setAttribute('aria-selected', selected ? 'true' : 'false');
+        item.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      panels.forEach(function (panel) {
+        panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+      });
+      if (shouldFocus) tab.focus();
+      if (updateHash) history.replaceState(null, '', '#' + tab.id.replace('tab-', ''));
+    }
+
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () { activate(tab, false, true); });
+      tab.addEventListener('keydown', function (event) {
+        var next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        activate(tabs[next], true, true);
+      });
+    });
+
+    var requested = location.hash.replace('#', '');
+    var requestedTab = document.getElementById('tab-' + requested);
+    if (requestedTab && requestedTab.classList.contains('children-tab')) activate(requestedTab, false, false);
+  })();
+</script>
 <script>
   (function () {
     function fit() {

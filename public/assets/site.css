@@ -29,17 +29,18 @@ img { border: 0; }
   z-index: 500;
 }
 .site-header .brand {
-  position: absolute; left: -43px; top: 30px;
+  position: absolute; left: 18px; top: 30px;
   display: flex; align-items: center; gap: 14px;
 }
 .site-header .brand img { width: 94px; height: 69px; object-fit: contain; }
 .site-header .brand span {
-  width: 172px; font-size: 15px; font-weight: 700; line-height: 1.35;
+  width: 172px; font-family: var(--helv);
+  font-size: 15px; font-weight: 700; line-height: 1.2; letter-spacing: 0.005em;
   color: var(--green);
 }
 /* main menu */
 .main-nav {
-  position: absolute; left: 259px; top: 38px;
+  position: absolute; left: 308px; top: 38px;
   display: flex; align-items: stretch;
   background: #fff;
   border: 2px solid #c33;
@@ -73,16 +74,28 @@ img { border: 0; }
 
 /* go live + socials */
 .go-live {
-  position: absolute; left: 1284px; top: 16px;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 217px; height: 40px;
-  background: var(--green-dark);
-  border-bottom: 4px solid #c33;
-  color: #fff; font-size: 16px; letter-spacing: 0.35em;
+  position: absolute; left: 1284px; top: 14px;
+  display: flex; align-items: center; justify-content: center; gap: 11px;
+  width: 217px; height: 46px; border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 999px; overflow: hidden;
+  background: linear-gradient(135deg, #173d2b 0%, #34744e 100%);
+  box-shadow: 0 9px 22px rgba(23,61,43,0.28), inset 0 1px 0 rgba(255,255,255,0.2);
+  color: #fff; font-size: 14px; font-weight: 800; letter-spacing: 0.2em;
+  text-transform: uppercase; transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.go-live img { width: 24px; height: 24px; }
-.socials { position: absolute; left: 1284px; top: 63px; display: flex; gap: 3px; }
+.go-live:hover, .go-live:focus-visible { transform: translateY(-2px); box-shadow: 0 13px 28px rgba(23,61,43,0.36); }
+.go-live .live-pulse {
+  position: relative; width: 10px; height: 10px; border-radius: 50%; background: #ff3838;
+  box-shadow: 0 0 0 4px rgba(255,56,56,0.16);
+}
+.go-live .live-pulse::after {
+  content: ""; position: absolute; inset: -5px; border: 1px solid rgba(255,78,78,0.7);
+  border-radius: 50%; animation: live-ring 1.8s ease-out infinite;
+}
+.go-live img { width: 22px; height: 22px; }
+.socials { position: absolute; left: 1284px; top: 68px; display: flex; gap: 3px; }
 .socials img { width: 52px; height: 52px; object-fit: contain; }
+@keyframes live-ring { from { transform: scale(0.75); opacity: 1; } to { transform: scale(1.45); opacity: 0; } }
 
 /* ---------- footer ---------- */
 .site-footer {
@@ -136,12 +149,15 @@ img { border: 0; }
   }
   .m-header .m-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
   .m-header .m-brand img { width: 46px; height: 34px; object-fit: contain; }
-  .m-header .m-brand span { font-size: 13px; font-weight: 700; color: var(--green); line-height: 1.25; max-width: 160px; }
+  .m-header .m-brand span { font-family: var(--helv); font-size: 13px; font-weight: 700; color: var(--green); line-height: 1.2; letter-spacing: 0.005em; max-width: 160px; }
   .m-header .m-right { display: flex; align-items: center; gap: 10px; }
   .m-header .m-golive {
-    background: var(--green-dark); color: #fff; font-size: 12px; letter-spacing: 0.12em;
-    padding: 8px 12px; border-bottom: 3px solid #c33; text-decoration: none; white-space: nowrap;
+    display: flex; align-items: center; gap: 7px; border-radius: 999px;
+    background: linear-gradient(135deg, #173d2b, #34744e); color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 9px 13px; box-shadow: 0 5px 12px rgba(23,61,43,0.24); text-decoration: none; white-space: nowrap;
   }
+  .m-header .m-live-pulse { width: 7px; height: 7px; border-radius: 50%; background: #ff3838; box-shadow: 0 0 0 3px rgba(255,56,56,0.16); }
   .m-header .m-burger {
     width: 40px; height: 40px; border: 2px solid #c33; background: #fff;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
