@@ -6,7 +6,8 @@
 <title>HOME | Clminternational</title>
 <meta name="description" content="Christ's Love Ministries International — Windhoek, Namibia. Join us for Sunday services, conventions, outreach and live streams.">
 <link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
-<link rel="stylesheet" href="/assets/site.css?v=20260901-2">
+<link rel="stylesheet" href="/assets/vendor/scrollcraft/scrollcraft.css">
+<link rel="stylesheet" href="/assets/site.css?v=20260905">
 <style>
   /* ---------- hero slideshow ---------- */
   .hero {
@@ -128,8 +129,12 @@
     .hero .slide { transition: none !important; }
   }
 </style>
+<link rel="stylesheet" href="/assets/home-refresh.css?v=20260905">
+<script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>
+<script defer src="/assets/home-refresh.js?v=20260905"></script>
+<script defer src="/assets/site-nav.js?v=20260905"></script>
 </head>
-<body>
+<body class="home-refresh">
 <div class="canvas-wrap">
 
   <header class="site-header">
@@ -195,7 +200,7 @@
   </nav>
 
   <!-- hero slideshow -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" aria-label="CLMI announcements" data-sc-act="flow">
     <div class="slide on"><img src="/assets/media/682560_797021ac91aa47679ecce6aeb5cffbc8~mv2.jpg" alt=""></div>
     <div class="slide"><img data-src="/assets/media/682560_55edcbfbe3674997b43fbb144dc0bb8f~mv2.jpg" alt=""></div>
     <div class="slide"><img data-src="/assets/media/682560_dfdd3072140745939dbc25bf83f61ac1~mv2.jpg" alt=""></div>
@@ -205,10 +210,11 @@
     <button class="arrow prev" aria-label="Previous slide">&#10094;</button>
     <button class="arrow next" aria-label="Next slide">&#10095;</button>
     <div class="counter"><span id="slideNum">1</span>/6</div>
+    <button class="hero-pause" aria-label="Pause slideshow" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button>
   </section>
 
   <!-- Restored YouTube playlists -->
-  <section class="playlists" aria-label="CLMI YouTube playlists">
+  <section class="playlists" aria-label="CLMI YouTube playlists" data-sc-act="flow">
     <div class="band"></div>
     <div class="pl-item">
       <iframe loading="lazy" style="left:87px" src="https://www.youtube.com/embed/videoseries?list=PLe7ztWaNnz_DJlGdSTyLnHgIXZwOwd2N0" title="Conventions playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -225,12 +231,13 @@
   </section>
 
   <!-- Approved looped CLMI social-platform film -->
-  <section class="social-video-showcase" aria-label="CLMI social media platforms">
+  <section class="social-video-showcase" aria-label="CLMI social media platforms" data-sc-act="flow">
     <video class="social-platform-video" autoplay muted loop playsinline preload="metadata" controls poster="/assets/video/clmi-social-platforms-poster.jpg" src="/assets/video/clmi-social-platforms-loop.mp4"></video>
   </section>
 
   <!-- Ministries grid + newsletter -->
-  <section class="ministries">
+  <section class="ministries" aria-label="Explore CLMI ministries" data-sc-act="flow">
+    <div class="ministry-grid">
     <a class="card" style="left:341px;top:126px"  href="/children-s-ministries"><img loading="lazy" src="/assets/media/682560_31b17a7ea6404ca7b6f40d30a9c41a5c~mv2.png" alt="Children's Ministry"></a>
     <a class="card" style="left:767px;top:126px"  href="/marriage-seminars"><img loading="lazy" src="/assets/media/682560_39b04f6975e54a12a4a83088bac9010a~mv2.jpg" alt="Marriage Seminar"></a>
     <a class="card" style="left:341px;top:331px"  href="/community-outreach"><img loading="lazy" src="/assets/media/682560_6c4ee8ed7a0043b2b9a58500cbd328c7~mv2.png" alt="Church Outreach"></a>
@@ -240,6 +247,7 @@
     <a class="card" style="left:341px;top:737px"  href="/livestream"><img loading="lazy" src="/assets/media/682560_31a5e9b80d524e44b04b22cad28ac04e~mv2.jpg" alt="CLMI Podcast"></a>
     <a class="card" style="left:767px;top:737px"  href="/church-outreach"><img loading="lazy" src="/assets/media/682560_81530cc60bcf4f6daf136f5367ce429e~mv2.jpg" alt="Handout — Good Samaritan"></a>
 
+    </div>
     <form class="newsletter" id="newsletterForm" action="https://formsubmit.co/info.clmitv@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="Newsletter signup — church website">
       <input type="hidden" name="_template" value="table">
@@ -270,7 +278,7 @@
   (function () {
     function fit() {
       var w = document.documentElement.clientWidth;
-      document.body.style.zoom = (w > 768 && w < 1512) ? (w / 1512) : '';
+      document.body.style.zoom = '';
     }
     fit(); window.addEventListener('resize', fit);
     var b = document.getElementById('mBurger'), n = document.getElementById('mNav');
@@ -281,14 +289,27 @@
   (function () {
     const slides = document.querySelectorAll('#hero .slide');
     const num = document.getElementById('slideNum');
-    let i = 0, timer;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const staticReview = new URLSearchParams(location.search).get('motion') === 'off';
+    const pause = document.querySelector('.hero-pause');
+    let i = 0, timer, userPaused = motion.matches || staticReview;
     function show(n) {
       slides[i].classList.remove('on');
       i = (n + slides.length) % slides.length;
       slides[i].classList.add('on');
       num.textContent = i + 1;
     }
-    function auto() { timer = setInterval(() => show(i + 1), 5000); }
+    function auto() {
+      clearInterval(timer);
+      const paused = userPaused;
+      pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      pause.setAttribute('aria-pressed', String(paused));
+      pause.firstElementChild.textContent = paused ? '▶' : 'Ⅱ';
+      if (!paused && !document.hidden) timer = setInterval(() => show(i + 1), 5000);
+    }
+    pause.addEventListener('click', () => { userPaused = !userPaused; auto(); });
+    motion.addEventListener('change', () => { userPaused = motion.matches; auto(); });
+    document.addEventListener('visibilitychange', auto);
     // fetch the remaining slides once the page is interactive
     window.addEventListener('load', () => {
       document.querySelectorAll('#hero .slide img[data-src]').forEach((im) => { im.src = im.dataset.src; });

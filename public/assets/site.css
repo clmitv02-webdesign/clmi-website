@@ -204,3 +204,42 @@ img { border: 0; }
   .wa-bubble { width: 52px; height: 52px; right: 14px; bottom: 16px; }
 }
 @media (min-width: 769px) { .m-header, .m-page, .m-nav, .m-footer { display: none !important; } }
+
+/* 2026-09: shared CLMI surface system, aligned with Children's Ministry. */
+.site-header { background: #fff; border-bottom: 1px solid rgba(23,77,55,.12); height: 132px; display: grid; grid-template-columns: 1fr auto auto; grid-template-rows: 78px 54px; align-items: center; gap: 0 22px; padding: 0 36px; }
+.site-header .brand { position: static; grid-column: 1; grid-row: 1; gap: 12px; }
+.site-header .brand img { width: 62px; height: 58px; }
+.site-header .brand span { width: 232px; font-size: 15px; line-height: 1.35; }
+.site-header .socials { position: static; grid-column: 2; grid-row: 1; gap: 9px; }
+.site-header .socials img { width: 30px; height: 30px; }
+.site-header .go-live { position: static; grid-column: 3; grid-row: 1; width: 142px; height: 40px; font-size: 12px; letter-spacing: .12em; box-shadow: 0 5px 12px rgba(13,51,38,.12); }
+.site-header .go-live img { width: 19px; height: 19px; }
+.site-header .main-nav { position: static; grid-column: 1 / -1; grid-row: 2; align-self: stretch; justify-content: space-between; border: 0; border-top: 1px solid rgba(23,77,55,.1); border-radius: 0; box-shadow: none; background: transparent; }
+.site-header .main-nav > .nav-item > a { height: 53px; padding: 0 13px; font-size: 12px; letter-spacing: .055em; }
+.main-nav { border: 1px solid rgba(23,77,55,.15); border-radius: 8px; box-shadow: 0 4px 14px rgba(13,51,38,.07); }
+.main-nav > .nav-item > a { color: #174d37; transition: background .18s ease,color .18s ease; }
+.main-nav > .nav-item.active > a { background: #174d37; color: #fff; border-radius: 6px; }
+.main-nav > .nav-item > a:hover { color: #174d37; background: #edf2ed; }
+.main-nav .dropdown { background: #174d37; border-radius: 0 0 10px 10px; box-shadow: 0 12px 24px rgba(13,51,38,.18); }
+.main-nav .nav-item:focus-within .dropdown { display: block; }
+.site-header .brand span { color: #174d37; }
+.socials a { transition: transform .18s ease; }
+.socials a:hover { transform: translateY(-2px); }
+.site-footer, .site-footer .inner, .m-footer { background: #f7f5ef; }
+.site-footer, .m-footer { border-top: 1px solid rgba(23,77,55,.14); }
+a:focus-visible, button:focus-visible, input:focus-visible, [role="button"]:focus-visible { outline: 3px solid #986217; outline-offset: 4px; }
+@media (max-width: 768px) {
+  .m-header { min-height: 72px; background: #fff; border-bottom: 1px solid rgba(23,77,55,.13); box-shadow: 0 3px 16px rgba(13,51,38,.06); }
+  .m-header .m-brand span { color: #174d37; max-width: 146px; font-size: 12px; }
+  .m-header .m-brand { min-width: 0; flex: 1; margin-right: 8px; }
+  .m-header .m-brand img { width: 44px; height: 42px; flex-shrink: 0; }
+  .m-header .m-burger { border: 1px solid rgba(23,77,55,.2); border-radius: 8px; width: 36px; height: 36px; }
+  .m-header .m-burger span { background: #174d37; }
+  .m-header .m-golive { padding: 10px; letter-spacing: .04em; }
+  .m-header .m-right { gap: 8px; flex-shrink: 0; }
+  .m-nav { top: 72px; background: #174d37; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .go-live .live-pulse::after { animation: none; }
+  .go-live, .socials a, .main-nav > .nav-item > a { transition: none; }
+}
