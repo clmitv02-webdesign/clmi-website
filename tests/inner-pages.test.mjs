@@ -75,3 +75,12 @@ test('Watch image links identify distinct stream and podcast destinations',()=>{
   assert.match(html,/<a href="\/copy-of-live-streams"><img[^>]*alt="Watch CLMI live streams"/);
   assert.match(html,/<a href="https:\/\/podcasters.spotify.com\/pod\/show\/clmipod"><img[^>]*alt="Listen to the CLMI podcast"/);
 });
+test('Gallery archive links have page spacing and no legacy footer spacer remains',()=>{
+  const html=pages.find(([r])=>r==='publication')[1];
+  assert.match(html,/<\/section>\s*<div class="page-content"><nav class="related-links"/);
+  assert.doesNotMatch(html,/<div style="width:1512px;height:193px/);
+});
+test('Gallery autoplay respects the motion-off review option and OS preference',()=>{
+  const html=pages.find(([r])=>r==='publication')[1];
+  assert.match(html,/const reduceMotion = matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches \|\| new URLSearchParams\(location.search\)\.get\('motion'\) === 'off';/);
+});

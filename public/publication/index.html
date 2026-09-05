@@ -120,7 +120,7 @@
       <span class="gallery-progress" aria-hidden="true"><span></span></span>
     </div>
   </section>
-<nav class="related-links" aria-label="Related pages"><a class="button-link" href="/convention-2026">Convention 2026</a><a class="button-link" href="/highlights">2023 Convention Gallery</a><a class="button-link" href="/copy-of-2024-convention-gallery">2026 Convention Gallery</a><a class="button-link" href="/copy-of-2023-convention-gallery">2024 Convention Gallery</a><a class="button-link" href="/1">Christmas Day at the Orphanage</a><a class="button-link" href="/copy-of-community-building-gallery">Creative Expression Gallery</a></nav></main>
+<div class="page-content"><nav class="related-links" aria-label="Related pages"><a class="button-link" href="/convention-2026">Convention 2026</a><a class="button-link" href="/highlights">2023 Convention Gallery</a><a class="button-link" href="/copy-of-2024-convention-gallery">2026 Convention Gallery</a><a class="button-link" href="/copy-of-2023-convention-gallery">2024 Convention Gallery</a><a class="button-link" href="/1">Christmas Day at the Orphanage</a><a class="button-link" href="/copy-of-community-building-gallery">Creative Expression Gallery</a></nav></div></main>
   <footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
   </footer>
@@ -141,7 +141,7 @@
       });
     });
   </script>
-  <div style="width:1512px;height:193px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>
+
 </div>
 
 <script>
@@ -153,7 +153,7 @@
     const dotsWrap = galleryShowcase.querySelector('.gallery-dots');
     const viewport = galleryShowcase.querySelector('.gallery-viewport');
     const progress = galleryShowcase.querySelector('.gallery-progress');
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches || new URLSearchParams(location.search).get('motion') === 'off';
     const AUTOPLAY_MS = 4800;
     let page = 0, timer, pointerStartX = null;
 

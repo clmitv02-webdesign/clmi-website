@@ -188,7 +188,8 @@ def migrate(route,source,shell):
             start=out.index('  <section class="gallery-showcase"')
             end=out.index('  <footer class="site-footer"',start)
             existing=out[start:end]
-            out=out[:start]+'<main class="inner-main gallery-main"><h1 class="visually-hidden">Gallery</h1>'+existing+related(route)+'</main>\n'+out[end:]
+            out=out[:start]+'<main class="inner-main gallery-main"><h1 class="visually-hidden">Gallery</h1>'+existing+'<div class="page-content">'+related(route)+'</div></main>\n'+out[end:]
+            out=out.replace("const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;", "const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches || new URLSearchParams(location.search).get('motion') === 'off';")
             gallery=Parser(existing).root
             ledger['images']=unique(n.attrs['src'] for n in gallery.walk() if n.tag=='img' and 'src' in n.attrs)
         else:
@@ -288,6 +289,7 @@ def migrate(route,source,shell):
         newmain='<main class="inner-main" data-page-family="'+family(route)+'">'+hero(route,lead,SPARSE.get(route,''))+'<div class="page-content">'+body+related(route)+'</div></main>'
         out=re.sub(r'<main\b[\s\S]*?</main>\s*',lambda m:newmain if m.start()==next(re.finditer(r'<main\b',source)).start() else '',source)
     out=re.sub(r'<body(?:\s[^>]*)?>','<body class="clmi-inner">',out,count=1)
+    out=out.replace('<div style="width:1512px;height:193px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>','')
     if route!='publication':out=re.sub(r'<title>.*?</title>','<title>'+esc(TITLES[route])+' | CLMI</title>',out,count=1)
     out=re.sub(r'<script>\s*\(function \(\) \{\s*function fit\(\)[\s\S]*?</script>','',out)
     out=out.replace('</head>','<link rel="stylesheet" href="/assets/inner-pages.css">\n<script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>\n<script defer src="/assets/inner-pages.js"></script>\n</head>')
