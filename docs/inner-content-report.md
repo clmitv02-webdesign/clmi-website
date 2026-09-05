@@ -52,6 +52,10 @@ Final Gallery polish: two further regression tests first reported 7 passing and 
 
 ## Reproduction and handoff
 
-Run `python3 tools/rebuild-inner-pages.py` from the repository to regenerate only the inner HTML and content ledger from the immutable backup. This deliberately restores the migrated inner content from that source and would overwrite later manual inner HTML edits; preserve or incorporate such edits in the helper before rerunning. Use `--backup PATH` only for another intentionally selected source. `--check` inventories without writing output.
+Historical migration only: writing through `tools/rebuild-inner-pages.py` is now disabled because it would overwrite the September 6 owner revisions. `--check` inventories without writing output. Do not use the immutable migration backup to overwrite current pages.
 
 The generated pages were handed to the parent for browser verification. Do not claim visual completion from the static preservation tests alone.
+
+## September 6 owner-directed exceptions
+
+The newer revision rewrites Outreach copy, removes Giving content below its original introduction, and replaces Gallery's six highlight photos with 98 photos from the two latest 2026 archives. Preservation tests now explicitly account for those authorised exceptions. Branches preserves its 49 original contact articles byte-for-byte. See `docs/vibrant-revisions-review.md` for the current 36-test suite, route/layout evidence and limitations; earlier counts above are historical stages, not the current verification total.

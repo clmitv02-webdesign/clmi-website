@@ -1,6 +1,20 @@
 /* Progressive enhancement: page content and links do not depend on this file. */
 (() => {
   document.body.classList.add('has-js');
+  const branchSearch = document.getElementById('branch-search');
+  if (branchSearch) {
+    const contacts = [...document.querySelectorAll('.branch-card')];
+    const count = document.getElementById('branch-count');
+    branchSearch.addEventListener('input', () => {
+      const query = branchSearch.value.trim().toLocaleLowerCase();
+      let visible = 0;
+      contacts.forEach(card => {
+        card.hidden = !card.textContent.toLocaleLowerCase().includes(query);
+        if (!card.hidden) visible++;
+      });
+      count.textContent = visible + ' of ' + contacts.length + ' branch contacts';
+    });
+  }
   const menuButton = document.getElementById('mBurger');
   const mobileNav = document.getElementById('mNav');
   if (menuButton && mobileNav) {

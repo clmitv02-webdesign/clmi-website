@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "public",
+  "buildCommand": "node tools/sync-convention-gallery.mjs --build",
   "cleanUrls": true,
   "trailingSlash": false
 }

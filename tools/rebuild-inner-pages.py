@@ -307,6 +307,8 @@ def migrate(route,source,shell):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--backup',type=Path,default=DEFAULT_BACKUP);parser.add_argument('--check',action='store_true');args=parser.parse_args()
+    if not args.check:
+        parser.error('Historical one-time migration: writing is disabled to protect later owner revisions. Edit current HTML directly; use sync-convention-gallery.mjs for the current gallery.')
     baseline=(args.backup/'public/youth-movement/index.html').read_text()
     shell=re.sub(r'<main\b[\s\S]*?</main>\s*','',baseline)
     shell=shell.replace('  <footer class="site-footer">','<!--INNER_BODY-->\n  <footer class="site-footer">')

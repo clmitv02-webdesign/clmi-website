@@ -6,6 +6,7 @@ import test from 'node:test';
 const root = new URL('../', import.meta.url);
 const html = await readFile(new URL('public/index.html', root), 'utf8');
 const galleryHtml = await readFile(new URL('public/publication/index.html', root), 'utf8');
+const galleryScript = await readFile(new URL('public/assets/convention-gallery.js', root), 'utf8');
 const css = await readFile(new URL('public/assets/site.css', root), 'utf8');
 
 async function htmlFiles(directory) {
@@ -71,15 +72,17 @@ test('Gallery page owns the lightweight accessible photo showcase', () => {
   assert.match(galleryHtml, /class="gallery-track"/);
   assert.match(galleryHtml, /class="gallery-arrow gallery-prev"[^>]+aria-label="Previous photos"/);
   assert.match(galleryHtml, /class="gallery-arrow gallery-next"[^>]+aria-label="Next photos"/);
-  assert.match(galleryHtml, /class="gallery-dots"[^>]+aria-label="Choose photo group"/);
-  assert.match(galleryHtml, /class="gallery-progress"[^>]+aria-hidden="true"/);
+  assert.match(galleryHtml, /class="gallery-viewport"[^>]+tabindex="0"/);
+  const section = galleryHtml.match(/<section[^>]+id="galleryShowcase"[\s\S]*?<\/section>/)[0];
+  assert.equal((section.match(/<button/g)||[]).length,2);
+  assert.doesNotMatch(section,/<select|class="gallery-pause"|class="gallery-dots"/);
 });
 
 test('photo showcase displays one large image at a time without promotional text', () => {
   assert.match(galleryHtml, /\.gallery-card\s*\{[^}]*flex:\s*0 0 100%/s);
   const section = galleryHtml.match(/<section[^>]+id="galleryShowcase"[\s\S]*?<\/section>/)?.[0] ?? '';
   assert.doesNotMatch(section, /gallery-heading|gallery-kicker|Faith in every moment|Life at CLMI/i);
-  assert.match(galleryHtml, /function perPage\(\)\s*\{\s*return 1;\s*\}/);
+  assert.match(galleryScript, /card.classList.toggle\('is-active',i===page\)/);
 });
 
 test('Gallery showcase remains full bleed', () => {
@@ -114,9 +117,9 @@ test('photo showcase uses lightweight retention motion and direct manipulation',
   assert.match(galleryHtml, /@keyframes\s+galleryDrift/);
   assert.match(galleryHtml, /\.gallery-card\.is-active img\s*\{[^}]*animation:\s*galleryDrift/s);
   assert.match(galleryHtml, /\.gallery-progress\.is-running\s+span\s*\{[^}]*animation:\s*galleryProgress/s);
-  assert.match(galleryHtml, /addEventListener\('pointerdown'/);
-  assert.match(galleryHtml, /addEventListener\('pointerup'/);
-  assert.match(galleryHtml, /const AUTOPLAY_MS = 4800;/);
+  assert.match(galleryScript, /addEventListener\('pointerdown'/);
+  assert.match(galleryScript, /addEventListener\('pointerup'/);
+  assert.match(galleryScript, /const AUTOPLAY_MS=7200;/);
 });
 
 test('photo showcase prioritizes the opening image and defers the remaining photos', () => {
@@ -139,6 +142,6 @@ test('photo showcase prioritizes the opening image and defers the remaining phot
 
 test('photo showcase respects reduced-motion preferences', () => {
   assert.match(galleryHtml, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
-  assert.match(galleryHtml, /galleryShowcase\.dataset\.autoplay\s*!==\s*'off'/);
+  assert.match(galleryScript, /if\(!motionOff\(\)&&!paused&&!focused&&visible&&!document.hidden\)/);
   assert.match(galleryHtml, /prefers-reduced-motion:[^)]+\)[\s\S]*\.gallery-card\.is-active img[^{]*\{[^}]*animation:\s*none/s);
 });

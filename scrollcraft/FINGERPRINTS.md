@@ -1,5 +1,15 @@
 # Experience fingerprints
 
+## CLMI Youth Service particle reading scene — 2026-09-06
+
+- Status: locally inspected on desktop/phone; no production deployment or measured retention result.
+- Grammar: chaptered editorial on one continuous owned particle background, six supplied text sections in normal flow, pastor profile close.
+- Navigation: existing framed equal-cell CLMI menu, now44px tall; no new chapter nav or counters.
+- Opening: ordinary Youth Service title. Peak: Scripture/prayer text over scroll-seeked particles. No dummy spacers or wheel interception.
+- Phone:390×844,24px text margins, stronger scrim and stacked reading. Motion-off: poster only, no video source, compact flow.
+- Prior registry similarities are intentional brand continuity, not claimed novelty. The key difference is consolidating the detached player/still into one meaningful background.
+- Evidence and limits: `docs/motion-polish-review.md`.
+
 ## CLMI layered refresh — 2026-09-05
 
 - Status: local review; owner approval of visual outcome pending. No production deployment.

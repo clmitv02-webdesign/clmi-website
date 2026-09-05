@@ -1,0 +1,265 @@
+/* Owner-directed colour/depth revision. Existing artwork is the visual reference. */
+:root {
+  --clmi-lift: 0 10px 14px -6px rgba(0,0,0,.4);
+  --clmi-card-depth: 0 15px 22px -12px rgba(0,0,0,.55), 0 4px 10px rgba(0,0,0,.12);
+  --clmi-edge-ground: linear-gradient(110deg,#d8dadd 0%,#fff 24%,#fff 66%,#a4a8ae 100%);
+  --clmi-action: #b31550;
+}
+/* The original framed menu, with equal cells instead of text-sized pills. */
+body:is(.home-refresh,.clmi-inner) .site-header {
+  height:138px; grid-template-rows:78px 44px; padding-bottom:16px;
+  background:var(--clmi-edge-ground);
+}
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav {
+  display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:0;
+  border:1px solid #d63a3a; border-radius:2px; background:#fff;
+  box-shadow:0 7px 12px rgba(0,0,0,.4),0 14px 30px rgba(190,55,35,.48),0 0 3px #ff7575;
+}
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item { min-width:0; }
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item+ .nav-item { box-shadow:inset 1px 0 #e5e7ed; }
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item>a {
+  width:100%; height:42px; padding:0 8px; justify-content:center; text-align:center;
+  color:#18509e; border-radius:0; font-size:clamp(10px,.92vw,13px); line-height:1.25; white-space:normal;
+}
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item>a:hover,
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item>a:focus-visible { background:#f9e9ec; color:#8b143f; }
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item.active>a,
+body:is(.home-refresh,.clmi-inner) .site-header .main-nav>.nav-item>a[aria-current="page"] { background:#3f7652; color:#fff; border-radius:0; }
+body:is(.home-refresh,.clmi-inner) .main-nav .dropdown { background:#18509e; border-radius:0 0 6px 6px; }
+body:is(.home-refresh,.clmi-inner) .main-nav>.nav-item:last-child .dropdown { left:auto; right:0; }
+body:is(.home-refresh,.clmi-inner) .m-header { background:var(--clmi-edge-ground); border-bottom:1px solid #c33; box-shadow:0 5px 13px #25262e30; }
+/* Reuse the exact two lifted-corner strips from the original ministry cards. */
+body.home-refresh .ministries a.card { box-shadow:none; overflow:visible; isolation:isolate; }
+body.home-refresh .ministries a.card img,
+body.home-refresh .playlists iframe { position:relative; z-index:1; box-shadow:var(--clmi-lift); }
+body.home-refresh .playlists iframe { position:static; }
+body.home-refresh .ministries a.card::before,body.home-refresh .ministries a.card::after,
+body.home-refresh .playlists .pl-item::before,body.home-refresh .playlists .pl-item::after {
+  display:block; content:""; position:absolute; bottom:0; height:20px; width:46%;
+  background:rgba(0,0,0,.65); filter:blur(10px); z-index:-1; pointer-events:none;
+}
+body.home-refresh .ministries a.card::before,body.home-refresh .playlists .pl-item::before { left:6px; transform:translateY(9px) rotate(-3.5deg); }
+body.home-refresh .ministries a.card::after,body.home-refresh .playlists .pl-item::after { right:6px; transform:translateY(9px) rotate(3.5deg); }
+body.home-refresh .playlists .pl-item { position:relative; isolation:isolate; }
+body.home-refresh .playlists .pl-item::before,body.home-refresh .playlists .pl-item::after { bottom:46px; }
+body.home-refresh .playlists .label { min-height:46px; }
+body.home-refresh .ministries a.card:hover,body.home-refresh .ministries a.card:focus-visible { box-shadow:none; }
+/* Newsletter: CLMI's blue/magenta artwork palette, warm gold for the action. */
+body.home-refresh .newsletter {
+  display:grid; grid-template-columns:1fr 1fr; column-gap:44px; align-items:center;
+  padding:44px; background:linear-gradient(112deg,#192c75 0%,#253f98 48%,#9b154c 48%,#c51a67 100%);
+  border:1px solid #ffffff80; border-top:5px solid #f7c956; border-radius:16px; box-shadow:var(--clmi-card-depth);
+}
+body.home-refresh .newsletter h3 { grid-column:1; grid-row:1/4; margin:0; font:750 clamp(26px,3vw,38px)/1.15 var(--helv); letter-spacing:-.035em; max-width:410px; }
+body.home-refresh .newsletter h3 span { display:block; margin-top:12px; color:#ffdf86; font-size:17px; letter-spacing:0; font-weight:500; }
+body.home-refresh .newsletter label,body.home-refresh .newsletter .row,body.home-refresh .newsletter .done { grid-column:2; }
+body.home-refresh .newsletter label { font-weight:700; }
+body.home-refresh .newsletter input[type="email"] { background:#fff; color:#202945; border:2px solid #fff; border-radius:6px; }
+body.home-refresh .newsletter input[type="email"]::placeholder { color:#5b6274; }
+body.home-refresh .newsletter button { background:#f7c956; color:#292242; border-radius:6px; box-shadow:0 4px 0 #a46b16,0 7px 13px #33152550; }
+body.home-refresh .newsletter button:hover { background:#ffe39a; }
+/* Shared white/grey checked surfaces, with clear text on the light portion. */
+body.clmi-inner,body.home-refresh { background:#f1f2f4; }
+body.clmi-inner .page-hero { background:var(--clmi-edge-ground); }
+body.clmi-inner .page-hero::before { mask-image:none; opacity:.85; }
+body.clmi-inner .page-content { background:transparent; }
+body.clmi-inner :is(.story-card,.event-card,.team-card,.contact-card,.branch-card,.hero-media,form,.children-panel) { box-shadow:var(--clmi-card-depth); }
+body.clmi-inner :is(.story-card,.event-card,.team-card,.contact-card) { border-color:#d2d5dd; }
+body.clmi-inner :is(.story-card,.event-card) { border-top:4px solid #2856ab; }
+body.clmi-inner :is(.story-card,.event-card):nth-child(3n+2) { border-top-color:#b31550; }
+body.clmi-inner :is(.story-card,.event-card):nth-child(3n) { border-top-color:#d9a327; }
+body.clmi-inner :is(.story-card,.event-card,.team-card,.branch-card) :is(h2,h3) {
+  font-family:"Avenir Next","Segoe UI",var(--helv); font-weight:600; font-size:clamp(23px,2.2vw,32px);
+  line-height:1.18; letter-spacing:-.025em; text-wrap:pretty; overflow-wrap:anywhere; color:#243452;
+}
+body.clmi-inner .event-card .section-heading { border:0; padding:0; }
+body.clmi-inner .event-card>figure { margin:0 0 28px; }
+body.clmi-inner .event-card img,body.clmi-inner .prose>a>img,body.clmi-inner .photo-grid img { box-shadow:var(--clmi-lift); }
+body.clmi-inner .prose>a:has(>img) { display:block; margin-bottom:30px; }
+body.clmi-inner .button-link,body.clmi-inner form button {
+  border:1px solid #a41120; border-radius:7px; background:linear-gradient(#dc3040,#b91c2d); color:#fff;
+  min-height:46px; padding:11px 19px; font:700 15px/1.4 "Avenir Next","Segoe UI",var(--helv);
+  box-shadow:0 4px 0 #771031,0 8px 14px #761b3330; transition:transform .18s,box-shadow .18s,background .18s;
+}
+body.clmi-inner .button-link:hover,body.clmi-inner form button:hover { background:#e23847; transform:translateY(-2px); box-shadow:0 6px 0 #81101c,0 10px 18px #761b3340; }
+body.clmi-inner .button-link:active { transform:translateY(2px); box-shadow:0 1px 0 #771031; }
+body.clmi-inner .prose a.button-link { color:#fff; text-decoration:none; }
+body.clmi-inner .story-card p:last-child { margin-top:auto; margin-bottom:0; padding-top:8px; }
+/* Outreach: one photographic lead story and two complementary ministry cards. */
+body.clmi-inner .outreach-grid .story-card { display:flex; flex-direction:column; gap:12px; }
+body.clmi-inner .outreach-grid .outreach-feature { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; padding:0; gap:0; overflow:hidden; }
+body.clmi-inner .outreach-feature .outreach-copy { padding:38px; display:flex; flex-direction:column; justify-content:center; }
+body.clmi-inner .outreach-feature img { width:100%; height:100%; object-fit:cover; margin:0; border-radius:0; }
+body.clmi-inner .outreach-grid .care-card { background:#244aa0; border-color:#244aa0; }
+body.clmi-inner .care-card :is(h2,p,.eyebrow) { color:#fff; }
+body.clmi-inner .care-card .button-link { color:#232d47; background:#f7ce65; border-color:#f7ce65; box-shadow:0 4px 0 #aa761e,0 8px 14px #08143e40; }
+body.clmi-inner .outreach-grid .hope-card { background:#fff9ef; border-top-color:#c19428; }
+/* About: continue the checked hero ground through overview, vision and mission. */
+body.clmi-inner .about-content { max-width:none; padding-top:0; margin-inline:0; }
+body.clmi-inner .about-story { max-width:none; padding:40px max(32px,calc((100% - 1120px)/2)) 56px; background:linear-gradient(#ffffff00,#ffffff00),var(--clmi-edge-ground); position:relative; isolation:isolate; }
+body.clmi-inner .about-story::before { content:""; position:absolute; inset:0; z-index:-1; background-image:linear-gradient(#24345209 1px,transparent 1px),linear-gradient(90deg,#24345209 1px,transparent 1px); background-size:44px 44px; }
+body.clmi-inner .about-story-inner { max-width:860px; }
+body.clmi-inner .about-content>section:not(.about-story),body.clmi-inner .about-content>.related-links { max-width:1120px; margin:56px auto 0; }
+body.clmi-inner .about-main .page-hero { border-bottom:0; }
+body.clmi-inner main[data-page-family="giving"] { min-height:0; }
+/* Branch contacts: a compact directory, not oversized display cards. */
+body.clmi-inner .branch-directory .page-hero { padding:20px max(32px,calc((100% - 1280px)/2)); grid-template-columns:1fr 240px; }
+body.clmi-inner .branch-directory .page-hero h1 { font-size:40px; margin:0; }
+body.clmi-inner .branch-directory .breadcrumbs { margin-bottom:8px; }
+body.clmi-inner .branch-directory .eyebrow { display:none; }
+body.clmi-inner .branch-directory .hero-media { width:240px; }
+body.clmi-inner .branch-directory .page-content { max-width:1280px; padding-top:24px; margin-inline:auto; }
+body.clmi-inner .directory-tools { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:16px; }
+body.clmi-inner .directory-tools label { font-size:14px; font-weight:700; color:#243452; }
+body.clmi-inner .directory-tools input { display:block; width:320px; max-width:100%; padding:10px 14px; border:1px solid #8c99b1; border-radius:6px; background:white; font:15px var(--helv); margin-top:4px; }
+body.clmi-inner .directory-tools p { margin:0; font-size:14px; }
+body.clmi-inner .branch-grid { display:grid; grid-template-columns:1fr; gap:7px; margin-top:0; }
+body.clmi-inner .branch-card { display:grid; grid-template-columns:1fr 1.45fr .95fr 1.7fr; gap:18px; align-items:center; padding:11px 18px; border-radius:5px; border-left:4px solid #2856ab; box-shadow:0 4px 7px -5px #0006; }
+body.clmi-inner .branch-card:nth-child(even) { background:#eef2fa; }
+body.clmi-inner .branch-card h2 { margin:0; font-size:15px; line-height:1.3; letter-spacing:.01em; overflow-wrap:anywhere; }
+body.clmi-inner .branch-card p { margin:0; font-size:13px; line-height:1.4; overflow-wrap:anywhere; }
+body.clmi-inner .branch-card strong { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+body.clmi-inner .directory-columns { display:grid; grid-template-columns:1fr 1.45fr .95fr 1.7fr; gap:18px; padding:0 22px 8px; margin-top:0; color:#657086; font:700 11px var(--helv); text-transform:uppercase; letter-spacing:.09em; }
+body.clmi-inner .branch-card br { display:none; }
+body.clmi-inner .branch-card[hidden] { display:none; }
+/* Archive navigation is a photo collection, not a loose row of buttons. */
+body.clmi-inner .album-heading { display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-bottom:24px; }
+body.clmi-inner .album-heading h2 { font:600 32px/1.15 "Avenir Next","Segoe UI",var(--helv); color:#243452; margin:0; }
+body.clmi-inner .album-heading p { margin:0; color:#566174; }
+body.clmi-inner .album-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+body.clmi-inner .album-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:var(--clmi-card-depth); border:1px solid #d2d5dd; text-decoration:none; transition:transform .2s; }
+body.clmi-inner .album-card:hover { transform:translateY(-4px); }
+body.clmi-inner .album-card img { width:100%; aspect-ratio:3/2; object-fit:cover; display:block; }
+body.clmi-inner .album-card>span { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px; font:600 18px/1.3 "Avenir Next","Segoe UI",var(--helv); color:#243452; }
+body.clmi-inner .album-card>span::after { content:'↗'; font-size:22px; color:#b31550; }
+body.clmi-inner .gallery-card img { aspect-ratio:3/2; object-fit:contain; transform:none; }
+body.clmi-inner .gallery-card.is-active img { animation:none; }
+body.clmi-inner .gallery-dots { gap:12px; color:#fff; font:600 13px var(--helv); bottom:24px; }
+body.clmi-inner .gallery-dots select { border:1px solid #ffffff70; border-radius:4px; background:#202634; color:#fff; padding:6px 8px; font:inherit; max-width:140px; }
+body.clmi-inner .gallery-pause { border:0; border-left:1px solid #ffffff60; background:none; color:#fff; font:700 12px var(--helv); padding:7px 0 7px 12px; cursor:pointer; }
+@media(max-width:1344px) { body.clmi-inner .branch-directory .page-content { margin-inline:32px; } }
+@media(max-width:1190px) { body.clmi-inner .about-content>section:not(.about-story),body.clmi-inner .about-content>.related-links { margin-inline:32px; } }
+@media(max-width:900px) {
+  body.clmi-inner .album-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  body.home-refresh .newsletter { grid-template-columns:1fr; gap:0; background:linear-gradient(125deg,#192c75,#3f307f 48%,#b21a5e); }
+  body.home-refresh .newsletter h3 { grid-row:auto; max-width:none; margin-bottom:24px; }
+  body.home-refresh .newsletter label,body.home-refresh .newsletter .row,body.home-refresh .newsletter .done { grid-column:1; }
+}
+@media(max-width:768px) {
+  body.home-refresh .newsletter { padding:28px 24px; }
+  body.home-refresh .playlists .pl-item::before,body.home-refresh .playlists .pl-item::after { bottom:46px; }
+  body.clmi-inner .outreach-grid .outreach-feature { grid-column:auto; grid-template-columns:1fr; }
+  body.clmi-inner .outreach-feature .outreach-copy { padding:28px; }
+  body.clmi-inner .outreach-feature img { height:auto; order:-1; }
+  body.clmi-inner .about-story { padding:24px 24px 40px; }
+  body.clmi-inner .about-content>section:not(.about-story),body.clmi-inner .about-content>.related-links { margin-inline:24px; }
+  body.clmi-inner .branch-directory .page-hero { padding:24px; grid-template-columns:1fr; }
+  body.clmi-inner .branch-directory .hero-media { display:none; }
+  body.clmi-inner .directory-columns { display:none; }
+  body.clmi-inner .branch-card strong { position:static; width:auto; height:auto; clip-path:none; display:block; font-size:10px; color:#657086; }
+  body.clmi-inner .branch-directory .page-content { margin-inline:18px; }
+  body.clmi-inner .directory-tools { align-items:start; flex-direction:column; gap:10px; }
+  body.clmi-inner .directory-tools label,body.clmi-inner .directory-tools input { width:100%; }
+  body.clmi-inner .branch-card { grid-template-columns:1fr 1.3fr; padding:14px; gap:8px 16px; }
+  body.clmi-inner .branch-card h2 { grid-column:1/-1; font-size:16px; }
+  body.clmi-inner .branch-card p:last-child { grid-column:1/-1; }
+  body.clmi-inner .album-heading { display:block; }
+  body.clmi-inner .album-heading p { margin-top:8px; }
+  body.clmi-inner .album-grid { grid-template-columns:1fr; }
+  body.clmi-inner .gallery-dots { bottom:12px; padding:6px 10px; }
+}
+@media(prefers-reduced-motion:reduce) { body.clmi-inner :is(.button-link,.album-card) { transition:none; transform:none; } }
+
+/* September 6 finishing touches — retain approved geometry and artwork. */
+body:is(.home-refresh,.clmi-inner) :is(.socials,.team-card)>a:has(img) { display:inline-block; }
+body:is(.home-refresh,.clmi-inner) .socials img,
+body.clmi-inner .team-card>a>img { filter:drop-shadow(0 3px 2px #16253b35); }
+body:is(.home-refresh,.clmi-inner) :is(.go-live,.m-golive) {
+  box-shadow:0 4px 0 #153629,0 8px 13px #122b3c45;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+body:is(.home-refresh,.clmi-inner) .go-live { gap:9px; }
+body:is(.home-refresh,.clmi-inner) .go-live::before {
+  content:""; flex:0 0 9px; height:9px; border-radius:50%; background:#ff393e;
+  box-shadow:0 0 0 4px #ff393e28,0 0 0 5px #ff393e50;
+}
+body:is(.home-refresh,.clmi-inner) .go-live .live-pulse { display:none; }
+body:is(.home-refresh,.clmi-inner) :is(.go-live,.m-golive):active,
+body:is(.home-refresh,.clmi-inner) :is(form button,.children-tab,.m-burger):active {
+  translate:0 3px; box-shadow:0 1px 0 #193a2c,0 2px 4px #0003;
+}
+body:is(.home-refresh,.clmi-inner) :is(.gallery-arrow,.hero .arrow,.hero-pause):active { scale:.94; }
+body:is(.home-refresh,.clmi-inner) :is(button,[role="button"],input[type="submit"],.wa-bubble):active { translate:0 2px; }
+body:is(.home-refresh,.clmi-inner) .socials a:active { translate:0 2px; }
+body:is(.home-refresh,.clmi-inner) .m-socials img { filter:drop-shadow(0 3px 2px #16253b35); }
+body:is(.home-refresh,.clmi-inner) .m-golive::before { content:""; display:inline-block; width:7px; height:7px; margin-right:8px; border-radius:50%; background:#ff393e; box-shadow:0 0 0 3px #ff393e28; }
+body:is(.home-refresh,.clmi-inner) .m-live-pulse { display:none; }
+body.clmi-inner .about-main .page-hero { grid-template-columns:1fr; }
+body.clmi-inner .about-story {
+  background:#62665b;
+  color:#fff;
+  overflow:hidden;
+}
+/* The source artwork includes a white footer. Overscan only the background,
+   keeping that strip outside the section without cropping or moving its text. */
+body.clmi-inner .about-story::after {
+  content:""; position:absolute; inset:0 0 -6%; z-index:-2;
+  background-image:linear-gradient(#092d234d,#092d234d),var(--about-art);
+  background-size:cover; background-position:center top;
+  pointer-events:none;
+}
+body.clmi-inner .about-story::before {
+  content:none;
+}
+body.clmi-inner .about-story .section-heading { color:#fffaf0; border-top-color:#c1d9c333; }
+body.clmi-inner .about-story p { color:#fff; }
+body.clmi-inner .children-invitation {
+  margin:0 auto 48px; max-width:1120px; padding:48px;
+  background:#f7e6b8; border:1px solid #e5cf91; border-left:7px solid #d5a433;
+  border-radius:0 28px 28px 0; box-shadow:var(--clmi-card-depth); overflow:hidden;
+}
+body.clmi-inner .children-invitation::after {
+  inset:0 0 0 auto; width:30%; opacity:.5;
+  background:repeating-linear-gradient(135deg,transparent 0 24px,#cba14e20 24px 25px);
+}
+body.clmi-inner .children-invitation h2 { color:#303d59; font-size:clamp(30px,3.5vw,46px); line-height:1.12; }
+body.clmi-inner .children-invitation p { color:#3e4656; }
+/* Cross-dissolve over a short glide instead of travelling an entire screen. */
+body.clmi-inner .gallery-showcase { width:100%; max-width:100%; }
+body.clmi-inner .gallery-track { display:grid; grid-template-columns:1fr; transform:none!important; transition:none; }
+body.clmi-inner .gallery-card {
+  grid-area:1/1; width:100%; min-width:0; opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateX(16px); transition:opacity 1.8s ease,transform 2s cubic-bezier(.22,.61,.36,1),visibility 1.8s;
+}
+body.clmi-inner .gallery-card.is-active { opacity:1; visibility:visible; transform:translateX(0); z-index:1; }
+body.clmi-inner .gallery-card img { transform:scale(1); transform-origin:center; }
+body.clmi-inner .gallery-card.is-active img { animation:conventionBreathe 9s linear both; }
+@keyframes conventionBreathe { from{transform:scale(1)} to{transform:scale(1.035)} }
+body.clmi-inner .gallery-still .gallery-card { transition:none; transform:none; }
+body.clmi-inner .gallery-still .gallery-card img { animation:none; transform:none; }
+/* A single continuous particle ground; the words stay in natural document flow. */
+body.clmi-inner .youth-scene { position:relative; isolation:isolate; background:#17151e; color:#fff; }
+body.clmi-inner .youth-backdrop { position:sticky; top:62px; height:calc(100svh - 62px); margin-bottom:calc(-100svh + 62px); z-index:-1; overflow:hidden; }
+body.clmi-inner .youth-backdrop video { width:100%; height:100%; object-fit:cover; display:block; background:#17151e url('/assets/media/11062b_eb492c6cb7834f13aee3424d74aceffcf000.jpg') center/cover; }
+body.clmi-inner .youth-backdrop::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#111521ed 0%,#111521c9 52%,#11152166 100%); }
+body.clmi-inner .youth-story { max-width:1120px; margin:auto; padding:48px 0 100px; }
+body.clmi-inner .youth-moment { max-width:660px; padding:76px 0; min-height:42svh; display:flex; flex-direction:column; justify-content:center; transform:translateY(var(--youth-drift,0px)); }
+body.clmi-inner .youth-moment h2 { color:#ffe0a1; font:600 clamp(30px,3.8vw,54px)/1.1 "Avenir Next","Segoe UI",var(--helv); letter-spacing:-.025em; margin:0 0 24px; }
+body.clmi-inner .youth-moment p { color:#fff; font-size:clamp(17px,1.6vw,21px); line-height:1.65; margin:0; }
+body.clmi-inner .scene-static .youth-moment { transform:none; min-height:0; padding-block:32px; }
+@media(max-width:1190px) {
+  body.clmi-inner .youth-story { margin-inline:32px; }
+  body.clmi-inner .children-invitation { margin-inline:32px; }
+}
+@media(max-width:768px) {
+  body.clmi-inner .children-invitation { padding:32px 26px; margin:0 20px 32px; border-radius:0 20px 20px 0; }
+  body.clmi-inner .youth-story { margin-inline:24px; padding-bottom:64px; }
+  body.clmi-inner .youth-moment { min-height:48svh; padding-block:48px; }
+  body.clmi-inner .youth-backdrop { top:72px; height:calc(100svh - 72px); margin-bottom:calc(-100svh + 72px); }
+  body.clmi-inner .youth-backdrop::after { background:#111521c9; }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.clmi-inner .gallery-card { transition:none; transform:none; }
+  body.clmi-inner .gallery-card.is-active img { animation:none; transform:none; }
+  body.clmi-inner .youth-moment { transform:none; min-height:0; }
+}

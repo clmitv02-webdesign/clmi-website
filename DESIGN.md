@@ -24,11 +24,11 @@ Retain CLMI's actual logo, banners, ministry artwork, playlists, film, routes an
 
 ## Colors
 
-Deep church green for navigation and newsletter, white and warm grey for reading surfaces, existing red for small accents. Artwork retains its original colors. Never apply a filter or crop to the banners.
+Deep church green remains an identity accent. Navigation uses the original blue labels and green active state within a red illuminated frame. White-to-grey edges and a subtle checked surface connect the pages. Blue, magenta and gold, drawn from the existing artwork, energise the newsletter and calls to action. Artwork retains its original colors. Never apply a filter or crop to the banners.
 
 ## Typography
 
-Use the existing Helvetica family for UI and church name, and existing Georgia for the newsletter heading. No font downloads or new families.
+Use Helvetica for body copy and the church name. Card titles, directory names and the newsletter use a compact system sans stack: Avenir Next, Segoe UI, then the existing Helvetica fallback. Georgia remains for editorial page headings. No font downloads.
 
 ## Layout
 
@@ -36,11 +36,13 @@ Fluid site up to 1512px with inner reading areas up to 1120px. Preserve the six-
 
 ## Elevation & Depth
 
-A quiet paper-like playlist surface meets the banner; the film expands gently into its full width; ministry artwork floats over the subtle grey grid. Use small displacements with real wheel response; no prolonged pinned scenes, scroll interception or blocking intro.
+Visible depth is an explicit owner preference: restore the original lifted-corner image shadows on the YouTube and ministry artwork, and use stronger layered shadows on story, event, team and media cards. Keep the new curved corners. The film expands gently into its full width. Use small displacements with real wheel response; no prolonged pinned scenes, scroll interception or blocking intro.
 
 ## Components
 
 Adapt existing site header, Go Live pill, Children’s Ministry card surfaces and eight ministry artwork cards. The shared Scroll Craft runtime is vendored unchanged for continuous scroll progress.
+
+Desktop navigation uses eight equal-width cells in a44px menu, including equal active/hover areas regardless of label length. Raised rectangular red/gold buttons replace the flat green pills; press feedback extends to controls and Go Live. Branches uses a dense searchable directory, not large promotional cards. Gallery uses the full latest convention photo set, a slow dissolve/glide/zoom with arrows only, and image-led archive navigation; its source is selected from dated convention archive pages at build time. About artwork is a background behind the overview, vision and mission, never a separate picture card. Youth Service uses its owned particle clip behind scroll-linked readable text; reduced motion uses its still poster without fetching the clip.
 
 ## Do's and Don'ts
 
