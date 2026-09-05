@@ -276,6 +276,12 @@ def migrate(route,source,shell):
                 else:other.append(block(n,title))
             body=''.join(other)+'<div class="photo-grid">'+''.join(figures)+'</div>'
         else:
+            if route=='livestream':
+                actions={'/copy-of-live-streams':'Watch CLMI live streams','https://podcasters.spotify.com/pod/show/clmipod':'Listen to the CLMI podcast'}
+                for n in nodes:
+                    if n.tag=='a' and n.attrs.get('href') in actions:
+                        for child in n.walk():
+                            if child.tag=='img':child.attrs['alt']=actions[n.attrs['href']]
             if any(n.tag=='img' for n in nodes):
                 lead=next(n for n in nodes if n.tag=='img');nodes.remove(lead)
             body='<section class="prose">'+''.join(block(n,title) for n in nodes)+'</section>'
@@ -286,6 +292,8 @@ def migrate(route,source,shell):
     out=re.sub(r'<script>\s*\(function \(\) \{\s*function fit\(\)[\s\S]*?</script>','',out)
     out=out.replace('</head>','<link rel="stylesheet" href="/assets/inner-pages.css">\n<script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>\n<script defer src="/assets/inner-pages.js"></script>\n</head>')
     out=out.replace('</head>','<noscript><style>body.clmi-inner .children-panel[hidden]{display:grid} @media(max-width:1050px){body.clmi-inner .m-nav{display:block;position:static;height:auto;max-height:none}body.clmi-inner .m-burger{display:none}}</style></noscript>\n</head>')
+    if route=='publication':
+        out=out.replace('</head>','<noscript><style>body.clmi-inner .gallery-track{display:grid;grid-template-columns:1fr;gap:16px;transform:none}body.clmi-inner .gallery-card{display:block;width:100%;opacity:1;visibility:visible}body.clmi-inner .gallery-card img{animation:none;transform:none;height:auto;aspect-ratio:auto;object-fit:contain}body.clmi-inner .gallery-controls,body.clmi-inner .gallery-progress{display:none}</style></noscript>\n</head>')
     # Preserve mobile-only media or destinations when layouts differ substantively.
     missing=[src for src in ledger['images'] if esc(src) not in out and src not in out]
     if missing:

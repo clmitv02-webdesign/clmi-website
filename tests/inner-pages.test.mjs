@@ -61,3 +61,17 @@ test('inner route local images exist, including relative gallery references',asy
     }
   }
 });
+test('Gallery exposes its six photos without JavaScript and hides inert controls',()=>{
+  const html=pages.find(([r])=>r==='publication')[1];
+  const fallback=[...html.matchAll(/<noscript>[\s\S]*?<\/noscript>/g)].map(m=>m[0]).join('');
+  assert.match(fallback,/\.gallery-track\s*\{[^}]*display:\s*grid/);
+  assert.match(fallback,/\.gallery-track\s*\{[^}]*transform:\s*none/);
+  assert.match(fallback,/\.gallery-card\s*\{[^}]*width:\s*100%/);
+  assert.match(fallback,/\.gallery-controls[^}]*display:\s*none/);
+  assert.equal((html.match(/<figure class="gallery-card(?: is-active)?">/g)||[]).length,6);
+});
+test('Watch image links identify distinct stream and podcast destinations',()=>{
+  const html=pages.find(([r])=>r==='livestream')[1].match(/<main\b[\s\S]*?<\/main>/)[0];
+  assert.match(html,/<a href="\/copy-of-live-streams"><img[^>]*alt="Watch CLMI live streams"/);
+  assert.match(html,/<a href="https:\/\/podcasters.spotify.com\/pod\/show\/clmipod"><img[^>]*alt="Listen to the CLMI podcast"/);
+});
