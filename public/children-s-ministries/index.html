@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CHILDREN'S MINISTRIES | Clminternational</title>
+<title>Children’s Ministry | CLMI</title>
 <meta name="description" content="Discover CLMI Children's Ministry through Sunday School, Children Evangelism and the Children's Christmas Gift program.">
 
 <link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
@@ -240,8 +240,13 @@
     .children-panel:not([hidden]) .program-image { transform: none; }
   }
 </style>
+<script defer src="/assets/site-nav.js?v=20260905"></script>
+<link rel="stylesheet" href="/assets/inner-pages.css">
+<script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>
+<script defer src="/assets/inner-pages.js"></script>
+<noscript><style>body.clmi-inner .children-panel[hidden]{display:grid} @media(max-width:1050px){body.clmi-inner .m-nav{display:block;position:static;height:auto;max-height:none}body.clmi-inner .m-burger{display:none}}</style></noscript>
 </head>
-<body>
+<body class="clmi-inner">
 <div class="canvas-wrap">
   <header class="site-header">
     <a class="brand" href="/">
@@ -293,6 +298,7 @@
     </div>
   </nav>
   <main class="children-experience">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> / Children’s Ministry</nav>
     <section class="children-hero" aria-labelledby="childrenHeroTitle">
       <div class="children-hero-copy">
         <p class="children-eyebrow">Children’s Ministry · CLMI</p>
@@ -440,17 +446,7 @@
     if (requestedTab && requestedTab.classList.contains('children-tab')) activate(requestedTab, false, false);
   })();
 </script>
-<script>
-  (function () {
-    function fit() {
-      var w = document.documentElement.clientWidth;
-      document.body.style.zoom = (w > 768 && w < 1512) ? (w / 1512) : '';
-    }
-    fit(); window.addEventListener('resize', fit);
-    var b = document.getElementById('mBurger'), n = document.getElementById('mNav');
-    if (b && n) b.addEventListener('click', function () { n.classList.toggle('open'); });
-  })();
-</script>
+
 <script>
   (function () {
     var vids = document.querySelectorAll('video.lazy-video');

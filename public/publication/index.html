@@ -44,8 +44,13 @@
     .gallery-progress.is-running span { animation: none !important; }
   }
 </style>
+<script defer src="/assets/site-nav.js?v=20260905"></script>
+<link rel="stylesheet" href="/assets/inner-pages.css">
+<script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>
+<script defer src="/assets/inner-pages.js"></script>
+<noscript><style>body.clmi-inner .children-panel[hidden]{display:grid} @media(max-width:1050px){body.clmi-inner .m-nav{display:block;position:static;height:auto;max-height:none}body.clmi-inner .m-burger{display:none}}</style></noscript>
 </head>
-<body>
+<body class="clmi-inner">
 <div class="canvas-wrap">
   <header class="site-header">
     <a class="brand" href="/">
@@ -96,7 +101,7 @@
       <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
     </div>
   </nav>
-  <section class="gallery-showcase" id="galleryShowcase" aria-label="CLMI photo highlights" data-autoplay="on">
+<main class="inner-main gallery-main"><h1 class="visually-hidden">Gallery</h1>  <section class="gallery-showcase" id="galleryShowcase" aria-label="CLMI photo highlights" data-autoplay="on">
     <div class="gallery-viewport" aria-live="off">
       <div class="gallery-track">
         <figure class="gallery-card is-active"><img loading="eager" fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/home-gallery/clmi-convention-01.jpg" alt="Bishop Elizabeth Arowolo ministering during a CLMI convention"></figure>
@@ -114,6 +119,7 @@
       <span class="gallery-progress" aria-hidden="true"><span></span></span>
     </div>
   </section>
+<nav class="related-links" aria-label="Related pages"><a class="button-link" href="/convention-2026">Convention 2026</a><a class="button-link" href="/highlights">2023 Convention Gallery</a><a class="button-link" href="/copy-of-2024-convention-gallery">2026 Convention Gallery</a><a class="button-link" href="/copy-of-2023-convention-gallery">2024 Convention Gallery</a><a class="button-link" href="/1">Christmas Day at the Orphanage</a><a class="button-link" href="/copy-of-community-building-gallery">Creative Expression Gallery</a></nav></main>
   <footer class="site-footer">
     <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
   </footer>
@@ -136,17 +142,7 @@
   </script>
   <div style="width:1512px;height:193px;margin:0 auto;background:rgba(232,230,230,0.72)"></div>
 </div>
-<script>
-  (function () {
-    function fit() {
-      var w = document.documentElement.clientWidth;
-      document.body.style.zoom = (w > 768 && w < 1512) ? (w / 1512) : '';
-    }
-    fit(); window.addEventListener('resize', fit);
-    var b = document.getElementById('mBurger'), n = document.getElementById('mNav');
-    if (b && n) b.addEventListener('click', function () { n.classList.toggle('open'); });
-  })();
-</script>
+
 <script>
   (function () {
     const galleryShowcase = document.getElementById('galleryShowcase');

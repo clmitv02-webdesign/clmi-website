@@ -1,372 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CLMI Annual Convention 2026 · Christ's Love Ministries International</title>
-<meta name="description" content="A cinematic slideshow from the Christ's Love Ministries International (CLMI) Annual Convention 2026 — Jehovah El Shaddai: God of All Possibilities.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#0a2342;
-    --royal:#16457e;
-    --gold:#e6b34a;
-    --cream:#f7f3ea;
-    --ink:#0c1a2e;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    background:var(--ink);color:var(--cream);
-    min-height:100vh;overflow-x:hidden;
-  }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convention 2026 | CLMI</title>
 
-  /* ---------- ANIMATED BACKGROUND (drifting aurora blobs) ---------- */
-  .bg{
-    position:fixed;inset:0;z-index:0;overflow:hidden;
-    background:radial-gradient(circle at 50% 30%,#11305a 0%,var(--ink) 60%,#050d18 100%);
-  }
-  .blob{
-    position:absolute;border-radius:50%;
-    filter:blur(80px);opacity:.55;mix-blend-mode:screen;will-change:transform;
-  }
-  .blob.b1{width:48vmax;height:48vmax;left:-10vmax;top:-8vmax;
-    background:radial-gradient(circle,var(--royal),transparent 68%);
-    animation:drift1 34s ease-in-out infinite;}
-  .blob.b2{width:40vmax;height:40vmax;right:-8vmax;top:10vmax;
-    background:radial-gradient(circle,var(--gold),transparent 66%);opacity:.35;
-    animation:drift2 42s ease-in-out infinite;}
-  .blob.b3{width:46vmax;height:46vmax;left:18vmax;bottom:-16vmax;
-    background:radial-gradient(circle,#1f6f8b,transparent 68%);
-    animation:drift3 38s ease-in-out infinite;}
-  .blob.b4{width:34vmax;height:34vmax;right:14vmax;bottom:-6vmax;
-    background:radial-gradient(circle,#4a2f7a,transparent 66%);
-    animation:drift4 46s ease-in-out infinite;}
-  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vmax,6vmax) scale(1.18)}}
-  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1.05)}50%{transform:translate(-7vmax,9vmax) scale(.9)}}
-  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vmax,-8vmax) scale(1.15)}}
-  @keyframes drift4{0%,100%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-9vmax,-5vmax) scale(.95)}}
-  @media(prefers-reduced-motion:reduce){.blob{animation:none}}
-
-  /* center the cinema frame, let the aurora frame it */
-  .page{
-    position:relative;z-index:1;min-height:100vh;
-    display:flex;flex-direction:column;justify-content:center;
-    padding:0;
-  }
-
-  /* ---------- STAGE (16:9) ---------- */
-  .stage-wrap{
-    width:100%;max-width:none;margin:0 auto;
-    background:#000;
-  }
-  .stage{
-    position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
-    background:#05101f;
-  }
-
-  .slide{
-    position:absolute;inset:0;
-    opacity:0;visibility:hidden;
-    transition:opacity 1.4s ease;
-  }
-  .slide.active{opacity:1;visibility:visible;z-index:1}
-
-  /* blurred backdrop fills 16:9, slow Ken Burns drift */
-  .slide .backdrop{
-    position:absolute;inset:-6%;width:112%;height:112%;
-    object-fit:cover;
-    filter:blur(26px) brightness(.5) saturate(1.1);
-    transform:scale(1.12);
-  }
-  .slide.active .backdrop{
-    animation:kenburns 9s ease-out forwards;
-  }
-  @keyframes kenburns{
-    from{transform:scale(1.12)}
-    to{transform:scale(1.24)}
-  }
-
-  /* the WHOLE photo, never cropped */
-  .slide .photo{
-    position:absolute;inset:0;width:100%;height:100%;
-    object-fit:contain;object-position:center;
-    z-index:1;
-  }
-  .slide.active .photo{
-    animation:floatIn 1.6s cubic-bezier(.16,.84,.36,1) both;
-  }
-  @keyframes floatIn{
-    from{opacity:0;transform:scale(1.04)}
-    to{opacity:1;transform:scale(1)}
-  }
-
-  /* soft vignette so captions read */
-  .stage::after{
-    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-    background:linear-gradient(to top,rgba(5,16,31,.82) 0%,rgba(5,16,31,.15) 32%,transparent 55%);
-  }
-
-  /* ---------- CAPTION ---------- */
-  .caption{
-    position:absolute;left:0;right:0;bottom:0;z-index:3;
-    padding:clamp(1.2rem,4vw,3.2rem) clamp(1.2rem,5vw,4rem);
-    text-align:left;pointer-events:none;
-  }
-  .caption .kicker{
-    font-size:clamp(.6rem,1.1vw,.8rem);letter-spacing:.32em;text-transform:uppercase;
-    color:var(--gold);font-weight:600;margin-bottom:.5rem;opacity:0;
-  }
-  .caption h2{
-    font-family:"Playfair Display",serif;font-weight:800;
-    font-size:clamp(1.4rem,4vw,3.2rem);line-height:1.08;
-    text-shadow:0 2px 24px rgba(0,0,0,.55);max-width:22ch;opacity:0;
-  }
-  .slide.active .caption .kicker{animation:rise .9s ease .5s forwards}
-  .slide.active .caption h2{animation:rise 1s ease .68s forwards}
-  @keyframes rise{
-    from{opacity:0;transform:translateY(26px)}
-    to{opacity:1;transform:translateY(0)}
-  }
-
-  /* ---------- BRAND BAR (top) ---------- */
-  .brandbar{
-    position:absolute;top:0;left:0;right:0;z-index:4;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:clamp(.8rem,2.2vw,1.6rem) clamp(1.2rem,4vw,2.6rem);
-    background:linear-gradient(to bottom,rgba(5,16,31,.7),transparent);
-    pointer-events:none;
-  }
-  .brandbar .recap{
-    font-family:"Playfair Display",serif;font-weight:800;
-    font-size:clamp(1rem,2.4vw,1.7rem);letter-spacing:.01em;line-height:1;
-    display:flex;align-items:baseline;gap:.4em;
-    animation:slideInL 1s cubic-bezier(.16,.84,.36,1) both;
-  }
-  .brandbar .recap .yr{
-    background:linear-gradient(90deg,#caa23a,#fff3cf,#e6b34a,#fff3cf,#caa23a);
-    background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmer 4s linear infinite;
-  }
-  .brandbar .recap .tag{
-    font-family:"Inter",sans-serif;font-weight:600;font-size:.42em;
-    letter-spacing:.34em;text-transform:uppercase;color:#cdd9ec;
-    border-left:2px solid var(--gold);padding-left:.7em;align-self:center;
-  }
-  .brandbar .theme{
-    font-size:clamp(.6rem,1.1vw,.8rem);letter-spacing:.2em;text-transform:uppercase;
-    color:#cdd9ec;text-align:right;
-    animation:slideInR 1s cubic-bezier(.16,.84,.36,1) both;
-  }
-  @keyframes slideInL{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
-  @keyframes slideInR{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
-  @keyframes shimmer{to{background-position:200% center}}
-
-  /* ---------- CONTROLS ---------- */
-  .ctrl{
-    position:absolute;z-index:5;top:50%;transform:translateY(-50%);
-    width:clamp(38px,4vw,52px);height:clamp(38px,4vw,52px);
-    border:none;border-radius:50%;cursor:pointer;
-    background:rgba(247,243,234,.14);color:var(--cream);
-    backdrop-filter:blur(6px);
-    font-size:1.4rem;line-height:1;
-    display:flex;align-items:center;justify-content:center;
-    transition:background .25s ease,transform .25s ease;
-  }
-  .ctrl:hover{background:var(--gold);color:var(--navy);transform:translateY(-50%) scale(1.08)}
-  .prev{left:clamp(.6rem,2vw,1.6rem)}
-  .next{right:clamp(.6rem,2vw,1.6rem)}
-
-  /* progress dots + play/pause */
-  .dock{
-    position:absolute;z-index:5;bottom:clamp(.7rem,2vw,1.4rem);right:clamp(1.2rem,4vw,2.6rem);
-    display:flex;align-items:center;gap:1rem;
-  }
-  .dots{display:flex;gap:7px;flex-wrap:wrap;max-width:46vw;justify-content:flex-end}
-  .dot{
-    width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;padding:0;
-    background:rgba(247,243,234,.32);transition:all .3s ease;
-  }
-  .dot.active{background:var(--gold);width:22px;border-radius:5px}
-  .playpause{
-    width:34px;height:34px;border-radius:50%;border:1px solid rgba(247,243,234,.4);
-    background:rgba(5,16,31,.4);color:var(--cream);cursor:pointer;
-    display:flex;align-items:center;justify-content:center;font-size:.85rem;
-    transition:background .25s ease;flex:none;
-  }
-  .playpause:hover{background:var(--gold);color:var(--navy)}
-
-  /* timer bar */
-  .timer{
-    position:absolute;z-index:5;bottom:0;left:0;height:3px;background:var(--gold);
-    width:0;
-  }
-  .timer.run{animation:fill 7s linear forwards}
-  @keyframes fill{from{width:0}to{width:100%}}
-
-  /* ---------- INFO STRIP under stage ---------- */
-  .info{
-    position:relative;z-index:1;
-    max-width:none;margin:0 auto;padding:1.7rem 1.5rem 2.4rem;text-align:center;
-  }
-  .info .meta{
-    font-size:clamp(.7rem,1.2vw,.9rem);letter-spacing:.16em;text-transform:uppercase;color:#9fb2cc;
-    animation:breathe 6s ease-in-out infinite;
-  }
-  .info .meta b{
-    font-weight:700;
-    background:linear-gradient(90deg,#caa23a,#fff3cf,#e6b34a,#fff3cf,#caa23a);
-    background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmer 4s linear infinite;
-  }
-  .info .nm{display:inline-block;animation:glowName 5s ease-in-out infinite}
-  .info .nm.b{animation-delay:2.5s}
-  .info .verse{
-    font-family:"Playfair Display",serif;font-style:italic;
-    font-size:clamp(1.05rem,2.4vw,1.5rem);color:var(--cream);margin-top:.6rem;
-    animation:floaty 5s ease-in-out infinite, glowVerse 5s ease-in-out infinite;
-  }
-  @keyframes breathe{0%,100%{letter-spacing:.16em;opacity:.85}50%{letter-spacing:.2em;opacity:1}}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  @keyframes glowVerse{0%,100%{text-shadow:0 0 12px rgba(230,179,74,0)}50%{text-shadow:0 0 26px rgba(230,179,74,.42)}}
-  @keyframes glowName{0%,100%{color:#9fb2cc;text-shadow:none}50%{color:#e6c277;text-shadow:0 0 14px rgba(230,179,74,.5)}}
-
-  @media(max-width:640px){
-    .dots{display:none}
-  }
-</style>
+<link rel="icon" href="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png">
+<link rel="stylesheet" href="/assets/site.css">
+<script defer src="/assets/site-nav.js?v=20260905"></script>
+<link rel="stylesheet" href="/assets/inner-pages.css">
+<script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>
+<script defer src="/assets/inner-pages.js"></script>
+<noscript><style>body.clmi-inner .children-panel[hidden]{display:grid} @media(max-width:1050px){body.clmi-inner .m-nav{display:block;position:static;height:auto;max-height:none}body.clmi-inner .m-burger{display:none}}</style></noscript>
 </head>
-<body>
-
-  <div class="bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="blob b4"></div>
-  </div>
-
-  <div class="page">
-  <div class="stage-wrap">
-    <div class="stage" id="stage">
-
-      <div class="brandbar">
-        <div class="recap">Convention&nbsp;<span class="yr">2026</span><span class="tag">Recap</span></div>
-        <div class="theme">Relive Every Moment</div>
-      </div>
-
-      <button class="ctrl prev" id="prev" aria-label="Previous">&#8249;</button>
-      <button class="ctrl next" id="next" aria-label="Next">&#8250;</button>
-
-      <div class="dock">
-        <button class="playpause" id="playpause" aria-label="Pause">&#10073;&#10073;</button>
-        <div class="dots" id="dots"></div>
-      </div>
-
-      <div class="timer" id="timer"></div>
+<body class="clmi-inner">
+<div class="canvas-wrap">
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img src="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png" alt="CLMI logo">
+      <span>Christ's Love Ministries International</span>
+    </a>
+    <nav class="main-nav">
+      <div class="nav-item"><a href="/">HOME</a></div>
+      <div class="nav-item"><a href="/church-outreach">CHURCH OUTREACH</a><div class="dropdown"><a href="/prison-outreach">PRISON OUTREACH</a><a href="/hospital-outreach">HOSPITAL OUTREACH</a><a href="/community-outreach">COMMUNITY OUTREACH</a></div></div>
+      <div class="nav-item"><a href="/events">EVENTS</a></div>
+      <div class="nav-item"><a href="/livestream">LIVE STREAMS</a></div>
+      <div class="nav-item"><a href="/donations">DONATIONS</a></div>
+      <div class="nav-item"><a href="/about-us">ABOUT US</a></div>
+      <div class="nav-item"><a href="/publication">GALLERY</a></div>
+      <div class="nav-item"><a href="/about-1">CONTACT US</a><div class="dropdown"><a href="/branches">BRANCHES</a></div></div>
+    </nav>
+    <a class="go-live" href="/copy-of-live-streams">Go Live <img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt=""></a>
+    <div class="socials">
+      <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
+      <a href="https://www.facebook.com/CLMItv-122166180865270/" target="_blank" rel="noopener"><img src="/assets/media/682560_9ac04de1b55049e2871e7aaacd5d37e3~mv2.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/clmitv/" target="_blank" rel="noopener"><img src="/assets/media/682560_62555820ace941a68a7c70857fb574fd~mv2.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
     </div>
-  </div>
+  </header>
+  <header class="m-header">
+    <a class="m-brand" href="/">
+      <img src="/assets/media/682560_46f604bec7654c0291de0cd1cc5ae5cc~mv2.png" alt="CLMI logo">
+      <span>Christ's Love Ministries International</span>
+    </a>
+    <div class="m-right">
+      <a class="m-golive" href="/copy-of-live-streams">Go Live</a>
+      <div class="m-burger" id="mBurger" role="button" aria-label="Menu" tabindex="0"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+  <nav class="m-nav" id="mNav">
+    <a href="/">HOME</a>
+    <a href="/church-outreach">CHURCH OUTREACH</a><a class="sub" href="/prison-outreach">PRISON OUTREACH</a><a class="sub" href="/hospital-outreach">HOSPITAL OUTREACH</a><a class="sub" href="/community-outreach">COMMUNITY OUTREACH</a>
+    <a href="/events">EVENTS</a>
+    <a href="/livestream">LIVE STREAMS</a>
+    <a href="/donations">DONATIONS</a>
+    <a href="/about-us">ABOUT US</a>
+    <a href="/publication">GALLERY</a>
+    <a href="/about-1">CONTACT US</a><a class="sub" href="/branches">BRANCHES</a>
+    <div class="m-socials">
+      <a href="https://www.youtube.com/@BishopArowoloCLMItv" target="_blank" rel="noopener"><img src="/assets/media/682560_dcf5511bbe7348f98a48568279e39108~mv2.png" alt="YouTube"></a>
+      <a href="https://www.facebook.com/CLMItv-122166180865270/" target="_blank" rel="noopener"><img src="/assets/media/682560_9ac04de1b55049e2871e7aaacd5d37e3~mv2.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/clmitv/" target="_blank" rel="noopener"><img src="/assets/media/682560_62555820ace941a68a7c70857fb574fd~mv2.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@clmitv" target="_blank" rel="noopener"><img src="/assets/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok"></a>
+    </div>
+  </nav>
+<main class="inner-main"><header class="page-hero"><div class="hero-copy"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/publication">Gallery</a></nav><p class="eyebrow">Christ’s Love Ministries International</p><h1>Convention 2026</h1><p class="page-intro">Relive Every Moment</p></div></header><div class="page-content"><section class="prose"><h2>Convention 2026 Recap</h2><p>Jehovah El Shaddai · God of All Possibilities · Jehovah Nissi</p><p>"Change your family trials to testimonies."</p></section><div class="photo-grid"><figure><img src="/convention-2026/images/web/IMG_2669.JPG" alt="Convention 2026 — photograph 1" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Gathering · One House, One Heart, One Worship</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2937.JPG" alt="Convention 2026 — photograph 2" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Word · A Word in Season</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2799.JPG" alt="Convention 2026 — photograph 3" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Voices Raised on High</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2766.JPG" alt="Convention 2026 — photograph 4" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Communion · United in His Presence</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2803.JPG" alt="Convention 2026 — photograph 5" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Choirs · Colour, Harmony &amp; Heart</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2861.JPG" alt="Convention 2026 — photograph 6" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Excellence Unto the Lord</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2712.JPG" alt="Convention 2026 — photograph 7" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Word · The Word Goes Forth</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2810.JPG" alt="Convention 2026 — photograph 8" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Joy · Dancing Before the Lord</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2882.JPG" alt="Convention 2026 — photograph 9" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · This Is What Family Looks Like</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2700.JPG" alt="Convention 2026 — photograph 10" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Adoration · Lifting Holy Hands</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2823.JPG" alt="Convention 2026 — photograph 11" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Joy · He Has Turned Our Mourning Into Dancing</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2947.JPG" alt="Convention 2026 — photograph 12" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Word · Faith Comes by Hearing</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2845.JPG" alt="Convention 2026 — photograph 13" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Crowned With His Favour</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2689.JPG" alt="Convention 2026 — photograph 14" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Leadership · Standing in the Gap</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2905.JPG" alt="Convention 2026 — photograph 15" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Honour · Giving God the Glory</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2671.JPG" alt="Convention 2026 — photograph 16" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Make a Joyful Noise</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2691.JPG" alt="Convention 2026 — photograph 17" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · Gathered in His Name</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2694.JPG" alt="Convention 2026 — photograph 18" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Worship · In the Beauty of Holiness</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2697.JPG" alt="Convention 2026 — photograph 19" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Fellowship · Dwelling Together in Unity</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2703.JPG" alt="Convention 2026 — photograph 20" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Great Things He Hath Done</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2705.JPG" alt="Convention 2026 — photograph 21" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Devotion · With Grateful Hearts</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2708.JPG" alt="Convention 2026 — photograph 22" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Make a Joyful Noise</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2714.JPG" alt="Convention 2026 — photograph 23" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · Gathered in His Name</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2720.JPG" alt="Convention 2026 — photograph 24" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Worship · In the Beauty of Holiness</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2734.JPG" alt="Convention 2026 — photograph 25" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Fellowship · Dwelling Together in Unity</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2741.JPG" alt="Convention 2026 — photograph 26" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Great Things He Hath Done</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2745.JPG" alt="Convention 2026 — photograph 27" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Devotion · With Grateful Hearts</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2751.JPG" alt="Convention 2026 — photograph 28" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Make a Joyful Noise</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2752.JPG" alt="Convention 2026 — photograph 29" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · Gathered in His Name</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2753.JPG" alt="Convention 2026 — photograph 30" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Worship · In the Beauty of Holiness</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2755.JPG" alt="Convention 2026 — photograph 31" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Fellowship · Dwelling Together in Unity</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2757.JPG" alt="Convention 2026 — photograph 32" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Great Things He Hath Done</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2797.JPG" alt="Convention 2026 — photograph 33" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Devotion · With Grateful Hearts</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2807.JPG" alt="Convention 2026 — photograph 34" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Make a Joyful Noise</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2809.JPG" alt="Convention 2026 — photograph 35" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · Gathered in His Name</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2832.JPG" alt="Convention 2026 — photograph 36" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Worship · In the Beauty of Holiness</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2842.JPG" alt="Convention 2026 — photograph 37" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Fellowship · Dwelling Together in Unity</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2843.JPG" alt="Convention 2026 — photograph 38" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Great Things He Hath Done</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2844.JPG" alt="Convention 2026 — photograph 39" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Devotion · With Grateful Hearts</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2850.JPG" alt="Convention 2026 — photograph 40" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Make a Joyful Noise</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2851.JPG" alt="Convention 2026 — photograph 41" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · Gathered in His Name</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2855.JPG" alt="Convention 2026 — photograph 42" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Worship · In the Beauty of Holiness</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2874.JPG" alt="Convention 2026 — photograph 43" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Fellowship · Dwelling Together in Unity</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2876.JPG" alt="Convention 2026 — photograph 44" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Celebration · Great Things He Hath Done</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2878.JPG" alt="Convention 2026 — photograph 45" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Devotion · With Grateful Hearts</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2890.JPG" alt="Convention 2026 — photograph 46" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Praise · Make a Joyful Noise</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2916.JPG" alt="Convention 2026 — photograph 47" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>The Family · Gathered in His Name</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2942.JPG" alt="Convention 2026 — photograph 48" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Worship · In the Beauty of Holiness</figcaption></figure><figure><img src="/convention-2026/images/web/IMG_2945.JPG" alt="Convention 2026 — photograph 49" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>Fellowship · Dwelling Together in Unity</figcaption></figure></div><nav class="related-links" aria-label="Related pages"><a class="button-link" href="/publication">Gallery</a><a class="button-link" href="/events">Events</a></nav></div></main>
+  <footer class="site-footer">
+    <div class="inner">Copyright © 2023 by<b>Christ's Love Ministries International</b>All rights reserved.</div>
+  </footer>
+  <footer class="m-footer">Copyright © 2023 by <b>Christ's Love Ministries International</b> All rights reserved.</footer>
+  <a class="wa-bubble" href="https://wa.me/264816195335" target="_blank" rel="noopener" aria-label="WhatsApp chat">
+    <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.5c1.2.6 2.5.9 3.8.9 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.2 0-2.4-.3-3.5-.8l-.7-.4-4.9.9 1-4.7-.4-.7C6.5 17.9 6 16.5 6 15c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10zm5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+  </a>
+  <script>
+    document.querySelectorAll('.wa-bubble').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var phone = '264816195335';
+        var t = Date.now();
+        window.location.href = 'whatsapp://send?phone=' + phone;
+        setTimeout(function () {
+          if (Date.now() - t < 1600 && !document.hidden) window.open('https://wa.me/' + phone, '_blank');
+        }, 800);
+      });
+    });
+  </script>
 
-  <div class="info">
-    <p class="meta"><span class="nm">Jehovah El Shaddai</span> &middot; <b>God of All Possibilities</b> &middot; <span class="nm b">Jehovah Nissi</span></p>
-    <p class="verse">"Change your family trials to testimonies."</p>
-  </div>
-  </div>
+</div>
 
 <script>
-  // Curated order — strongest moments lead. Each has an elegant caption.
-  const SLIDES = [
-    {f:"IMG_2669.JPG", k:"The Gathering",     t:"One House, One Heart, One Worship"},
-    {f:"IMG_2937.JPG", k:"The Word",          t:"A Word in Season"},
-    {f:"IMG_2799.JPG", k:"Praise",            t:"Voices Raised on High"},
-    {f:"IMG_2766.JPG", k:"Communion",         t:"United in His Presence"},
-    {f:"IMG_2803.JPG", k:"The Choirs",        t:"Colour, Harmony & Heart"},
-    {f:"IMG_2861.JPG", k:"Celebration",       t:"Excellence Unto the Lord"},
-    {f:"IMG_2712.JPG", k:"The Word",          t:"The Word Goes Forth"},
-    {f:"IMG_2810.JPG", k:"Joy",               t:"Dancing Before the Lord"},
-    {f:"IMG_2882.JPG", k:"The Family",        t:"This Is What Family Looks Like"},
-    {f:"IMG_2700.JPG", k:"Adoration",         t:"Lifting Holy Hands"},
-    {f:"IMG_2823.JPG", k:"Joy",               t:"He Has Turned Our Mourning Into Dancing"},
-    {f:"IMG_2947.JPG", k:"The Word",          t:"Faith Comes by Hearing"},
-    {f:"IMG_2845.JPG", k:"Celebration",       t:"Crowned With His Favour"},
-    {f:"IMG_2689.JPG", k:"Leadership",        t:"Standing in the Gap"},
-    {f:"IMG_2905.JPG", k:"Honour",            t:"Giving God the Glory"}
-  ];
-  // Remaining photos round out the show with a rotating set of theme captions.
-  const REST = ["IMG_2671.JPG","IMG_2691.JPG","IMG_2694.JPG","IMG_2697.JPG","IMG_2703.JPG",
-    "IMG_2705.JPG","IMG_2708.JPG","IMG_2714.JPG","IMG_2720.JPG","IMG_2734.JPG","IMG_2741.JPG",
-    "IMG_2745.JPG","IMG_2751.JPG","IMG_2752.JPG","IMG_2753.JPG","IMG_2755.JPG","IMG_2757.JPG",
-    "IMG_2797.JPG","IMG_2807.JPG","IMG_2809.JPG","IMG_2832.JPG","IMG_2842.JPG","IMG_2843.JPG",
-    "IMG_2844.JPG","IMG_2850.JPG","IMG_2851.JPG","IMG_2855.JPG","IMG_2874.JPG","IMG_2876.JPG",
-    "IMG_2878.JPG","IMG_2890.JPG","IMG_2916.JPG","IMG_2942.JPG","IMG_2945.JPG"];
-  const THEMES = [
-    {k:"Praise",      t:"Make a Joyful Noise"},
-    {k:"The Family",  t:"Gathered in His Name"},
-    {k:"Worship",     t:"In the Beauty of Holiness"},
-    {k:"Fellowship",  t:"Dwelling Together in Unity"},
-    {k:"Celebration", t:"Great Things He Hath Done"},
-    {k:"Devotion",    t:"With Grateful Hearts"}
-  ];
-  REST.forEach((f,i)=>SLIDES.push({f, ...THEMES[i%THEMES.length]}));
-
-  const WEB="images/web/";
-  const stage=document.getElementById("stage");
-  const dotsWrap=document.getElementById("dots");
-  const timer=document.getElementById("timer");
-  const DURATION=7000;
-  let idx=0, playing=true, tid=null;
-
-  // build slides + dots
-  SLIDES.forEach((s,i)=>{
-    const el=document.createElement("div");
-    el.className="slide";
-    el.innerHTML=
-      '<img class="backdrop" src="'+WEB+s.f+'" alt="" aria-hidden="true">'+
-      '<img class="photo" src="'+WEB+s.f+'" alt="CLMI Annual Convention 2026 — '+s.t+'">'+
-      '<div class="caption"><div class="kicker">'+s.k+'</div><h2>'+s.t+'</h2></div>';
-    stage.insertBefore(el, stage.querySelector(".brandbar"));
-    const d=document.createElement("button");
-    d.className="dot";d.setAttribute("aria-label","Go to slide "+(i+1));
-    d.addEventListener("click",()=>go(i));
-    dotsWrap.appendChild(d);
-  });
-  const slideEls=[...stage.querySelectorAll(".slide")];
-  const dotEls=[...dotsWrap.children];
-
-  function restartTimer(){
-    timer.classList.remove("run");void timer.offsetWidth;
-    if(playing)timer.classList.add("run");
-  }
-  function render(){
-    slideEls.forEach((el,i)=>el.classList.toggle("active",i===idx));
-    dotEls.forEach((d,i)=>d.classList.toggle("active",i===idx));
-    restartTimer();
-  }
-  function go(i){idx=(i+SLIDES.length)%SLIDES.length;render();schedule();}
-  function next(){go(idx+1)}
-  function prev(){go(idx-1)}
-  function schedule(){clearTimeout(tid);if(playing)tid=setTimeout(next,DURATION);}
-
-  document.getElementById("next").onclick=next;
-  document.getElementById("prev").onclick=prev;
-  const pp=document.getElementById("playpause");
-  pp.onclick=()=>{
-    playing=!playing;
-    pp.innerHTML=playing?"&#10073;&#10073;":"&#9654;";
-    pp.setAttribute("aria-label",playing?"Pause":"Play");
-    if(playing){schedule();restartTimer();}else{clearTimeout(tid);timer.classList.remove("run");}
-  };
-  // pause on hover (desktop)
-  stage.addEventListener("mouseenter",()=>{if(playing){clearTimeout(tid);timer.classList.remove("run");}});
-  stage.addEventListener("mouseleave",()=>{if(playing){schedule();restartTimer();}});
-  document.addEventListener("keydown",e=>{
-    if(e.key==="ArrowRight")next();
-    if(e.key==="ArrowLeft")prev();
-    if(e.key===" "){e.preventDefault();pp.click();}
-  });
-
-  render();schedule();
+  (function () {
+    var vids = document.querySelectorAll('video.lazy-video');
+    if (!vids.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src) { v.src = v.dataset.src; v.play().catch(function () {}); }
+        io.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
 </script>
 </body>
 </html>
