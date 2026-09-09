@@ -18,8 +18,15 @@
   background: #fff; box-shadow: 0 1px 0 rgba(23,77,55,.14);
   transition: box-shadow .25s ease,transform .25s ease;
 }
-.home-refresh.is-scrolled .site-header { transform: translateY(-78px); box-shadow: 0 8px 28px rgba(13,51,38,.1); }
-.home-refresh.is-scrolled .site-header:focus-within { transform: none; }
+body.home-refresh.is-scrolled .site-header,
+body.home-refresh.is-scrolled .m-header {
+  transform:none;
+  background:linear-gradient(110deg,rgba(216,218,221,.78),rgba(255,255,255,.72) 30%,rgba(255,255,255,.72) 66%,rgba(164,168,174,.78));
+  -webkit-backdrop-filter:blur(18px) saturate(1.12);
+  backdrop-filter:blur(18px) saturate(1.12);
+  box-shadow:0 8px 28px rgba(13,51,38,.13);
+}
+body.home-refresh.is-scrolled .site-header .main-nav { background:rgba(255,255,255,.68); }
 .home-refresh .site-header .brand { position: static; gap: 12px; grid-column: 1; grid-row: 1; }
 .home-refresh .site-header .brand img { width: 62px; height: 58px; }
 .home-refresh .site-header .brand span { width: 232px; font-size: 15px; line-height: 1.35; color: #174d37; }

@@ -1,0 +1,71 @@
+/* One continuous charcoal surface; the approved portrait has no UI frame. */
+.bishop-intro { position:relative; width:100%; background:#1c1c1c; color:#f7f5ef; }
+.bishop-intro-stage { position:relative; height:100svh; min-height:360px; overflow:hidden; isolation:isolate; }
+.bishop-intro.is-enhanced { height:280svh; }
+.bishop-intro.is-enhanced .bishop-intro-stage { position:sticky; top:0; }
+.bishop-intro-art { position:absolute; inset:0; overflow:hidden; }
+.bishop-intro-art :is(img,video,canvas) {
+  position:absolute; display:block; width:max(100%,min(200vw,177.778svh)); max-width:none;
+  height:auto; aspect-ratio:16/9; left:50%; bottom:0; transform:translate(-50%,3%);
+  object-fit:contain; mix-blend-mode:lighten;
+  /* Feather the source's empty outer rim into the page, not its portrait. */
+  mask-image:linear-gradient(transparent,#000 2%,#000 98%,transparent),linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-composite:intersect;
+}
+.bishop-intro-art video { opacity:0; }
+.bishop-intro.is-painted .bishop-intro-art video { opacity:1; }
+.bishop-intro.is-reacting .bishop-intro-art video { opacity:0; }
+.bishop-intro.is-painted .bishop-intro-poster { visibility:hidden; }
+.bishop-intro.is-enhanced:not(.is-painted) .bishop-intro-poster { visibility:hidden; }
+.bishop-intro-js .bishop-intro[data-state="pending"] .bishop-intro-poster { visibility:hidden; }
+.bishop-intro-art canvas { pointer-events:none; visibility:hidden; }
+.bishop-ambient { position:absolute; inset:0; overflow:hidden; pointer-events:none; opacity:var(--ambient-opacity,0); }
+.bishop-ambient i {
+  position:absolute; display:block; width:var(--dust-size); height:var(--dust-size);
+  border-radius:50%; background:#e9dbc6; box-shadow:0 0 4px rgba(237,222,197,.45);
+  animation:bishopDust var(--dust-duration) var(--dust-delay) linear infinite;
+  animation-play-state:paused;
+}
+.bishop-intro.has-ambient .bishop-ambient i { animation-play-state:running; }
+.bishop-intro:not(.is-enhanced) .bishop-ambient { display:none; }
+@keyframes bishopDust {
+  from { transform:translate3d(0,32px,0); opacity:0; }
+  12% { opacity:.65; }
+  65% { opacity:.85; }
+  88% { opacity:.65; }
+  to { transform:translate3d(var(--dust-drift),calc(-1 * var(--dust-rise)),0); opacity:0; }
+}
+.bishop-intro-welcome {
+  position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center;
+  align-items:center; text-align:center; padding:24px; pointer-events:none;
+  opacity:var(--welcome-opacity,1); transform:translateY(var(--welcome-y,0px));
+}
+.bishop-intro-welcome h1 {
+  margin:0; color:#f7f5ef; font:400 clamp(42px,6.5vw,108px)/1.12 Georgia,"Times New Roman",serif;
+  letter-spacing:-.045em; text-wrap:balance; animation:clmiWelcome 1.15s cubic-bezier(.2,.7,.2,1) both;
+}
+.bishop-intro-welcome p {
+  margin:24px 0 0; color:#d0cdc6; font:400 clamp(13px,1.1vw,17px)/1.5 var(--helv);
+  letter-spacing:.06em; animation:clmiWelcome .9s .25s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes clmiWelcome { from {opacity:0;transform:translateY(20px);} to {opacity:1;transform:translateY(0);} }
+body.bishop-intro-visible .wa-bubble { visibility:hidden; pointer-events:none; }
+#clmiHome:focus { outline:none; }
+@media(max-width:768px) {
+  .bishop-intro.is-enhanced { height:250svh; }
+  .bishop-intro-welcome { padding:28px; }
+  .bishop-intro-welcome h1 { max-width:330px; font-size:clamp(42px,12vw,70px); }
+  body.bishop-intro-visible :is(.m-header,.m-nav) { visibility:hidden; pointer-events:none; }
+}
+html:not(.bishop-intro-js) .bishop-intro-welcome,.bishop-intro[data-state="static"] .bishop-intro-welcome {
+  bottom:auto; top:5%; opacity:1; transform:none;
+}
+html:not(.bishop-intro-js) .bishop-intro-welcome h1,.bishop-intro[data-state="static"] .bishop-intro-welcome h1 { font-size:clamp(30px,4vw,56px); }
+@media(prefers-reduced-motion:reduce) {
+  .bishop-intro .bishop-ambient { display:none; }
+  .bishop-intro.has-ambient .bishop-ambient i { animation-play-state:paused; }
+  .bishop-intro-js .bishop-intro[data-state="pending"] .bishop-intro-poster { visibility:visible; }
+  .bishop-intro.is-enhanced { height:auto; }
+  .bishop-intro.is-enhanced .bishop-intro-stage { position:relative; }
+  .bishop-intro-welcome :is(h1,p) { animation:none; }
+}

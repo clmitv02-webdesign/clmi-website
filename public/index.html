@@ -129,13 +129,27 @@
     .hero .slide { transition: none !important; }
   }
 </style>
-<link rel="stylesheet" href="/assets/home-refresh.css?v=20260905">
+<link rel="stylesheet" href="/assets/home-refresh.css?v=20260910-v2">
 <script defer src="/assets/vendor/scrollcraft/scrollcraft.js"></script>
-<script defer src="/assets/home-refresh.js?v=20260905"></script>
+<script defer src="/assets/home-refresh.js?v=20260910-v2"></script>
 <script defer src="/assets/site-nav.js?v=20260905"></script>
+<link rel="stylesheet" href="/assets/bishop-intro.css?v=20260910-v2">
+<script>document.documentElement.classList.add('bishop-intro-js');</script>
+<script defer src="/assets/bishop-intro.js?v=20260910-v2"></script>
 </head>
 <body class="home-refresh">
-<div class="canvas-wrap">
+<section id="bishopIntro" class="bishop-intro" aria-label="Bishop Elizabeth Arowolo — a portrait formed from words of faith" data-state="pending">
+  <div class="bishop-intro-stage">
+    <div class="bishop-intro-art" aria-hidden="true">
+      <img class="bishop-intro-poster" src="/assets/video/bishop-intro-poster.jpg" width="1920" height="1080" alt="" fetchpriority="high">
+    </div>
+    <div class="bishop-intro-welcome">
+      <h1>Welcome to CLMI</h1>
+      <p>Scroll to explore</p>
+    </div>
+  </div>
+</section>
+<div class="canvas-wrap" id="clmiHome" tabindex="-1">
 
   <header class="site-header">
     <a class="brand" href="/">

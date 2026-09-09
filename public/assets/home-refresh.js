@@ -49,7 +49,8 @@
   });
   let queued = false;
   function updateHeader() {
-    document.body.classList.toggle('is-scrolled', window.scrollY > 160);
+    const homeTop = document.querySelector('.canvas-wrap').getBoundingClientRect().top + window.scrollY;
+    document.body.classList.toggle('is-scrolled', window.scrollY > homeTop + 8);
     queued = false;
   }
   addEventListener('scroll', () => {
