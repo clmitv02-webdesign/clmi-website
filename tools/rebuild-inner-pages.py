@@ -256,6 +256,19 @@ def migrate(route,source,shell):
                 body+='<article class="team-card">'+card+'</article>'
             body+='</div></section>'
         elif route in ['events','community-outreach']:
+            # Correct historical card destinations before deriving their labels.
+            # Slugs are legacy copies; the destination content determines identity.
+            if route=='community-outreach':
+                fixes={'/1':'/copy-of-katutura-street-evangelism',
+                    '/copy-of-katutura-street-evangelism':'/copy-of-zimababwe-shona-bibles',
+                    '/copy-of-kilimanjaro-outreach':'/copy-of-donations-to-the-orphange',
+                    '/copy-of-church-outreach-wavis-bay':'/copy-of-christmas-day-at-orphanage',
+                    '/copy-of-donations-to-the-orphange':'/copy-of-community-police',
+                    '/copy-of-christmas-day-at-orphanage':'/1',
+                    '/copy-of-zimababwe-shona-bibles':'/copy-of-kilimanjaro-outreach'}
+                for n in nodes:
+                    if n.tag=='a' and n.attrs.get('href') in fixes:
+                        n.attrs['href']=fixes[n.attrs['href']]
             groups=[]
             for n in nodes:
                 if n.tag=='img':groups.append([])

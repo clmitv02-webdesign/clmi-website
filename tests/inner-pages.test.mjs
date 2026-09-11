@@ -28,6 +28,11 @@ test('backup-derived ledger retains text, content media and link destinations',a
     const source=await readFile(`${ledger.backup}/public/${entry.route}/index.html`,'utf8');
     assert.equal(createHash('sha256').update(source).digest('hex'),entry.sourceSha256,`${entry.route}: ledger source identity`);
     const html=pages.find(([r])=>r===entry.route)[1];
+    // Owner-approved 2026-09-11 repair replaces the irrelevant Community Police
+    // destination with the missing Orphanage story. Seven card pairings have
+    // their own regression test; the immutable source ledger stays unchanged.
+    const correctedHref=href=>entry.route==='community-outreach'&&href==='/copy-of-church-outreach-wavis-bay'
+      ?'/copy-of-community-police':href;
     const text=decode(html.replace(/<script\b[\s\S]*?<\/script>/g,'').replace(/<style\b[\s\S]*?<\/style>/g,'').replace(/<[^>]*>/g,' '));
     for(const value of entry.text.filter(value=>entry.route!=="church-outreach")) {
       // Youth copy moved into headings; punctuation/markup now differs, wording does not.
@@ -35,7 +40,7 @@ test('backup-derived ledger retains text, content media and link destinations',a
       assert.ok(norm(text).includes(norm(value)),`${entry.route}: text ${value}`);
     }
     for(const src of entry.images.filter(src=>entry.route!=="publication")) assert.ok(decode(html).includes(src),`${entry.route}: image ${src}`);
-    for(const href of entry.links) assert.ok(decode(html).includes(`href="${href}"`),`${entry.route}: link ${href}`);
+    for(const href of entry.links) assert.ok(decode(html).includes(`href="${correctedHref(href)}"`),`${entry.route}: link ${href}`);
     for(const src of entry.media) {
       if(entry.route==='about-5'&&src.endsWith('11062b_eb492c6cb7834f13aee3424d74aceffc.mp4')) {
         assert.ok(decode(html).includes('/assets/video/youth-particles-scrub.mp4'),'Youth uses a scrub-encoded copy');
@@ -43,7 +48,7 @@ test('backup-derived ledger retains text, content media and link destinations',a
       } else assert.ok(decode(html).includes(src),`${entry.route}: media ${src}`);
     }
     // Re-extract links and images from backup independently of the migration's inventory.
-    for(const [,href] of source.matchAll(/<a\b[^>]*href="([^"]+)"/g)) assert.ok(decode(html).includes(`href="${decode(href)}"`),`${entry.route}: original destination ${href}`);
+    for(const [,href] of source.matchAll(/<a\b[^>]*href="([^"]+)"/g)) assert.ok(decode(html).includes(`href="${correctedHref(decode(href))}"`),`${entry.route}: original destination ${href}`);
     const sourceMains=[...source.matchAll(/<main\b[\s\S]*?<\/main>/g)].map(m=>m[0]).join('');
     for(const [,src] of sourceMains.matchAll(/<img\b[^>]*src="([^"]+)"/g)) assert.ok(decode(html).includes(decode(src)),`${entry.route}: original content image ${src}`);
   }
