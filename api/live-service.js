@@ -30,7 +30,7 @@ function selectService(data) {
   visit(selected.content);
   const service = videos.find(v=>v.kind==='live') || videos.find(v=>v.kind==='replay');
   if (!service) throw new Error('No playable stream found');
-  return service;
+  return {...service,streamOrder:[...new Set(videos.map(v=>v.videoId))]};
 }
 
 async function resolveService() {

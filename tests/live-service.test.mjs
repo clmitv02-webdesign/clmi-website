@@ -13,10 +13,10 @@ const card=(id,badge='2:24:15',text='Streamed 1 hour ago')=>({richItemRenderer:{
 const page=cards=>({metadata:{channelMetadataRenderer:{externalId:'UCqkrpCvbRCLEjc9v-jU67MQ'}},contents:{twoColumnBrowseResultsRenderer:{tabs:[{tabRenderer:{selected:true,title:'Live',content:{richGridRenderer:{contents:cards}}}}]}}});
 test('active broadcast is preferred to an earlier upcoming item or replay',()=>{
   const p=page([card('Upcoming001','UPCOMING','Premieres tomorrow'),card('Replay00001'),card('LiveNow0001','LIVE','14 watching')]);
-  assert.deepEqual(parse(p),{videoId:'LiveNow0001',kind:'live',title:'CLMI service'});
+  assert.deepEqual(parse(p),{videoId:'LiveNow0001',kind:'live',title:'CLMI service',streamOrder:['Replay00001','LiveNow0001']});
 });
 test('off-air selects the first completed stream, never a scheduled event',()=>{
-  assert.deepEqual(parse(page([card('Upcoming001','UPCOMING','Premieres tomorrow'),card('AdHCkko5Cmc') ])),{videoId:'AdHCkko5Cmc',kind:'replay',title:'CLMI service'});
+  assert.deepEqual(parse(page([card('Upcoming001','UPCOMING','Premieres tomorrow'),card('AdHCkko5Cmc') ])),{videoId:'AdHCkko5Cmc',kind:'replay',title:'CLMI service',streamOrder:['AdHCkko5Cmc']});
 });
 test('unknown metadata, empty channel, or another channel cannot be advertised as live',()=>{
   assert.throws(()=>parse(page([])));
@@ -26,7 +26,7 @@ test('unknown metadata, empty channel, or another channel cannot be advertised a
 });
 test('classic YouTube stream cards are supported without treating past broadcasts as live',()=>{
   const old={richItemRenderer:{content:{videoRenderer:{videoId:'AdHCkko5Cmc',title:{runs:[{text:'Sunday service'}]},publishedTimeText:{simpleText:'Streamed 1 hour ago'},lengthText:{simpleText:'2:24:15'}}}}};
-  assert.deepEqual(parse(page([old])),{videoId:'AdHCkko5Cmc',kind:'replay',title:'Sunday service'});
+  assert.deepEqual(parse(page([old])),{videoId:'AdHCkko5Cmc',kind:'replay',title:'Sunday service',streamOrder:['AdHCkko5Cmc']});
 });
 test('lookup failures expose a safe diagnostic code without upstream page content',async()=>{
   const original=globalThis.fetch;
