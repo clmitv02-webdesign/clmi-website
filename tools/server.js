@@ -6,6 +6,7 @@ const ROOT = path.join(__dirname, '..', 'public');
 const PORT = process.argv[2] || 8123;
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.webp': 'image/webp', '.ico': 'image/x-icon', '.JPG': 'image/jpeg' };
 http.createServer((req, res) => {
+  if (req.url.split('?')[0] === '/api/live-service') return require('../api/live-service.js')(req,res);
   let p = decodeURIComponent(req.url.split('?')[0]);
   let file = path.join(ROOT, p);
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
