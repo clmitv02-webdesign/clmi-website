@@ -42,3 +42,9 @@ test('lookup failures expose a safe diagnostic code without upstream page conten
     assert.equal(payload.error,'Live status is temporarily unavailable');
   } finally {globalThis.fetch=original;console.error=originalError;}
 });
+test('a changed embedded-data format is distinguished from a missing upstream page',async()=>{
+  const original=globalThis.fetch;
+  globalThis.fetch=async()=>({ok:true,text:async()=>'<script>window["ytInitialData"] = {};</script>'});
+  try {await assert.rejects(require(path.pathname).resolveService(),/YouTube data format changed/);}
+  finally {globalThis.fetch=original;}
+});

@@ -38,7 +38,12 @@ async function resolveService() {
   if (!response.ok) throw new Error(`YouTube response ${response.status}`);
   const html = await response.text();
   const match = html.match(/var ytInitialData\s*=\s*([\s\S]*?);<\/script>/);
-  if (!match) throw new Error('YouTube stream data unavailable');
+  if (!match) {
+    if (html.includes('ytInitialData')) throw new Error('YouTube data format changed');
+    if (/Before you continue to YouTube|consent\.youtube\.com\/save/.test(html)) throw new Error('YouTube consent required');
+    if (/Our systems have detected unusual traffic|\/sorry\/index/.test(html)) throw new Error('YouTube challenge required');
+    throw new Error('YouTube stream data unavailable');
+  }
   return selectService(JSON.parse(match[1]));
 }
 
@@ -52,7 +57,7 @@ module.exports = async function handler(req,res) {
     res.end(req.method==='HEAD'?undefined:JSON.stringify(service));
   } catch (error) {
     console.error('CLMI stream lookup:',error.message);
-    const codes = {'Channel identity mismatch':'CHANNEL_MISMATCH','Stream list unavailable':'STREAM_LIST_UNAVAILABLE','No playable stream found':'NO_PLAYABLE_STREAM','YouTube stream data unavailable':'SOURCE_DATA_UNAVAILABLE'};
+    const codes = {'Channel identity mismatch':'CHANNEL_MISMATCH','Stream list unavailable':'STREAM_LIST_UNAVAILABLE','No playable stream found':'NO_PLAYABLE_STREAM','YouTube stream data unavailable':'SOURCE_DATA_UNAVAILABLE','YouTube data format changed':'SOURCE_FORMAT_CHANGED','YouTube consent required':'SOURCE_CONSENT_REQUIRED','YouTube challenge required':'SOURCE_CHALLENGE_REQUIRED'};
     const code = codes[error.message] || (error.name==='TimeoutError'?'SOURCE_TIMEOUT':/^YouTube response \d+$/.test(error.message)?'SOURCE_HTTP_ERROR':'LOOKUP_FAILED');
     res.setHeader('Cache-Control','no-store');
     res.statusCode=503;
