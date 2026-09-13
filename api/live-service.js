@@ -52,9 +52,11 @@ module.exports = async function handler(req,res) {
     res.end(req.method==='HEAD'?undefined:JSON.stringify(service));
   } catch (error) {
     console.error('CLMI stream lookup:',error.message);
+    const codes = {'Channel identity mismatch':'CHANNEL_MISMATCH','Stream list unavailable':'STREAM_LIST_UNAVAILABLE','No playable stream found':'NO_PLAYABLE_STREAM','YouTube stream data unavailable':'SOURCE_DATA_UNAVAILABLE'};
+    const code = codes[error.message] || (error.name==='TimeoutError'?'SOURCE_TIMEOUT':/^YouTube response \d+$/.test(error.message)?'SOURCE_HTTP_ERROR':'LOOKUP_FAILED');
     res.setHeader('Cache-Control','no-store');
     res.statusCode=503;
-    res.end(req.method==='HEAD'?undefined:JSON.stringify({error:'Live status is temporarily unavailable'}));
+    res.end(req.method==='HEAD'?undefined:JSON.stringify({error:'Live status is temporarily unavailable',code}));
   }
 };
 module.exports.selectService = selectService;

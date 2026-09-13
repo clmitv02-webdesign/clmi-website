@@ -28,3 +28,17 @@ test('classic YouTube stream cards are supported without treating past broadcast
   const old={richItemRenderer:{content:{videoRenderer:{videoId:'AdHCkko5Cmc',title:{runs:[{text:'Sunday service'}]},publishedTimeText:{simpleText:'Streamed 1 hour ago'},lengthText:{simpleText:'2:24:15'}}}}};
   assert.deepEqual(parse(page([old])),{videoId:'AdHCkko5Cmc',kind:'replay',title:'Sunday service'});
 });
+test('lookup failures expose a safe diagnostic code without upstream page content',async()=>{
+  const original=globalThis.fetch;
+  const originalError=console.error;
+  globalThis.fetch=async()=>({ok:true,text:async()=>'<html>upstream unavailable</html>'});
+  console.error=()=>{};
+  let payload;
+  const response={setHeader(){},end(body){payload=JSON.parse(body);}};
+  try {
+    await require(path.pathname)({method:'GET'},response);
+    assert.equal(response.statusCode,503);
+    assert.equal(payload.code,'SOURCE_DATA_UNAVAILABLE');
+    assert.equal(payload.error,'Live status is temporarily unavailable');
+  } finally {globalThis.fetch=original;console.error=originalError;}
+});
